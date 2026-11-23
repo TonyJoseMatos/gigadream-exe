@@ -7,6 +7,11 @@ Gigadream Agent + Gonzo Media · Support • Multiplier • Bridge · Mixing Mod
 
 [![GIGADREAM.EXE — the Unicronian lattice over an Ektar sunset sea](media/hero.png)](https://tonyjosematos.github.io/gigadream-exe/)
 
+### 🎞 Demo
+[![GIGADREAM.EXE demo: the black hole refuses access, then 07 SPAWN and the credentials terminal open](media/demo.gif)](https://tonyjosematos.github.io/gigadream-exe/preview.mp4)
+
+**[▶ Watch the full 14-second demo (preview.mp4)](https://tonyjosematos.github.io/gigadream-exe/preview.mp4)**: the black hole idling, ACCESS DENIED, 07 SPAWN, Signal with `credentials.py` typing out, the Lore compiler, and back home.
+
 A one-page transmission from TERRA II. Seven petroglyph sigils sit on a hand-ruled heptagon around a black hole:
 **&lt;REDACTED PROJECT&gt; — ACCESS DENIED.** Its accretion disk swirls, the lattice lines spiral into the event horizon,
 and the sky behind it is gravitationally lensed. Click it and it refuses you. Pull a sigil outward (or just tap it) and its sheet slides in:
@@ -36,7 +41,7 @@ NEVER DOOM | GOOD AND PROSPEROUS | 3077 — love is the fifth element.
 - Film layer: grain, drifting light leaks, chromatic aberration, and gate weave.
 - Responsive layout (the lattice becomes a totem on phones), keyboard support, and `prefers-reduced-motion`. Animation pauses when the tab is hidden.
 - Deep links: `#projects` `#developing` `#lore` `#optics` `#archive` `#signal` `#spawn`
-- `preview.mp4` is an 8-second capture of the v3 home view (before the seventh node).
+- `preview.mp4` is a 14-second capture of the current site (1280×800, 24 fps, headless software render). `media/demo.gif` is an 8-second excerpt.
 
 Run it locally by opening `index.html` in a browser.
 
