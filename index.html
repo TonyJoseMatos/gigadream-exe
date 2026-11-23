@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>GIGADREAM.EXE — Tony Jose Matos · #beachpunk</title>
+<meta name="description" content="Tony Jose Matos — Prime Waveform Modifier of the Beachpunk Gigadream. Gigadream Agent + Gonzo Media. Mixing Models for Maximum Creativity." />
+<meta name="theme-color" content="#0a1215" />
+<meta property="og:title" content="GIGADREAM.EXE — Tony Jose Matos" />
+<meta property="og:description" content="Prime Waveform Modifier of the Beachpunk Gigadream. Mixing Models for Maximum Creativity." />
+<meta property="og:image" content="assets/x-banner.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@500;800;900&family=Martian+Mono:wght@300;400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Reenie+Beanie&display=swap" rel="stylesheet" />
+<style>
+/* ---------------------------------------------------------------------------
+   GIGADREAM.EXE v2 — hand-set for Tony Jose Matos (@TonyJMatos)
+   Palette is pulled toward Kodak Ektar: sunset coral, sand, sea teal,
+   Ektar red, and process C/M/Y used only as misregistration accents.
+--------------------------------------------------------------------------- */
+:root{
+  --night:#0a1215; --night-2:#101c20;
+  --paper:#eee0c2; --paper-2:#e4d2ad; --paper-ink:#1d140d; --paper-mute:#6b5a46;
+  --sand:#e8c98e; --bone:#f4ead6;
+  --coral:#ff5d3b; --ektar:#d8291c; --magenta:#e2266f; --sun:#ffb21c;
+  --teal:#17a497; --sea:#0d5a60;
+  --pc:#00a6cf; --pm:#e5007d; --py:#ffe500;
+  --display:"Big Shoulders Stencil Display","Impact","Haettenschweiler",sans-serif;
+  --mono:"Martian Mono","IBM Plex Mono","Courier New",monospace;
+  --serif:"Newsreader","Iowan Old Style","Georgia",serif;
+  --hand:"Reenie Beanie","Comic Sans MS",cursive;
+  --sheet-w:clamp(380px,42vw,620px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;background:var(--night);color:var(--bone);overflow:hidden;font-family:var(--mono);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+a{color:inherit}
+::selection{background:var(--coral);color:var(--night)}
+
+/* ---------- REEL: everything that sits "on the film" gets gate weave ---------- */
+#reel{position:fixed;inset:-6px;animation:gate 0.5s steps(1) infinite}
+@keyframes gate{
+  0%{transform:translate(0,0)} 17%{transform:translate(.6px,-.4px)} 33%{transform:translate(-.3px,.7px)}
+  50%{transform:translate(.2px,.2px)} 67%{transform:translate(-.6px,-.2px)} 83%{transform:translate(.4px,.5px)}
+}
+#gl-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+#lattice-stage{position:absolute;inset:6px;transition:transform .6s cubic-bezier(.2,.9,.2,1)}
+body.open-left #lattice-stage{transform:translateX(calc(var(--sheet-w) * .58)) scale(.78)}
+body.open-right #lattice-stage{transform:translateX(calc(var(--sheet-w) * -.47)) scale(.78)}
+.masthead,.hint,.byline{transition:opacity .4s,transform .5s cubic-bezier(.2,.9,.2,1)}
+body.open-left .masthead,body.open-left .hint{opacity:0;pointer-events:none}
+body.open-right .masthead{transform:scale(.56);transform-origin:left top}
+body.open-right .byline,body.open-right .hint{opacity:0}
+body.open-right #annos,body.open-left #annos{opacity:0}
+#annos{transition:opacity .4s}
+#lattice-svg{width:100%;height:100%;display:block;touch-action:none}
+
+/* ---------- LINES ---------- */
+.e-bleed{fill:none;stroke-linecap:round;opacity:.8}
+.e-c,.e-m{fill:none;stroke-linecap:round;mix-blend-mode:screen}
+.e-c{stroke:var(--pc)} .e-m{stroke:var(--pm)}
+.e-main{fill:none;stroke-linecap:round}
+.e-stip{fill:none;stroke:var(--sand);stroke-width:2.4;stroke-linecap:round;stroke-dasharray:0.01 7;opacity:.95}
+.e-pulse{fill:none;stroke-linecap:round;stroke-dasharray:3 97;animation:march 3.6s linear infinite}
+.e-pulse.b{stroke-dasharray:1.2 48.8;animation-duration:7s}
+@keyframes march{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+.edge.spoke .e-main{stroke-width:3.6}
+.edge.spoke .e-c,.edge.spoke .e-m{stroke-width:1.8;opacity:.9}
+.edge.spoke .e-bleed{stroke-width:12}
+.edge.rim .e-main{stroke-width:2.2}
+.edge.rim .e-c,.edge.rim .e-m{stroke-width:1.2;opacity:.75}
+.edge.rim .e-bleed{stroke-width:8}
+.edge.hot .e-main{stroke-width:3.6}
+.e-pulse.hot{animation-duration:1.1s;stroke:#f4ead6;stroke-width:4}
+.edge.hot .e-c,.edge.hot .e-m{opacity:1}
+
+/* ---------- NODES ---------- */
+.vertex-node{cursor:grab;outline:none}
+.vertex-node:active{cursor:grabbing}
+.vertex-node .stone{fill:#0c1518;stroke:var(--sand);stroke-width:1.6}
+.vertex-node .stone-shadow{fill:var(--ektar);opacity:.85}
+.vertex-node .ticks{fill:none;stroke:var(--sand);stroke-width:1;stroke-dasharray:1 5.2;opacity:.8;transform-origin:0 0;animation:spin 40s linear infinite}
+.vertex-node .sigil{fill:none;stroke:var(--bone);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vertex-node .sigil .fill{fill:var(--bone);stroke:none}
+.vertex-node .sigil .hot{stroke:var(--coral)}
+.vertex-node .sigil .hotf{fill:var(--coral);stroke:none}
+.vertex-node .body{transition:transform .35s cubic-bezier(.3,1.6,.4,1)}
+.vertex-node:hover .body,.vertex-node:focus-visible .body,.vertex-node.is-open .body{transform:scale(1.12) rotate(-4deg)}
+.vertex-node:focus-visible .stone{stroke:var(--sun);stroke-width:2.6}
+.vertex-node.is-open .stone{stroke:var(--coral);stroke-width:2.4}
+@keyframes spin{to{transform:rotate(360deg)}}
+.node-num{font-family:var(--display);font-weight:900;font-size:15px;fill:var(--coral);letter-spacing:.02em;pointer-events:none}
+.node-label{font-family:var(--display);font-weight:800;font-size:27px;letter-spacing:.06em;fill:var(--bone);pointer-events:none;paint-order:stroke;stroke:#0a1215;stroke-width:5px;stroke-linejoin:round}
+.node-sub{font-family:var(--mono);font-size:8.6px;letter-spacing:.14em;fill:var(--sand);pointer-events:none;paint-order:stroke;stroke:#0a1215;stroke-width:3px}
+.anno{font-family:var(--hand);font-size:25px;fill:var(--sun);pointer-events:none}
+.anno-line{fill:none;stroke:var(--sun);stroke-width:1.4;stroke-linecap:round}
+.core-ring{fill:#0b1417;stroke:var(--sun);stroke-width:1.6}
+.core-text{font-family:var(--mono);font-size:8.4px;letter-spacing:.32em;fill:var(--sand)}
+.core-label{font-family:var(--mono);font-size:8.6px;letter-spacing:.2em;fill:var(--sand);paint-order:stroke;stroke:#0a1215;stroke-width:3px}
+#core-anchor .spin{animation:spin 60s linear infinite}
+#core-anchor .spin-r{animation:spin 26s linear infinite reverse}
+#core-anchor .beat{animation:beat 2.2s ease-in-out infinite;transform-origin:0 0}
+@keyframes beat{0%,100%{transform:scale(1)}8%{transform:scale(1.18)}16%{transform:scale(1)}24%{transform:scale(1.08)}}
+
+/* ---------- PRINT CHROME (masthead, crop marks, slug) ---------- */
+.chrome{position:absolute;pointer-events:none;z-index:4}
+.masthead{top:26px;left:34px;pointer-events:auto}
+.wordmark{font-family:var(--display);font-weight:900;font-size:clamp(46px,6.2vw,96px);line-height:.82;letter-spacing:.01em;color:var(--bone);
+  text-shadow:-2px 1px 0 rgba(0,166,207,.8),2px -1px 0 rgba(229,0,125,.75);transform:rotate(-2.2deg);transform-origin:left top}
+.wordmark .exe{font-size:.36em;color:var(--coral);text-shadow:none;letter-spacing:.08em;vertical-align:top;margin-left:4px}
+.byline{margin-top:14px;font-size:10.5px;letter-spacing:.16em;color:var(--sand);max-width:360px;line-height:1.7;transform:rotate(-1deg)}
+.byline b{color:var(--bone);font-weight:600}
+.stamp{top:30px;right:52px;transform:rotate(3.5deg);border:3px solid var(--coral);color:var(--coral);padding:8px 12px 7px;font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:.12em;
+  background:rgba(10,18,21,.35);filter:url(#ink-rough);opacity:.95}
+.stamp small{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.24em;font-weight:400;margin-top:3px;color:var(--coral)}
+.crop{width:38px;height:38px;border-color:rgba(232,201,142,.7);border-style:solid;border-width:0}
+.crop.tl{top:12px;left:12px;border-top-width:1px;border-left-width:1px}
+.crop.tr{top:12px;right:12px;border-top-width:1px;border-right-width:1px}
+.crop.bl{bottom:12px;left:12px;border-bottom-width:1px;border-left-width:1px}
+.crop.br{bottom:12px;right:12px;border-bottom-width:1px;border-right-width:1px}
+.reg{width:26px;height:26px}
+.reg.l{left:18px;top:50%} .reg.r{right:18px;top:50%}
+.colorbar{right:20px;top:120px;display:flex;flex-direction:column;gap:3px}
+.colorbar i{display:block;width:10px;height:18px}
+.slug{bottom:20px;left:62px;right:62px;display:flex;justify-content:space-between;font-size:8.5px;letter-spacing:.2em;color:rgba(232,201,142,.75);text-transform:uppercase}
+.mstat{display:none}
+.hint{bottom:46px;left:44px;font-family:var(--hand);font-size:28px;color:var(--sun);transform:rotate(-3deg);line-height:.95}
+.hint svg{display:inline-block;vertical-align:middle;margin-left:4px}
+
+/* ---------- FILM LAYER ---------- */
+.film{position:fixed;inset:0;pointer-events:none;z-index:40}
+.film.grain{opacity:.2;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 2.2 -.6'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation:grainjump .42s steps(1) infinite;inset:-60px}
+@keyframes grainjump{0%{transform:translate(0,0)}20%{transform:translate(-31px,17px)}40%{transform:translate(23px,-41px)}60%{transform:translate(-13px,29px)}80%{transform:translate(37px,9px)}}
+.film.leak{z-index:25;mix-blend-mode:screen;opacity:.42;filter:blur(30px)}
+.film.leak::before,.film.leak::after{content:"";position:absolute;border-radius:50%}
+.film.leak::before{width:48vw;height:70vh;left:-16vw;top:-12vh;background:radial-gradient(closest-side,rgba(255,93,59,.95),rgba(216,41,28,.5) 55%,transparent);animation:leak1 19s ease-in-out infinite alternate}
+.film.leak::after{width:34vw;height:58vh;right:-12vw;bottom:-14vh;background:radial-gradient(closest-side,rgba(255,178,28,.9),rgba(226,38,111,.45) 60%,transparent);animation:leak2 23s ease-in-out infinite alternate}
+@keyframes leak1{0%{transform:translate(0,0) scale(1);opacity:.75}50%{transform:translate(8vw,10vh) scale(1.2);opacity:1}100%{transform:translate(2vw,28vh) scale(.9);opacity:.55}}
+@keyframes leak2{0%{transform:translate(0,0);opacity:.6}60%{transform:translate(-10vw,-14vh) scale(1.25);opacity:1}100%{transform:translate(-4vw,-30vh);opacity:.7}}
+.film.burn{box-shadow:inset 0 0 140px 30px rgba(0,0,0,.75),inset 0 0 40px rgba(216,41,28,.35)}
+.film.scratch{opacity:0;background:linear-gradient(90deg,transparent calc(50% - .5px),rgba(244,234,214,.5) 50%,transparent calc(50% + .5px));animation:scratch 7s steps(1) infinite}
+@keyframes scratch{0%,100%{opacity:0}31%{opacity:.6;transform:translateX(-23vw)}32%{opacity:0}63%{opacity:.4;transform:translateX(31vw)}64%{opacity:0}}
+
+/* ---------- SHEETS (drawers) ---------- */
+.sheet{position:fixed;top:16px;bottom:16px;width:var(--sheet-w);max-width:calc(100vw - 32px);z-index:30;color:var(--paper-ink);
+  transition:transform .55s cubic-bezier(.2,.9,.2,1),visibility 0s .55s;visibility:hidden;filter:drop-shadow(0 18px 30px rgba(0,0,0,.55))}
+.sheet.left{left:16px;transform:translateX(calc(-100% - 60px)) rotate(-1.5deg)}
+.sheet.right{right:16px;transform:translateX(calc(100% + 60px)) rotate(1.5deg)}
+.sheet.open{transform:translateX(0) rotate(0);visibility:visible;transition:transform .55s cubic-bezier(.2,.9,.2,1),visibility 0s}
+.sheet-paper{position:absolute;inset:0;background:var(--paper);
+  background-image:radial-gradient(rgba(29,20,13,.07) .7px,transparent 1.1px),linear-gradient(180deg,rgba(255,255,255,.18),transparent 30%,rgba(120,80,30,.08));
+  background-size:5px 5px,100% 100%}
+.sheet-inner{position:absolute;inset:0;display:flex;flex-direction:column;min-width:0}
+.sheet-head{position:relative;padding:22px 30px 14px 30px;border-bottom:1.5px solid var(--paper-ink);display:grid;grid-template-columns:auto 1fr auto;gap:2px 14px;align-items:end}
+.sheet.left .sheet-head{padding-right:44px}
+.sheet.right .sheet-head{padding-left:44px}
+.folio{grid-row:1/3;font-family:var(--display);font-weight:900;font-size:64px;line-height:.8;color:var(--ektar);letter-spacing:-.02em}
+.sheet-head h2{font-family:var(--display);font-weight:900;font-size:40px;line-height:.9;letter-spacing:.02em;text-transform:uppercase}
+.kicker{grid-column:2;font-size:9px;letter-spacing:.2em;color:var(--paper-mute);text-transform:uppercase}
+.close-btn{grid-row:1/3;grid-column:3;align-self:start;background:none;border:1.5px solid var(--paper-ink);padding:7px 10px 6px;font-size:10px;letter-spacing:.18em;cursor:pointer;transform:rotate(2deg)}
+.close-btn:hover,.close-btn:focus-visible{background:var(--paper-ink);color:var(--paper);outline:none}
+.sheet-body{flex:1;overflow-y:auto;overflow-x:hidden;padding:20px 30px 40px;min-width:0;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--paper-ink) transparent}
+.sheet.left .sheet-body{padding-right:44px}
+.sheet.right .sheet-body{padding-left:44px}
+.sheet-body p{font-family:var(--serif);font-size:16px;line-height:1.45;margin:6px 0 10px;overflow-wrap:anywhere}
+.sheet-body h3{font-family:var(--display);font-weight:800;font-size:27px;line-height:.95;letter-spacing:.02em;text-transform:uppercase;margin-top:2px}
+.lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--paper-mute)}
+.lbl b{color:var(--ektar);font-weight:600}
+.sect{margin:26px 0 8px;display:flex;align-items:center;gap:10px;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase}
+.sect::after{content:"";flex:1;height:0;border-top:1.5px dashed var(--paper-ink);opacity:.5}
+.lnk{display:inline-block;font-size:10px;letter-spacing:.12em;text-decoration:none;border-bottom:1.5px solid var(--ektar);padding-bottom:1px;margin:2px 14px 2px 0;overflow-wrap:anywhere}
+.lnk:hover,.lnk:focus-visible{background:var(--ektar);color:var(--paper);outline:none}
+.hand{font-family:var(--hand);font-size:24px;line-height:.9;color:var(--ektar)}
+.ph{display:inline-block;font-size:9.5px;letter-spacing:.1em;border:1.5px dashed var(--paper-mute);color:var(--paper-mute);padding:4px 7px;margin:4px 0}
+
+/* plates: printed images with tape + rough clipped edges */
+.plate{position:relative;margin:14px 0 8px;display:block;text-decoration:none}
+.plate img{display:block;width:100%;height:auto;filter:saturate(1.15) contrast(1.04);clip-path:polygon(0 1%,3% 0,40% .6%,71% 0,100% 1.2%,99.4% 38%,100% 72%,99% 100%,62% 99.2%,30% 100%,.6% 99%,0 64%,.8% 33%)}
+.plate::before{content:"";position:absolute;z-index:2;top:-9px;left:18%;width:78px;height:22px;background:rgba(232,201,142,.72);transform:rotate(-4deg);box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.plate.t2::before{left:auto;right:12%;transform:rotate(5deg)}
+.plate figcaption{display:flex;justify-content:space-between;gap:10px;font-size:9px;letter-spacing:.16em;text-transform:uppercase;margin-top:7px;color:var(--paper-mute)}
+.plate figcaption b{color:var(--paper-ink);font-weight:600}
+.duo{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;align-items:start}
+.duo .plate:nth-child(2){margin-top:44px}
+
+.entry{display:grid;grid-template-columns:62px 1fr;gap:4px 14px;padding:14px 0;border-top:1px solid rgba(29,20,13,.25)}
+.entry .yr{font-family:var(--display);font-weight:900;font-size:26px;line-height:.9;color:var(--ektar)}
+.entry .yr small{display:block;font-family:var(--mono);font-size:8px;letter-spacing:.14em;color:var(--paper-mute);font-weight:400;margin-top:4px}
+.entry h3{font-size:22px}
+.entry p{font-size:15px;margin:4px 0 6px}
+.quote{font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.3;padding:12px 0 12px 18px;border-left:3px solid var(--ektar);margin:14px 0}
+.quote cite{display:block;font-family:var(--mono);font-style:normal;font-size:9px;letter-spacing:.14em;color:var(--paper-mute);margin-top:8px}
+.quote cite a{color:inherit}
+
+/* terminal block (lore + optics) */
+.term{background:#10181a;color:var(--sand);font-family:var(--mono);font-size:11.5px;line-height:1.6;padding:16px 18px;white-space:pre-wrap;overflow-wrap:anywhere;margin:12px 0;
+  box-shadow:inset 0 0 0 1px rgba(232,201,142,.25),3px 3px 0 var(--ektar);position:relative;min-height:112px}
+.term::after{content:"█";animation:blink 1s steps(1) infinite;color:var(--coral)}
+@keyframes blink{50%{opacity:0}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 2px}
+.chip{background:none;border:1.5px solid var(--paper-ink);padding:7px 10px 6px;font-size:9.5px;letter-spacing:.16em;cursor:pointer;text-transform:uppercase}
+.chip:nth-child(2){transform:rotate(-1.5deg)} .chip:nth-child(3){transform:rotate(1.2deg)}
+.chip.active,.chip:hover{background:var(--ektar);border-color:var(--ektar);color:var(--paper)}
+
+/* sliders */
+.dial{margin:18px 0 6px}
+.dial label{display:flex;justify-content:space-between;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+.dial label output{font-family:var(--display);font-weight:900;font-size:22px;color:var(--ektar);letter-spacing:0;line-height:.8}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:16px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:8px;background:linear-gradient(90deg,var(--coral),var(--sun) 30%,var(--teal) 50%,var(--pc) 66%,var(--pm) 83%,var(--py));border:1.5px solid var(--paper-ink)}
+input[type=range]::-moz-range-track{height:8px;background:linear-gradient(90deg,var(--coral),var(--sun) 30%,var(--teal) 50%,var(--pc) 66%,var(--pm) 83%,var(--py));border:1.5px solid var(--paper-ink)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-9.5px;border-radius:50%;background:var(--paper) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='6' fill='none' stroke='%231d140d' stroke-width='1.5'/><path d='M12 0v24M0 12h24' stroke='%231d140d' stroke-width='1.5'/></svg>") center/100%;border:none}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--paper) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='6' fill='none' stroke='%231d140d' stroke-width='1.5'/><path d='M12 0v24M0 12h24' stroke='%231d140d' stroke-width='1.5'/></svg>") center/100%;border:none}
+input[type=range]:focus-visible{outline:2px dashed var(--ektar);outline-offset:4px}
+
+/* contact sheet (archive) */
+.contact{background:#14110e;padding:12px 10px 14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 8px;margin:12px -6px 0;transform:rotate(-.6deg)}
+.contact a{display:block;text-decoration:none;color:#d9c9a8;position:relative}
+.contact img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;filter:saturate(1.1);border:1px solid #000;transition:filter .2s}
+.contact a:hover img,.contact a:focus-visible img{filter:saturate(1.4) brightness(1.1);outline:2px solid var(--coral)}
+.contact .fn{font-size:7.5px;letter-spacing:.14em;color:#ff9a3c;margin-top:4px;display:flex;justify-content:space-between}
+.contact .tt{font-size:9px;line-height:1.3;margin-top:2px;overflow-wrap:anywhere}
+.contact a.mark::after{content:"";position:absolute;inset:-5px -4px auto -4px;height:calc(100% * .62);border:2px solid var(--ektar);border-radius:46% 54% 50% 50%/55% 48% 52% 45%;transform:rotate(-3deg);pointer-events:none}
+
+/* signal (about + links) */
+.idcard{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;margin-top:6px}
+.idcard img{width:96px;height:96px;object-fit:cover;filter:grayscale(1) contrast(1.2);mix-blend-mode:multiply;clip-path:polygon(4% 0,100% 3%,97% 100%,0 96%)}
+.banner{display:block;width:calc(100% + 12px);margin:0 -6px 12px;height:auto;clip-path:polygon(0 4%,100% 0,100% 94%,0 100%)}
+.links{list-style:none;margin:6px 0}
+.links li a{display:flex;align-items:baseline;gap:8px;padding:7px 0;text-decoration:none;font-size:11px;letter-spacing:.08em}
+.links li a .k{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.links li a .dots{flex:1;border-bottom:1.5px dotted var(--paper-ink);transform:translateY(-4px);min-width:20px}
+.links li a .v{color:var(--paper-mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:55%}
+.links li a:hover .k,.links li a:focus-visible .k{color:var(--ektar)}
+.links li a:focus-visible{outline:none}
+
+.sheet-foot{padding:10px 30px;border-top:1.5px solid var(--paper-ink);display:flex;justify-content:space-between;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--paper-mute)}
+.sheet.left .sheet-foot{padding-right:44px} .sheet.right .sheet-foot{padding-left:44px}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- CRT TERMINAL (credentials + repo teaser) — phosphor printed onto the zine ---------- */
+.crt{position:relative;margin:18px 8px 10px 2px;background:#0c1311;color:#f4ead6;box-shadow:4px 4px 0 var(--ektar),0 0 0 1px rgba(29,20,13,.9);transform:rotate(-.4deg)}
+.crt.alt{transform:rotate(.5deg);box-shadow:-4px 4px 0 var(--teal),0 0 0 1px rgba(29,20,13,.9)}
+.crt::before,.crt::after{content:"";position:absolute;z-index:3;top:-10px;width:64px;height:20px;background:rgba(232,201,142,.78);box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.crt::before{left:-12px;transform:rotate(-28deg)}
+.crt::after{left:auto;right:18%;top:auto;bottom:-11px;transform:rotate(-4deg);width:58px}
+.crt-bar{display:flex;align-items:center;gap:10px;padding:8px 18px 8px 12px;border-bottom:1px dashed rgba(232,201,142,.35);font-size:9px;letter-spacing:.14em;color:var(--sand);text-transform:lowercase}
+.crt-bar .lamp{display:flex;gap:5px}
+.crt-bar .lamp i{width:7px;height:7px;border-radius:50%;background:var(--ektar)}
+.crt-bar .lamp i:nth-child(2){background:var(--sun)} .crt-bar .lamp i:nth-child(3){background:var(--teal)}
+.crt-bar .path{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.crt-bar button{background:none;border:1px solid rgba(232,201,142,.5);color:var(--sand);font-size:8.5px;letter-spacing:.14em;padding:3px 7px;cursor:pointer}
+.crt-bar button:hover,.crt-bar button:focus-visible{background:var(--sun);color:#0c1311;outline:none}
+.crt-screen{position:relative;overflow:hidden}
+.crt-screen::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(180deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px),radial-gradient(ellipse at 50% 40%,transparent 55%,rgba(0,0,0,.55));mix-blend-mode:multiply}
+.crt pre{margin:0;padding:12px 0 16px 0;font-family:var(--mono);font-size:10.6px;line-height:1.6;overflow-x:auto;tab-size:4;min-height:3em;
+  text-shadow:0 0 5px rgba(255,178,28,.35),-.6px 0 rgba(0,166,207,.55),.6px 0 rgba(229,0,125,.5);scrollbar-width:thin;scrollbar-color:var(--sand) transparent}
+.crt code{display:inline-block;min-width:100%;font:inherit}
+.crt .row{display:grid;grid-template-columns:3.4em max-content}
+.crt .ln{position:sticky;left:0;z-index:1;background:#0c1311;padding-right:1em;text-align:right;color:rgba(232,201,142,.32);user-select:none;text-shadow:none}
+.crt .src{white-space:pre;padding-right:14px}
+.crt .t-k{color:#ff7a52} .crt .t-s{color:#f0d49a} .crt .t-c{color:#86998f;font-style:italic} .crt .t-n{color:#ffb21c}
+.crt .t-t{color:#3fd3c2} .crt .t-p{color:#c9b48c} .crt .t-f{color:#ffd36b}
+.crt .caret{display:inline-block;width:.62em;height:1.15em;vertical-align:-.2em;background:var(--coral);box-shadow:0 0 8px var(--coral);animation:blink 1s steps(1) infinite}
+.crt-foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:7px 12px 9px;border-top:1px dashed rgba(232,201,142,.3);font-size:8.5px;letter-spacing:.12em;color:rgba(232,201,142,.75)}
+.crt-foot a{color:var(--sun)}
+
+.cmd{bottom:46px;right:64px;pointer-events:auto;cursor:pointer;background:rgba(12,19,17,.82);border:1px solid rgba(232,201,142,.55);color:var(--sand);
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:9px 12px;transform:rotate(-1.5deg);box-shadow:3px 3px 0 var(--ektar);
+  text-shadow:0 0 6px rgba(255,178,28,.45),-.6px 0 rgba(0,166,207,.6),.6px 0 rgba(229,0,125,.55);transition:opacity .4s,transform .2s}
+.cmd b{color:var(--coral);font-weight:400}
+.cmd .caret{display:inline-block;width:.6em;height:1.05em;vertical-align:-.18em;margin-left:3px;background:var(--coral);animation:blink 1s steps(1) infinite}
+.cmd:hover,.cmd:focus-visible{transform:rotate(0) scale(1.04);outline:none;border-color:var(--sun)}
+body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
+
+/* ---------- PHONE ---------- */
+@media (max-width:760px){
+  :root{--sheet-w:100vw}
+  .masthead{top:18px;left:20px}
+  .wordmark{font-size:54px}
+  .byline{font-size:9px;max-width:230px;margin-top:10px}
+  .stamp{display:none}
+  .core-label{display:none}
+  .colorbar,.reg{display:none}
+  .slug{left:22px;right:22px;bottom:16px;font-size:7px}
+  .slug span:nth-child(2){display:none}
+  .hint{display:none}
+  .cmd{right:16px;bottom:58px;font-size:10px;padding:7px 9px}
+  .crt pre{font-size:9.3px}
+  .crt{margin-left:2px;margin-right:6px}
+  .mstat{display:block;bottom:34px;left:22px;font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.12em;color:var(--coral)}
+  body.open-left #lattice-stage,body.open-right #lattice-stage{transform:none}
+  .sheet,.sheet.left,.sheet.right{inset:0;width:100vw;max-width:none;top:0;bottom:0;left:0;right:0;transform:translateY(calc(100% + 40px));filter:none}
+  .sheet.open{transform:translateY(0)}
+  .sheet .sheet-head,.sheet.left .sheet-head,.sheet.right .sheet-head{padding:18px 18px 12px}
+  .sheet .sheet-body,.sheet.left .sheet-body,.sheet.right .sheet-body{padding:16px 18px 40px}
+  .sheet .sheet-foot,.sheet.left .sheet-foot,.sheet.right .sheet-foot{padding:10px 18px calc(10px + env(safe-area-inset-bottom))}
+  .folio{font-size:48px} .sheet-head h2{font-size:32px}
+  .duo{grid-template-columns:1fr 1fr;gap:10px}
+  .contact{grid-template-columns:repeat(2,minmax(0,1fr));margin:12px 0 0;transform:none}
+  .node-label{font-size:30px} .node-sub{font-size:10px}
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .film.scratch{display:none}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- rubber-stamp ink: eats the edges of the masthead stamp -->
+    <filter id="ink-rough" x="-5%" y="-10%" width="110%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.4 0 0 0 1.75" result="m"/>
+      <feComposite in="SourceGraphic" in2="m" operator="in" result="eaten"/>
+      <feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="1" seed="2" result="w"/>
+      <feDisplacementMap in="eaten" in2="w" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<noscript><p style="position:fixed;z-index:99;bottom:60px;left:20px;right:20px;color:#e8c98e;font:12px monospace">GIGADREAM.EXE needs JavaScript for the lattice. Links: x.com/TonyJMatos · tonyjmatos.com · github.com/TonyJoseMatos · linktr.ee/beachpunks</p></noscript>
+<div id="reel">
+  <canvas id="gl-canvas" aria-hidden="true"></canvas>
+
+  <div id="lattice-stage">
+    <svg id="lattice-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="group" aria-label="GIGADREAM lattice navigation">
+      <defs>
+        <!-- LINE BOIL: hand-drawn wobble. seed is swapped "on twos" (≈8fps) by JS -->
+        <filter id="boil" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+          <feTurbulence id="boil-turb" type="fractalNoise" baseFrequency=".019" numOctaves="2" seed="1" result="warp"/>
+          <feDisplacementMap in="SourceGraphic" in2="warp" scale="6" xChannelSelector="R" yChannelSelector="G" result="wobbled"/>
+          <!-- SAND-GRAIN EROSION: high-freq noise thresholded into an alpha mask -->
+          <feTurbulence id="grain-turb" type="fractalNoise" baseFrequency="1.15" numOctaves="1" seed="4" result="g"/>
+          <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -3.2 0 0 0 2.45" result="gm"/>
+          <feComposite in="wobbled" in2="gm" operator="in"/>
+        </filter>
+        <!-- INK BLEED: soft spread under each stroke -->
+        <filter id="bleed" x="-10%" y="-10%" width="120%" height="120%">
+          <feGaussianBlur stdDeviation="3.2"/>
+        </filter>
+        <filter id="pulse-glow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2.6" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="stone-rough" x="-15%" y="-15%" width="130%" height="130%">
+          <feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="2" seed="9" result="w"/>
+          <feDisplacementMap in="SourceGraphic" in2="w" scale="4.5" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+        <g id="grads"></g>
+      </defs>
+
+      <g id="edges-bleed" filter="url(#bleed)"></g>
+      <g id="edges" filter="url(#boil)"></g>
+      <g id="pulses" filter="url(#pulse-glow)"></g>
+
+      <!-- UNICRONIAN VECTOR CORE -->
+      <g id="core-anchor" transform="translate(600,400)">
+        <g class="spin">
+          <path id="core-orbit" d="M0,-92 a92,92 0 1,1 0,184 a92,92 0 1,1 0,-184" fill="none"/>
+          <text class="core-text"><textPath href="#core-orbit">NEVER DOOM · GOOD AND PROSPEROUS · 3077 · LOVE IS THE FIFTH ELEMENT ·</textPath></text>
+        </g>
+        <circle r="74" fill="none" stroke="#e8c98e" stroke-width="1" stroke-dasharray="2 4 12 4" class="spin-r" opacity=".7"/>
+        <g filter="url(#stone-rough)">
+          <polygon points="0,-56 49,-28 49,28 0,56 -49,28 -49,-28" class="core-ring"/>
+          <polygon points="0,-34 29.5,17 -29.5,17" fill="none" stroke="#ff5d3b" stroke-width="2"/>
+          <polygon points="0,34 29.5,-17 -29.5,-17" fill="none" stroke="#17a497" stroke-width="1.4" opacity=".9"/>
+        </g>
+        <g class="beat"><circle r="7" fill="#ffb21c"/><circle r="12" fill="none" stroke="#ffb21c" stroke-width="1" opacity=".6"/></g>
+        <text class="core-label" y="118" text-anchor="middle">UNICRONIAN VECTOR CORE</text>
+      </g>
+
+      <g id="nodes"></g>
+
+      <!-- hand annotations (desktop only; repositioned/hidden by JS) -->
+      <g id="annos">
+        <path class="anno-line" d="M494,170 C520,140 540,130 572,128"/><path class="anno-line" d="M494,170 l2,-11 M494,170 l10,-5"/>
+        <text class="anno" x="580" y="134" transform="rotate(-5 620 134)">start here</text>
+        <path class="anno-line" d="M790,650 C812,680 830,690 862,694"/><path class="anno-line" d="M790,650 l1,11 M790,650 l10,4"/>
+        <text class="anno" x="868" y="702" transform="rotate(4 900 702)">drag it — the sky bends</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- PRINT CHROME -->
+  <div class="chrome masthead">
+    <h1 class="wordmark">GIGA<br/>DREAM<span class="exe">.EXE</span></h1>
+    <p class="byline"><b>TONY JOSE MATOS</b> — PRIME WAVEFORM MODIFIER OF THE BEACHPUNK GIGADREAM · GIGADREAM AGENT + GONZO MEDIA · #BEACHPUNK IMG/ACC</p>
+  </div>
+  <div class="chrome stamp">NEVER DOOM | GOOD AND PROSPEROUS | 3077<small>LOC. TERRA II · MIXING MODELS FOR MAXIMUM CREATIVITY</small></div>
+  <i class="chrome crop tl"></i><i class="chrome crop tr"></i><i class="chrome crop bl"></i><i class="chrome crop br"></i>
+  <svg class="chrome reg l" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="7" fill="none" stroke="#e8c98e"/><path d="M13 0v26M0 13h26" stroke="#e8c98e"/></svg>
+  <svg class="chrome reg r" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="7" fill="none" stroke="#e8c98e"/><path d="M13 0v26M0 13h26" stroke="#e8c98e"/></svg>
+  <div class="chrome colorbar" aria-hidden="true">
+    <i style="background:#00a6cf"></i><i style="background:#e5007d"></i><i style="background:#ffe500"></i><i style="background:#111"></i>
+    <i style="background:#d8291c"></i><i style="background:#ff5d3b"></i><i style="background:#ffb21c"></i><i style="background:#e8c98e"></i><i style="background:#17a497"></i><i style="background:#0d5a60"></i>
+  </div>
+  <div class="chrome hint">pull a sigil outward<br/>— or just tap it
+    <svg width="46" height="22" viewBox="0 0 46 22"><path d="M2 14 C14 2 26 22 42 8 M42 8 l-9 0 M42 8 l-2 9" fill="none" stroke="#ffb21c" stroke-width="1.6" stroke-linecap="round"/></svg>
+  </div>
+  <div class="chrome slug"><span>FILE GD-037 · @TONYJMATOS</span><span>C 0 · M 72 · Y 88 · K 0 — EKTAR PUSH +1</span><span>PRINTED ON TERRA II</span></div>
+  <button class="chrome cmd" type="button" data-open="signal" aria-label="Open credentials in 06 Signal"><b>$</b> cat credentials.py<span class="caret"></span></button>
+  <div class="chrome mstat">NEVER DOOM | GOOD AND PROSPEROUS | 3077</div>
+</div>
+
+<div class="film leak" aria-hidden="true"></div>
+<div class="film grain" aria-hidden="true"></div>
+<div class="film scratch" aria-hidden="true"></div>
+<div class="film burn" aria-hidden="true"></div>
+
+<!-- ======================= 01 PROJECTS ======================= -->
+<aside id="drawer-projects" class="sheet left" role="dialog" aria-modal="false" aria-labelledby="h-projects">
+  <div class="sheet-paper"></div>
+  <div class="sheet-inner">
+    <header class="sheet-head">
+      <span class="folio">01</span><h2 id="h-projects">Projects</h2><span class="kicker">GIGADREAM.EXE · current series · 2026</span>
+      <button class="close-btn" type="button">close ✕</button>
+    </header>
+    <div class="sheet-body">
+      <a class="plate" href="https://tonyjmatos.com/photo-vector-bashing" target="_blank" rel="noopener">
+        <img src="assets/gd-photo-vector-bashing.jpg" alt="Photo Vector Bashing cover: a blue figure with sunflower eyes" loading="lazy" decoding="async" width="928" height="725"/>
+        <figcaption><b>PL. 01 — Photo Vector Bashing</b><span>2026</span></figcaption>
+      </a>
+      <p>Hybrid photographic raster plates fractured and re-welded with hard-edged Unicronian vector primitives, chromatic edge bleed, and sun-bleached coastal saturation.</p>
+      <div class="duo">
+        <figure class="plate t2"><img src="assets/pvb-1.jpg" alt="Photo Vector Bashing plate" loading="lazy" decoding="async" width="480" height="960"/><figcaption><b>PL. 01b</b><span>series</span></figcaption></figure>
+        <figure class="plate"><img src="assets/pvb-5.jpg" alt="Photo Vector Bashing plate" loading="lazy" decoding="async" width="480" height="960"/><figcaption><b>PL. 01c</b><span>series</span></figcaption></figure>
+      </div>
+      <a class="lnk" href="https://tonyjmatos.com/photo-vector-bashing" target="_blank" rel="noopener">tonyjmatos.com/photo-vector-bashing →</a>
+
+      <div class="sect">the gigadream.exe set</div>
+      <div class="duo">
+        <a class="plate" href="https://tonyjmatos.com/portal-37" target="_blank" rel="noopener"><img src="assets/gd-portal-37.jpg" alt="PORTAL 37 cover" loading="lazy" decoding="async" width="960" height="750"/><figcaption><b>PL. 02 — PORTAL 37</b><span>2026</span></figcaption></a>
+        <a class="plate t2" href="https://tonyjmatos.com/codename-beachpunk" target="_blank" rel="noopener"><img src="assets/gd-codename-beachpunk.jpg" alt="codename: beachpunk cover: a mech on a beach" loading="lazy" decoding="async" width="960" height="750"/><figcaption><b>PL. 03 — codename: beachpunk</b><span>2026</span></figcaption></a>
+      </div>
+      <div class="entry"><div class="yr">2026<small>PL. 02</small></div><div><h3>PORTAL 37</h3>
+        <p>Dimensional transit visual studies bridging physical production logistics with speculative 3077 coastal megastructures and gonzo cinema framing.</p>
+        <a class="lnk" href="https://tonyjmatos.com/portal-37" target="_blank" rel="noopener">tonyjmatos.com/portal-37 →</a>
+        <a class="lnk" href="https://github.com/TonyJoseMatos/gigadream-portal37" target="_blank" rel="noopener">terminal ASCII engine (GitHub) →</a></div></div>
+      <div class="entry"><div class="yr">2026<small>PL. 03</small></div><div><h3>codename: beachpunk</h3>
+        <!-- one-liner remixed (paraphrase, not a quote) from @TonyJMatos posts:
+             https://x.com/TonyJMatos/status/2114367274601570743  (25 Oct 2026: "The beachpunk gigadream is a self referential creative ecosystem that has become an ever evolving IP / I time stamped it before any AI film maker even knew how to prompt")
+             https://x.com/TonyJMatos/status/2114508588609831120  (26 Oct 2026: "Double dipping with my rare lasting lore")
+             https://x.com/TonyJMatos/status/2114415692267257955  (25 Oct 2026: "On the outside looking in (you are)")
+             https://x.com/TonyJMatos/status/2113636712475767181  (23 Oct 2026: "All will be revealed")
+             #beachpunk search on X returned no other public posts beyond his own (checked 22 Nov 2026). -->
+        <p>A self-referential creative ecosystem, time-stamped before anyone knew how to prompt — rare, lasting lore that keeps evolving while you're on the outside looking in. All will be revealed.</p>
+        <a class="lnk" href="https://tonyjmatos.com/codename-beachpunk" target="_blank" rel="noopener">tonyjmatos.com/codename-beachpunk →</a></div></div>
+      <a class="plate" href="https://tonyjmatos.com/shorts-in-aesthetical-accuracy" target="_blank" rel="noopener"><img src="assets/gd-shorts.jpg" alt="SHORTS IN AESTHETICAL ACCURACY cover: a figure skydiving over desert clouds" loading="lazy" decoding="async" width="960" height="751"/><figcaption><b>PL. 04 — Shorts in Aesthetical Accuracy</b><span>2026</span></figcaption></a>
+      <p>High-velocity micro-films and brand systems built on multi-model consistency pipelines without sacrificing raw indie comic grit.</p>
+      <a class="lnk" href="https://tonyjmatos.com/shorts-in-aesthetical-accuracy" target="_blank" rel="noopener">tonyjmatos.com/shorts-in-aesthetical-accuracy →</a>
+
+      <div class="sect">fresh off the feed</div>
+      <div class="duo">
+        <a class="plate" href="https://x.com/TonyJMatos/status/2114405554110026231" target="_blank" rel="noopener"><img src="assets/x-gigadream-outside.jpg" alt="Video still from 'POV: You only see the gigadream from the outside'" loading="lazy" decoding="async" width="960" height="540"/><figcaption><b>"POV: You only see the gigadream from the outside"</b><span>25.X.26</span></figcaption></a>
+        <a class="plate t2" href="https://x.com/TonyJMatos/status/2116656594943705551" target="_blank" rel="noopener"><img src="assets/x-apotheosis-proxima.jpg" alt="Collage posted as the 'you are here' branch, apotheosis proxima" loading="lazy" decoding="async" width="798" height="960"/><figcaption><b>"you are here*" branch (apotheosis proxima)</b><span>31.X.26</span></figcaption></a>
+      </div>
+      <p class="hand">all of it lives at tonyjmatos.com/gigadream ↗</p>
+      <a class="lnk" href="https://tonyjmatos.com/gigadream" target="_blank" rel="noopener">tonyjmatos.com/gigadream →</a>
+      <a class="lnk" href="https://x.com/TonyJMatos/highlights" target="_blank" rel="noopener">@TonyJMatos highlights →</a>
+    </div>
+    <footer class="sheet-foot"><span>GD-037 / 01</span><span>vector bashing dept.</span></footer>
+  </div>
+</aside>
+
+<!-- ======================= 02 DEVELOPING ======================= -->
+<aside id="drawer-developing" class="sheet right" role="dialog" aria-modal="false" aria-labelledby="h-developing">
+  <div class="sheet-paper"></div>
+  <div class="sheet-inner">
+    <header class="sheet-head">
+      <span class="folio">02</span><h2 id="h-developing">Developing</h2><span class="kicker">AI + engine lab · github.com/TonyJoseMatos</span>
+      <button class="close-btn" type="button">close ✕</button>
+    </header>
+    <div class="sheet-body">
+      <div class="quote">"Mixing Models for Maximum Creativity" or currently — Using Spawn to prototype my games, then Unreal to code them with my Magi.
+        <cite><a href="https://x.com/TonyJMatos/status/2114508588609831120" target="_blank" rel="noopener">@TonyJMatos · 26 Oct 2026</a></cite></div>
+      <figure class="crt alt" aria-labelledby="teaser-cap">
+        <figcaption class="crt-bar"><span class="lamp" aria-hidden="true"><i></i><i></i><i></i></span><span class="path" id="teaser-cap">gigadream-fieldkit / canon.py · L1–21</span><span aria-hidden="true">py</span></figcaption>
+        <div class="crt-screen"><pre tabindex="0" aria-label="Excerpt of canon.py from the gigadream-fieldkit repository"><code id="teaser-code"></code></pre></div>
+        <div class="crt-foot"><span>real source · commit 49ac210 · 15 Sep 2026 · scroll →</span><a href="https://github.com/TonyJoseMatos/gigadream-fieldkit/blob/49ac210714e6ae5491ea5a24e411b679e78ea61b/canon.py#L1-L21" target="_blank" rel="noopener">view on GitHub →</a></div>
+      </figure>
+      <p><b>Focus</b> — creative production systems and content supply chains; generative workflow transformation (ComfyUI, multi-model pipelines, consistency systems); brand governance, asset logistics, and scalable delivery; hands-on enablement for creative and enterprise teams.</p>
+
+      <div class="sect">open repos · live</div>
+      <div class="entry"><div class="yr">PY<small>upd. 10.26</small></div><div><h3>fractal-ontology-alignment</h3>
+        <p>Combining Nick Cammarata's empirical findings with a focus on eschatological ontology and imaginative neural alignment — attempting to prove that machines can develop imaginative, macro-metaphorical reasoning.</p>
+        <a class="lnk" href="https://github.com/TonyJoseMatos/fractal-ontology-alignment" target="_blank" rel="noopener">repo →</a></div></div>
+      <div class="entry"><div class="yr">FF<small>upd. 11.26</small></div><div><h3>firefly-lab</h3>
+        <p>Experimental Adobe Firefly workflows, shortcuts, and demos. Beachpunk Gigadream tone. High-complexity generative systems, asset logistics, cinematic production pipelines.</p>
+        <a class="lnk" href="https://github.com/TonyJoseMatos/firefly-lab" target="_blank" rel="noopener">repo →</a></div></div>
+      <div class="entry"><div class="yr">⚡<small>upd. 08.26</small></div><div><h3>gigadream-portal</h3>
+        <p>The clean repository for the gigadream portal electrified sand experience.</p>
+        <a class="lnk" href="https://github.com/TonyJoseMatos/gigadream-portal" target="_blank" rel="noopener">repo →</a></div></div>
+      <div class="entry"><div class="yr">37<small>upd. 06.26</small></div><div><h3>gigadream-portal37</h3>
+        <p>GIGADREAM // PORTAL 37 — Terminal ASCII Engine | Beachpunk hints | Pure Gigadream.</p>
+        <a class="lnk" href="https://github.com/TonyJoseMatos/gigadream-portal37" target="_blank" rel="noopener">repo →</a></div></div>
+      <div class="entry"><div class="yr">&gt;_<small>upd. 07.26</small></div><div><h3>gigadream-github</h3>
+        <p>GIGADREAM // GITHUB PORTAL — live GitHub profile transmission in terminal ASCII.</p>
+        <a class="lnk" href="https://github.com/TonyJoseMatos/gigadream-github" target="_blank" rel="noopener">repo →</a></div></div>
+      <div class="entry"><div class="yr">RL<small>upd. 07.26</small></div><div><h3>gigadream</h3>
+        <p>Reels.</p>
+        <a class="lnk" href="https://github.com/TonyJoseMatos/gigadream" target="_blank" rel="noopener">repo →</a></div></div>
+
+      <div class="sect">production systems</div>
+      <h3>Multi-model ComfyUI &amp; local CLI supply chains</h3>
+      <p>Zero-API local orchestration pipelines running on Apple Silicon and Linux CLI for deterministic style transfer, asset logistics, and Unreal Engine worldbuilding.</p>
+      <p class="hand">the obvious next step ↘</p>
+      <a class="lnk" href="https://github.com/TonyJoseMatos" target="_blank" rel="noopener">all 13 public repos →</a>
+    </div>
+    <footer class="sheet-foot"><span>GD-037 / 02</span><span>imaginative development</span></footer>
+  </div>
+</aside>
+
+<!-- ======================= 03 LORE ======================= -->
+<aside id="drawer-lore" class="sheet right" role="dialog" aria-modal="false" aria-labelledby="h-lore">
+  <div class="sheet-paper"></div>
+  <div class="sheet-inner">
+    <header class="sheet-head">
+      <span class="folio">03</span><h2 id="h-lore">Lore</h2><span class="kicker">TERRA II compiler · The Diamond Riot</span>
+      <button class="close-btn" type="button">close ✕</button>
+    </header>
+    <div class="sheet-body">
+      <h3>The Diamond Riot // TERRA II</h3>
+      <p>Beachpunk Gigadream field kit — a Diamond Riot / TERRA II lore compiler for the terminal. FRINGE POSH DARK boards. Prompts, title cards, salvage ASCII, product viz. <i>The riot does not ask permission.</i></p>
+      <div class="chips" role="group" aria-label="Lore compiler mode">
+        <button class="chip active" type="button" data-lore="riot">fringe posh dark</button>
+        <button class="chip" type="button" data-lore="terra">terra II dispatch</button>
+        <button class="chip" type="button" data-lore="ascii">salvage ascii</button>
+      </div>
+      <div id="lore-output" class="term" aria-live="polite"></div>
+      <a class="lnk" href="https://github.com/TonyJoseMatos/gigadream-fieldkit" target="_blank" rel="noopener">gigadream-fieldkit →</a>
+      <a class="lnk" href="https://github.com/TonyJoseMatos/TheDiamondRiot" target="_blank" rel="noopener">TheDiamondRiot →</a>
+      <a class="lnk" href="https://www.redbubble.com/people/thediamondriot/shop" target="_blank" rel="noopener">the original Diamond Riot! shop →</a>
+
+      <div class="quote">This whole thing is an experiment remember? We are currently running on America — version 2.27. Stop your dooming and get to work on pushing the next update.
+        <cite><a href="https://x.com/TonyJMatos/status/2118350547816186245" target="_blank" rel="noopener">@TonyJMatos · 5 Nov 2026</a></cite></div>
+
+      <div class="sect">the IP shelf</div>
+      <p>Creator of IP, Defender of Lore. Titles that recur across the archive:</p>
+      <div class="entry"><div class="yr">BP</div><div><h3>Beachpunk</h3><p>From the 2023 Capstone demo reel to "Mixed Models — Beachpunk Trailer 1" (2024).</p></div></div>
+      <div class="entry"><div class="yr">SW</div><div><h3>Swords with no Masters</h3><p>Animated text-to-video tease, 2023.</p><a class="lnk" href="https://tonyjmatos.com/e-3" target="_blank" rel="noopener">watch →</a></div></div>
+      <div class="entry"><div class="yr">NU</div><div><h3>nu-Punk · nu-Babylon TV</h3><p>"The First nu-Punk" multimodal character dev and "Birth of nu-Babylon TV" (Pika Labs), 2023.</p><a class="lnk" href="https://tonyjmatos.com/w3" target="_blank" rel="noopener">first nu-punk →</a><a class="lnk" href="https://tonyjmatos.com/g" target="_blank" rel="noopener">nu-babylon tv →</a></div></div>
+      <p class="hand">love is the fifth element (stop forgetting)</p>
+    </div>
+    <footer class="sheet-foot"><span>GD-037 / 03</span><span>defender of lore</span></footer>
+  </div>
+</aside>
+
+<!-- ======================= 04 OPTICS ======================= -->
+<aside id="drawer-optics" class="sheet right" role="dialog" aria-modal="false" aria-labelledby="h-optics">
+  <div class="sheet-paper"></div>
+  <div class="sheet-inner">
+    <header class="sheet-head">
+      <span class="folio">04</span><h2 id="h-optics">Optics</h2><span class="kicker">bilingual sorting facility · RGB → CMYK</span>
+      <button class="close-btn" type="button">close ✕</button>
+    </header>
+    <div class="sheet-body">
+      <h3>Biological RGB → Mechanical CMYK</h3>
+      <p>Translates biological human layout logic (RGB) into mechanical structural logic (CMYK), using cross-layer latent blending matrices as the physical translation mechanics in the gigadream OS.</p>
+      <p class="hand">these dials drive the sky behind this sheet ↓</p>
+      <div class="dial"><label for="cmyk-slider">latent RGB ↔ CMYK matrix shift <output id="cmyk-val">45%</output></label><input id="cmyk-slider" type="range" min="0" max="100" value="45"/></div>
+      <div class="dial"><label for="vector-slider">unicronian vector-bash fracture <output id="vector-val">60%</output></label><input id="vector-slider" type="range" min="0" max="100" value="60"/></div>
+      <div class="dial"><label for="ektar-slider">ektar push · leaks + grain <output id="ektar-val">50%</output></label><input id="ektar-slider" type="range" min="0" max="100" value="50"/></div>
+      <div class="term" style="min-height:0">M_blend = (1.0 - alpha) * RGB_bio + alpha * inv(CMYK_mech)
+# live GLSL uniforms bound to the background shader</div>
+      <a class="lnk" href="https://github.com/TonyJoseMatos/Bilingual-Optics-Sorting-Facility" target="_blank" rel="noopener">Bilingual-Optics-Sorting-Facility →</a>
+      <div class="sect">field optics</div>
+      <div class="entry"><div class="yr">3DGS<small>2025</small></div><div><h3>Neighborhood Gaussian splat, connected by portals</h3>
+        <p>An entire neighborhood captured — indoors, outdoors, day and night — then stitched with Teleport 2.0 portals into one explorable world.</p>
+        <a class="lnk" href="https://www.linkedin.com/posts/tony-matos-791085159_i-dont-think-many-of-you-on-this-particular-activity-7323770550923784192-UY36" target="_blank" rel="noopener">LinkedIn post →</a></div></div>
+      <div class="entry"><div class="yr">NeRF<small>2023</small></div><div><h3>neRF Capture — Tesla Supercharger</h3><a class="lnk" href="https://tonyjmatos.com/nerf-capture-tesla-supercharger" target="_blank" rel="noopener">view →</a></div></div>
+    </div>
+    <footer class="sheet-foot"><span>GD-037 / 04</span><span>K is for key, not black</span></footer>
+  </div>
+</aside>
+
+<!-- ======================= 05 ARCHIVE ======================= -->
+<aside id="drawer-archive" class="sheet left" role="dialog" aria-modal="false" aria-labelledby="h-archive">
+  <div class="sheet-paper"></div>
+  <div class="sheet-inner">
+    <header class="sheet-head">
+      <span class="folio">05</span><h2 id="h-archive">Archive</h2><span class="kicker">contact sheet · 2023 → 2026 · 30 frames</span>
+      <button class="close-btn" type="button">close ✕</button>
+    </header>
+    <div class="sheet-body">
+      <p>Every motion test, model shoot-out and short since the first class in 2023 — Runway, Luma, Pika, Kaiber, Midjourney, NeRF — mixed models, in the order they were pulled from the bath. Circled frames are the Beachpunk ones.</p>
+      <div id="contact" class="contact"></div>
+      <p class="hand" style="margin-top:16px">full set + legacy work → tonyjmatos.com/work</p>
+      <a class="lnk" href="https://tonyjmatos.com/work" target="_blank" rel="noopener">tonyjmatos.com/work →</a>
+      <a class="lnk" href="https://www.behance.net/Tony-J-Matos" target="_blank" rel="noopener">Behance →</a>
+    </div>
+    <footer class="sheet-foot"><span>GD-037 / 05</span><span>pulled from the bath</span></footer>
+  </div>
+</aside>
+
+<!-- ======================= 06 SIGNAL ======================= -->
+<aside id="drawer-signal" class="sheet left" role="dialog" aria-modal="false" aria-labelledby="h-signal">
+  <div class="sheet-paper"></div>
+  <div class="sheet-inner">
+    <header class="sheet-head">
+      <span class="folio">06</span><h2 id="h-signal">Signal</h2><span class="kicker">about · links · transmission</span>
+      <button class="close-btn" type="button">close ✕</button>
+    </header>
+    <div class="sheet-body">
+      <img class="banner" src="assets/x-banner.jpg" alt="GIGADREAM banner" loading="lazy" decoding="async" width="960" height="320"/>
+      <div class="idcard">
+        <img src="assets/x-avatar.jpg" alt="Tony Jose Matos" loading="lazy" decoding="async" width="400" height="400"/>
+        <div><h3>Tony Jose Matos</h3><div class="lbl">Gigadream Agent + Gonzo Media · <b>Terra II</b></div>
+          <div class="lbl" style="margin-top:4px">Support • Multiplier • Bridge · Imaginative Development</div></div>
+      </div>
+      <p>I am a creative generalist mixing AI with a user-centric vision: the bridge between innovative brand storytelling, immersive UI/UX design, AI-driven content creation, and impactful product strategies.</p>
+      <p class="hand">AI art technologist &amp; gonzo media · creator of beachpunk: The Diamond Riot!</p>
+
+      <div class="sect">credentials</div>
+      <figure class="crt" id="cred" aria-labelledby="cred-cap">
+        <figcaption class="crt-bar"><span class="lamp" aria-hidden="true"><i></i><i></i><i></i></span><span class="path" id="cred-cap">~/gigadream/signal/credentials.py</span><button type="button" id="cred-replay">↻ replay</button></figcaption>
+        <div class="crt-screen"><pre tabindex="0" aria-hidden="true"><code id="cred-code"></code></pre></div>
+        <div class="crt-foot"><span>sources: tonyjmatos.com · LinkedIn · github.com/TonyJoseMatos · @TonyJMatos</span></div>
+        <ul class="sr" id="cred-sr">
+          <li>Creative Generalist &amp; AI Tutor, LABL Design, 2022 to now</li>
+          <li>Creative Director, Maitri Learning, 2020 to 2022</li>
+          <li>Creative Director, Pro-Mart Industries, 2015 to 2020</li>
+          <li>BA, Arts, Entertainment and Media Management, UMass Amherst</li>
+          <li>Certificates: Generative AI for Everyone (Coursera, 2023); Generative AI Creation – Multimodal Masterclass (Maven, 2023)</li>
+          <li>Tools: ComfyUI, Unreal Engine, Spawn, Runway, Luma, Pika, Kaiber, Midjourney, Adobe Firefly, NeRF, Gaussian splatting</li>
+          <li>IP: Beachpunk, The Diamond Riot, Swords with no Masters, PORTAL 37, TERRA II</li>
+        </ul>
+      </figure>
+
+      <div class="sect">transmit</div>
+      <ul class="links">
+        <li><a href="https://x.com/TonyJMatos" target="_blank" rel="noopener"><span class="k">X</span><span class="dots"></span><span class="v">@TonyJMatos</span></a></li>
+        <li><a href="https://tonyjmatos.com/gigadream" target="_blank" rel="noopener"><span class="k">Portfolio</span><span class="dots"></span><span class="v">tonyjmatos.com</span></a></li>
+        <li><a href="https://github.com/TonyJoseMatos" target="_blank" rel="noopener"><span class="k">GitHub</span><span class="dots"></span><span class="v">TonyJoseMatos</span></a></li>
+        <li><a href="https://www.instagram.com/tonyjmatos/" target="_blank" rel="noopener"><span class="k">Instagram</span><span class="dots"></span><span class="v">@tonyjmatos</span></a></li>
+        <li><a href="https://www.behance.net/Tony-J-Matos" target="_blank" rel="noopener"><span class="k">Behance</span><span class="dots"></span><span class="v">Tony-J-Matos</span></a></li>
+        <li><a href="https://www.linkedin.com/in/tony-matos-791085159/" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="dots"></span><span class="v">tony-matos</span></a></li>
+        <li><a href="https://dribbble.com/tags/tonyjmatos" target="_blank" rel="noopener"><span class="k">Dribbble</span><span class="dots"></span><span class="v">#tonyjmatos</span></a></li>
+        <li><a href="https://society6.com/tonyjmatos" target="_blank" rel="noopener"><span class="k">Society6</span><span class="dots"></span><span class="v">tonyjmatos</span></a></li>
+        <li><a href="https://www.redbubble.com/people/thediamondriot/shop" target="_blank" rel="noopener"><span class="k">Riot shop</span><span class="dots"></span><span class="v">Redbubble</span></a></li>
+        <li><a href="http://buymeacoffee.com/beachpunk" target="_blank" rel="noopener"><span class="k">Support</span><span class="dots"></span><span class="v">buymeacoffee/beachpunk</span></a></li>
+        <li><a href="https://linktr.ee/beachpunks" target="_blank" rel="noopener"><span class="k">Everything</span><span class="dots"></span><span class="v">linktr.ee/beachpunks</span></a></li>
+      </ul>
+      <span class="ph">[ADD: booking / commissions email — only if you want one public]</span>
+    </div>
+    <footer class="sheet-foot"><span>GD-037 / 06</span><span>be impeccable with your word</span></footer>
+  </div>
+</aside>
+
+<script>
+(() => {
+'use strict';
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const SVGNS = 'http://www.w3.org/2000/svg';
+const $ = (s, r = document) => r.querySelector(s);
+const el = (tag, attrs = {}, parent) => { const e = document.createElementNS(SVGNS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+
+/* ==========================================================================
+   1. BACKGROUND SHADER — Unicronian vector-bashing over an Ektar sunset sea.
+      Uniforms are the same family as v1 (cmyk shift, vector bash, pull) plus
+      an "ektar push" that drives grain + leak strength.
+   ========================================================================== */
+const canvas = $('#gl-canvas');
+const gl = canvas.getContext('webgl', { antialias: false, premultipliedAlpha: false, powerPreference: 'low-power' });
+let cmykShift = .45, vectorBash = .60, ektar = .5, pull = [0, 0], pullTarget = [0, 0];
+
+const vert = `attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}`;
+const frag = `
+precision highp float;
+uniform vec2 R; uniform float T, C, B, E; uniform vec2 P;
+float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float poly(vec2 uv,float n,float a){float an=atan(uv.y,uv.x)+a;float r=6.2831853/n;return cos(floor(.5+an/r)*r-an)*length(uv);}
+vec3 scene(vec2 uv,float off){
+  vec2 p=uv+P*.25+vec2(off,-off*.7);
+  float t=T*.2;
+  float d1=poly(p*1.4,3.,t+off*4.);
+  float d2=poly((p-vec2(.18,-.12))*2.1,6.,-t*.8);
+  float sh=abs(fract(d1*(3.+B*5.))-.5);
+  float lines=smoothstep(.028,0.,sh);
+  float wave=sin(p.x*5.+t*2.+d2*4.)*(.05+B*.07);
+  float hy=p.y+.16+wave;
+  float horizon=smoothstep(.012,0.,abs(hy));
+  /* --- biological RGB: Ektar sunset over a teal sea, sand-coloured shards --- */
+  vec3 skyLow=vec3(1.,.40,.16), skyMid=vec3(.62,.11,.27), skyTop=vec3(.07,.05,.10);
+  vec3 sky=mix(skyLow,skyMid,smoothstep(0.,.32,hy)); sky=mix(sky,skyTop,smoothstep(.25,.95,hy));
+  vec3 sea=mix(vec3(.03,.36,.36),vec3(.01,.06,.08),smoothstep(0.,-.55,hy));
+  float sunG=exp(-pow(length((p-vec2(-.05,-.16))*vec2(1.,2.2))*3.2,2.));
+  vec3 base=(hy>0.?sky:sea)*.42 + vec3(1.,.55,.2)*sunG*.35;
+  float band=step(.45,fract(d2*3.));
+  vec3 bio=base + lines*mix(vec3(.91,.79,.56),vec3(1.,.36,.23),band)*.26 + horizon*vec3(1.,.66,.36)*.9;
+  /* --- mechanical CMYK: process inks + a rotated halftone screen --- */
+  vec2 q=mat2(.966,-.259,.259,.966)*gl_FragCoord.xy/7.;
+  float lum=dot(base,vec3(.3,.59,.11));
+  float dotm=smoothstep(.0,.08,lum*1.6-length(fract(q)-.5));
+  vec3 ink=fract(d2*2.5)<.33?vec3(0.,.65,.81):(fract(d2*2.5)<.66?vec3(.9,0.,.49):vec3(1.,.9,0.));
+  vec3 mech=vec3(.035,.06,.075)+dotm*vec3(.85,.78,.64)*.32 + lines*ink*.42 + horizon*vec3(.95,.92,.85);
+  return mix(bio,mech,C);
+}
+void main(){
+  float fr=floor(T*12.);
+  vec2 weave=vec2(h(vec2(fr,1.))-.5,h(vec2(fr,7.))-.5)*.0025;
+  vec2 uv=(gl_FragCoord.xy-.5*R)/min(R.x,R.y)+weave;
+  float split=.0018+length(P)*.018+E*.002;
+  vec3 col=vec3(scene(uv,split).r,scene(uv,0.).g,scene(uv,-split).b);
+  /* Ektar response: lift saturation, warm the mids */
+  float l=dot(col,vec3(.299,.587,.114));
+  col=mix(vec3(l),col,1.18+E*.2); col*=vec3(1.04,1.,.94);
+  col+=(h(floor(gl_FragCoord.xy/1.5)+fr)-.5)*(.04+E*.06);
+  float v=1.-dot(uv*.78,uv*.78); col*=clamp(v,.12,1.);
+  gl_FragColor=vec4(col,1.);
+}`;
+let U = {}, glOK = false;
+if (gl) {
+  const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(o)); return o; };
+  const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, vert)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, frag)); gl.linkProgram(pr);
+  if (gl.getProgramParameter(pr, gl.LINK_STATUS)) {
+    gl.useProgram(pr);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+    const a = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(a); gl.vertexAttribPointer(a, 2, gl.FLOAT, false, 0, 0);
+    ['R','T','C','B','E','P'].forEach(k => U[k] = gl.getUniformLocation(pr, k));
+    glOK = true;
+  } else console.error(gl.getProgramInfoLog(pr));
+}
+if (!glOK) canvas.style.background = 'radial-gradient(ellipse at 45% 62%,#ff6a2a 0,#a3183f 30%,#140b14 60%,#04191b 100%)';
+function resize() {
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5) * (innerWidth > 1600 ? .75 : .9); // capped: it's a film layer, not a hero render
+  canvas.width = Math.round(canvas.clientWidth * dpr); canvas.height = Math.round(canvas.clientHeight * dpr);
+  if (glOK) gl.viewport(0, 0, canvas.width, canvas.height);
+}
+
+/* ==========================================================================
+   2. LATTICE — six petroglyph sigils on a hand-ruled hexagon.
+   ========================================================================== */
+// Sigils: drawn as if pecked into stone. Taíno-petroglyph / cyber-orisha.
+const SIGILS = {
+  // sun-face (cemí sun): ring, two eyes, mouth, rays
+  projects: `<circle r="11"/><circle class="fill" cx="-4" cy="-2.5" r="1.9"/><circle class="fill" cx="4" cy="-2.5" r="1.9"/><path d="M-5 4 Q0 8 5 4"/><path class="hot" d="M0-15v-5M0 15v5M-15 0h-5M15 0h5M-10.6-10.6l-3.5-3.5M10.6 10.6l3.5 3.5M10.6-10.6l3.5-3.5M-10.6 10.6l-3.5 3.5"/>`,
+  // double spiral (development / recursion)
+  developing: `<path d="M0 0 C3 -3 6 0 4 4 C1 9 -7 6 -7 0 C-7 -8 4 -11 9 -5 C14 1 9 12 0 13"/><path class="hot" d="M0 13 C-8 13 -15 7 -15 -1"/><circle class="hotf" cx="-15" cy="-2" r="2.2"/>`,
+  // three-pointed cemí with face (lore keeper)
+  lore: `<path d="M-15 10 L0 -15 L15 10 Z"/><circle class="fill" cx="-4.5" cy="1" r="1.8"/><circle class="fill" cx="4.5" cy="1" r="1.8"/><path class="hot" d="M-4 6.5h8M-19 14h38"/>`,
+  // eye with misregistered C/M/Y irises (optics)
+  optics: `<path d="M-17 0 Q0 -14 17 0 Q0 14 -17 0Z"/><circle cx="-1.6" cy="0" r="5" stroke="#00a6cf"/><circle cx="1.6" cy="1" r="5" stroke="#e5007d"/><circle cx="0" cy="-1.4" r="5" stroke="#ffe500"/><circle class="fill" r="1.6"/>`,
+  // tide record: framed stacked waves (archive)
+  archive: `<rect x="-13" y="-13" width="26" height="26" rx="2"/><path d="M-10-5 q2.5-3 5 0 t5 0 t5 0 t5 0"/><path class="hot" d="M-10 1 q2.5-3 5 0 t5 0 t5 0 t5 0"/><path d="M-10 7 q2.5-3 5 0 t5 0 t5 0 t5 0"/>`,
+  // signal staff: coquí-headed antenna radiating arcs
+  signal: `<path d="M0 15V-4"/><circle cx="0" cy="-7" r="3.4"/><path class="hot" d="M-7-13 Q-11-7 -7-1M7-13 Q11-7 7-1"/><path d="M-12-17 Q-18-7 -12 3M12-17 Q18-7 12 3"/><path d="M-6 15h12"/>`
+};
+const NODE_DEFS = [
+  { key: 'projects',   n: '01', label: 'PROJECTS',   sub: 'PORTAL 37 // VECTOR BASHING', side: 'left'  },
+  { key: 'developing', n: '02', label: 'DEVELOPING', sub: 'FRACTAL ONTOLOGY // COMFYUI', side: 'right' },
+  { key: 'lore',       n: '03', label: 'LORE',       sub: 'TERRA II // DIAMOND RIOT',    side: 'right' },
+  { key: 'optics',     n: '04', label: 'OPTICS',     sub: 'RGB → CMYK SORTING FACILITY', side: 'right' },
+  { key: 'archive',    n: '05', label: 'ARCHIVE',    sub: 'CONTACT SHEET 2023—2026',      side: 'left'  },
+  { key: 'signal',     n: '06', label: 'SIGNAL',     sub: 'ABOUT // LINKS // TRANSMIT',  side: 'left'  }
+];
+// hand-cut stone outlines (irregular, deliberately not a regular polygon)
+const STONES = [
+  'M-22-19 L4-27 L25-13 L27 9 L10 26 L-16 24 L-27 4Z', 'M-19-24 L14-25 L28-4 L20 22 L-6 28 L-26 12 L-27-10Z',
+  'M-25-12 L-4-27 L22-20 L27 6 L13 25 L-14 25 L-28 9Z', 'M-17-26 L19-22 L28 2 L17 25 L-10 27 L-27 8 L-24-15Z',
+  'M-26-6 L-11-26 L17-24 L28-3 L22 21 L-3 28 L-23 18Z', 'M-21-22 L9-28 L27-10 L24 16 L3 27 L-22 21 L-28-2Z'
+];
+
+const svg = $('#lattice-svg'), gEdges = $('#edges'), gBleed = $('#edges-bleed'), gPulses = $('#pulses'), gNodes = $('#nodes'), gGrads = $('#grads');
+const center = { x: 600, y: 400 };
+const nodes = {};
+let mobile = false, VB = { w: 1200, h: 800 };
+
+NODE_DEFS.forEach((d, i) => {
+  const g = el('g', { class: 'vertex-node', id: 'node-' + d.key, 'data-section': d.key, tabindex: '0', role: 'button', 'aria-label': `Open ${d.n} ${d.label}` }, gNodes);
+  g.innerHTML = `
+    <g class="body">
+      <path class="stone-shadow" d="${STONES[i]}" transform="translate(3.5,4)" filter="url(#stone-rough)"/>
+      <path class="stone" d="${STONES[i]}" filter="url(#stone-rough)"/>
+      <circle class="ticks" r="37"/>
+      <g class="sigil" filter="url(#stone-rough)">${SIGILS[d.key]}</g>
+    </g>
+    <text class="node-num">${d.n}</text>
+    <text class="node-label">${d.label}</text>
+    <text class="node-sub">${d.sub}</text>`;
+  nodes[d.key] = { ...d, el: g, home: { x: 0, y: 0 }, pos: { x: 0, y: 0 }, edges: [] };
+});
+
+// edges: 6 spokes (core→node) + 6 rim segments (ring order)
+const ORDER = NODE_DEFS.map(d => d.key);
+const EDGES = [];
+ORDER.forEach((k, i) => EDGES.push({ a: 'core', b: k, kind: 'spoke', bow: (i % 2 ? 1 : -1) * (9 + i * 1.7), id: 's' + i }));
+ORDER.forEach((k, i) => EDGES.push({ a: k, b: ORDER[(i + 1) % 6], kind: 'rim', bow: (i % 2 ? -1 : 1) * (6 + (i * 3) % 7), id: 'r' + i }));
+
+const STOPS = {
+  spoke: [[0, '#ffb21c', 1], [.18, '#ff5d3b', 1], [.55, '#e8c98e', .95], [.86, '#d8291c', .9], [1, '#3a0d08', .5]],
+  rim:   [[0, '#e8c98e', .2], [.12, '#e8c98e', .95], [.5, '#17a497', .9], [.88, '#e8c98e', .95], [1, '#e8c98e', .2]]
+};
+EDGES.forEach(E => {
+  const gr = el('linearGradient', { id: 'g-' + E.id, gradientUnits: 'userSpaceOnUse' }, gGrads);
+  STOPS[E.kind].forEach(([o, c, a]) => el('stop', { offset: o, 'stop-color': c, 'stop-opacity': a }, gr));
+  E.grad = gr;
+  const g = el('g', { class: `edge ${E.kind}`, id: 'e-' + E.id }, gEdges);
+  E.g = g;
+  E.bleed = el('path', { class: 'e-bleed', stroke: E.kind === 'spoke' ? '#d8291c' : '#0d5a60' }, gBleed);
+  E.c = el('path', { class: 'e-c', transform: 'translate(-1.8,1.2)' }, g);
+  E.m = el('path', { class: 'e-m', transform: 'translate(1.6,-1.1)' }, g);
+  E.main = el('path', { class: 'e-main', stroke: `url(#g-${E.id})` }, g);
+  if (E.kind === 'rim') E.stip = el('path', { class: 'e-stip', transform: 'translate(0,4)' }, g);
+  E.pulse = el('path', { class: 'e-pulse' + (E.kind === 'rim' ? ' b' : ''), pathLength: E.kind === 'rim' ? 50 : 100, stroke: E.kind === 'spoke' ? '#ffb21c' : '#e8c98e', 'stroke-width': E.kind === 'spoke' ? 3.2 : 2 }, gPulses);
+  E.pulse.style.animationDelay = (-Math.random() * 6).toFixed(2) + 's';
+  E.vib = 0; E.phase = Math.random() * 6.28;
+  if (E.a !== 'core') nodes[E.a].edges.push(E);
+  nodes[E.b].edges.push(E);
+});
+const posOf = k => k === 'core' ? center : nodes[k].pos;
+
+function edgePath(E, t) {
+  const A = posOf(E.a), B = posOf(E.b);
+  let dx = B.x - A.x, dy = B.y - A.y; const L = Math.hypot(dx, dy) || 1; dx /= L; dy /= L;
+  // spokes start at the core's rim; rims overshoot the corners like a hand-ruled line
+  const s0 = E.kind === 'spoke' ? 58 : -12, s1 = E.kind === 'spoke' ? 34 : -12;
+  const x1 = A.x + dx * s0, y1 = A.y + dy * s0, x2 = B.x - dx * s1, y2 = B.y - dy * s1;
+  const vib = E.vib * Math.sin(t * 0.042 + E.phase);           // plucked-string kinetic cue
+  const bow = E.bow + vib;
+  const cx = (x1 + x2) / 2 - dy * bow, cy = (y1 + y2) / 2 + dx * bow;
+  E.grad.setAttribute('x1', x1); E.grad.setAttribute('y1', y1); E.grad.setAttribute('x2', x2); E.grad.setAttribute('y2', y2);
+  return `M${x1.toFixed(1)},${y1.toFixed(1)} Q${cx.toFixed(1)},${cy.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)}`;
+}
+function drawEdges(t = performance.now()) {
+  EDGES.forEach(E => {
+    if (E.hidden) { E.g.style.display = E.bleed.style.display = E.pulse.style.display = 'none'; return; }
+    E.g.style.display = E.bleed.style.display = E.pulse.style.display = '';
+    const d = edgePath(E, t);
+    E.c.setAttribute('d', d); E.m.setAttribute('d', d); E.main.setAttribute('d', d); E.bleed.setAttribute('d', d); E.pulse.setAttribute('d', d);
+    if (E.stip) E.stip.setAttribute('d', d);
+  });
+}
+function placeNodes() {
+  for (const k in nodes) { const n = nodes[k]; n.el.setAttribute('transform', `translate(${n.pos.x.toFixed(1)},${n.pos.y.toFixed(1)})`); }
+}
+
+function layout() {
+  mobile = innerWidth <= 760;
+  const annos = $('#annos');
+  if (!mobile) {
+    VB = { w: 1200, h: 800 }; svg.setAttribute('viewBox', '0 0 1200 800'); svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+    center.x = 600; center.y = 405;
+    // flat hexagon, nudged by hand so it doesn't read as a perfect generated shape
+    const H = { projects: [452, 196], developing: [758, 188], lore: [918, 404], optics: [748, 618], archive: [446, 612], signal: [284, 398] };
+    for (const k in nodes) { const n = nodes[k]; n.home = { x: H[k][0], y: H[k][1] }; }
+    annos.style.display = '';
+    EDGES.forEach(E => E.hidden = false);
+  } else {
+    VB = { w: 400, h: 900 }; svg.setAttribute('viewBox', '0 0 400 900'); svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    center.x = 300; center.y = 235;
+    // the totem: sigils stacked down the left like a carved post
+    ORDER.forEach((k, i) => { nodes[k].home = { x: 74 + (i % 2 ? 22 : 0), y: 318 + i * 90 }; });
+    annos.style.display = 'none';
+    EDGES.forEach(E => E.hidden = (E.id === 'r5'));
+  }
+  $('#core-anchor').setAttribute('transform', `translate(${center.x},${center.y}) scale(${mobile ? .72 : 1})`);
+  for (const k in nodes) {
+    const n = nodes[k], [num, lab, sub] = n.el.querySelectorAll('text');
+    n.pos = { ...n.home };
+    if (!mobile) {
+      const below = (k === 'optics' || k === 'archive');
+      const lx = 0, ly = below ? 66 : -50;
+      [num, lab, sub].forEach(t => t.setAttribute('text-anchor', 'middle'));
+      lab.setAttribute('x', lx + 9); lab.setAttribute('y', ly);
+      num.setAttribute('x', lx - lab.textContent.length * 8.4 - 8); num.setAttribute('y', ly - 8); num.setAttribute('text-anchor', 'end');
+      sub.setAttribute('x', 0); sub.setAttribute('y', below ? 82 : 54);
+    } else {
+      [num, lab, sub].forEach(t => t.setAttribute('text-anchor', 'start'));
+      num.setAttribute('x', 46); num.setAttribute('y', -14);
+      lab.setAttribute('x', 46); lab.setAttribute('y', 12);
+      sub.setAttribute('x', 47); sub.setAttribute('y', 28);
+    }
+  }
+  placeNodes(); drawEdges();
+}
+
+/* ---------- interaction: click / drag a sigil outward to open ---------- */
+let dragging = null, dragStart = null, openKey = null;
+function clientToSvg(x, y) { const p = svg.createSVGPoint(); p.x = x; p.y = y; return p.matrixTransform(gNodes.getScreenCTM().inverse()); }
+function pluck(key, amt) { nodes[key].edges.forEach(E => E.vib = Math.max(E.vib, amt * (E.kind === 'spoke' ? 1 : .55))); kick(); }
+
+function openDrawer(key, quiet = false) {
+  if (!nodes[key]) return;
+  const fresh = key !== openKey;
+  document.querySelectorAll('.sheet.open').forEach(s => s.classList.remove('open'));
+  document.querySelectorAll('.vertex-node.is-open').forEach(n => n.classList.remove('is-open'));
+  EDGES.forEach(E => { E.g.classList.remove('hot'); E.pulse.classList.remove('hot'); });
+  const n = nodes[key], sheet = $('#drawer-' + key);
+  sheet.classList.add('open'); n.el.classList.add('is-open');
+  document.body.classList.remove('open-left', 'open-right'); document.body.classList.add('open-' + n.side);
+  n.edges.forEach(E => { E.g.classList.add('hot'); E.pulse.classList.add('hot'); });
+  for (const k in nodes) nodes[k].pos = { ...nodes[k].home };
+  if (!mobile) { const dx = n.home.x - center.x, dy = n.home.y - center.y; n.pos = { x: n.home.x + dx * .16, y: n.home.y + dy * .16 }; }
+  pullTarget = [(n.pos.x - center.x) / 900, -(n.pos.y - center.y) / 900];
+  placeNodes(); if (!quiet) pluck(key, 22);
+  openKey = key;
+  if (key === 'signal' && fresh) typeCred();
+  if (location.hash !== '#' + key) history.replaceState(null, '', '#' + key);
+  if (!quiet && fresh) setTimeout(() => { const b = sheet.querySelector('.close-btn'); if (b) b.focus({ preventScroll: true }); }, 60);
+  if (fresh) sheet.querySelector('.sheet-body').scrollTop = 0;
+}
+function closeAll() {
+  if (!openKey) return;
+  const was = openKey; openKey = null;
+  document.querySelectorAll('.sheet.open').forEach(s => s.classList.remove('open'));
+  document.querySelectorAll('.vertex-node.is-open').forEach(n => n.classList.remove('is-open'));
+  document.body.classList.remove('open-left', 'open-right');
+  EDGES.forEach(E => { E.g.classList.remove('hot'); E.pulse.classList.remove('hot'); });
+  for (const k in nodes) nodes[k].pos = { ...nodes[k].home };
+  pullTarget = [0, 0]; placeNodes(); pluck(was, 12);
+  history.replaceState(null, '', location.pathname + location.search);
+  nodes[was].el.focus({ preventScroll: true });
+}
+document.querySelectorAll('.close-btn').forEach(b => b.addEventListener('click', closeAll));
+addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
+svg.addEventListener('pointerdown', e => { if (!e.target.closest('.vertex-node')) closeAll(); });
+
+for (const key in nodes) {
+  const n = nodes[key], g = n.el;
+  g.addEventListener('pointerenter', () => pluck(key, 7));
+  g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDrawer(key); } });
+  g.addEventListener('pointerdown', e => { e.stopPropagation(); dragging = key; dragStart = { x: e.clientX, y: e.clientY }; g.setPointerCapture(e.pointerId); });
+  g.addEventListener('pointermove', e => {
+    if (dragging !== key) return;
+    const p = clientToSvg(e.clientX, e.clientY);
+    n.pos.x = Math.max(60, Math.min(VB.w - 60, p.x)); n.pos.y = Math.max(80, Math.min(VB.h - 60, p.y));
+    pullTarget = [(n.pos.x - n.home.x) / 300, -(n.pos.y - n.home.y) / 300];
+    n.edges.forEach(E => E.vib = Math.max(E.vib, 4));
+    placeNodes(); drawEdges(); kick();
+  });
+  g.addEventListener('pointerup', e => {
+    if (dragging !== key) return;
+    dragging = null;
+    const moved = Math.hypot(e.clientX - dragStart.x, e.clientY - dragStart.y);
+    const hd = Math.hypot(n.home.x - center.x, n.home.y - center.y), cd = Math.hypot(n.pos.x - center.x, n.pos.y - center.y);
+    if (moved < 8 || cd > hd + 35) openDrawer(key);
+    else { n.pos = { ...n.home }; pullTarget = [0, 0]; placeNodes(); pluck(key, 16); }
+  });
+  g.addEventListener('pointercancel', () => { dragging = null; n.pos = { ...n.home }; placeNodes(); drawEdges(); });
+}
+
+/* ==========================================================================
+   3. LOOP — shader, string vibration, line boil. Pauses when hidden.
+   ========================================================================== */
+const boilT = $('#boil-turb'), grainT = $('#grain-turb');
+let running = true, raf = 0, lastBoil = 0, boilSeed = 1;
+function kick() { if (!raf && running) raf = requestAnimationFrame(loop); }
+function loop(now) {
+  raf = 0;
+  if (!running) return;
+  pull[0] += (pullTarget[0] - pull[0]) * .08; pull[1] += (pullTarget[1] - pull[1]) * .08;
+  if (glOK) {
+    gl.uniform2f(U.R, canvas.width, canvas.height); gl.uniform1f(U.T, RM ? 12 : now * .001);
+    gl.uniform1f(U.C, cmykShift); gl.uniform1f(U.B, vectorBash); gl.uniform1f(U.E, ektar); gl.uniform2f(U.P, pull[0], pull[1]);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  }
+  let vib = false;
+  EDGES.forEach(E => { if (E.vib > .05) { E.vib *= .962; vib = true; } else E.vib = 0; });
+  if (vib || dragging) drawEdges(now);
+  // boil "on twos": swap turbulence seeds ~8 times a second, like re-inked animation frames
+  if (!RM && now - lastBoil > 125) { lastBoil = now; boilSeed = boilSeed % 4 + 1; boilT.setAttribute('seed', boilSeed); grainT.setAttribute('seed', boilSeed + 10); }
+  if (!RM || vib || dragging) raf = requestAnimationFrame(loop);
+}
+document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) kick(); else { cancelAnimationFrame(raf); raf = 0; } });
+
+/* ==========================================================================
+   4. SHEET CONTENT + CONTROLS
+   ========================================================================== */
+const bind = (id, out, fn) => { const s = $('#' + id), o = $('#' + out); s.addEventListener('input', () => { o.textContent = s.value + '%'; fn(s.value / 100); kick(); }); };
+bind('cmyk-slider', 'cmyk-val', v => cmykShift = v);
+bind('vector-slider', 'vector-val', v => vectorBash = v);
+bind('ektar-slider', 'ektar-val', v => { ektar = v; document.querySelector('.film.leak').style.opacity = (.12 + v * .6).toFixed(2); document.querySelector('.film.grain').style.opacity = (.06 + v * .28).toFixed(2); });
+
+const LORE = {
+  riot: `[BOARD: FRINGE_POSH_DARK // SECTOR 3077]
+> STATUS: NEVER DOOM | GOOD AND PROSPEROUS
+> SIGNAL: Love is the fifth element (stop forgetting).
+> DIRECTIVE: Mix models for maximum creativity.`,
+  terra: `[TERRA II FIELD DISPATCH // PORTAL 37]
+> VECTOR BASHING ENGINE: ONLINE
+> LOGISTICS LAYER: Biological RGB -> Mechanical CMYK
+> NOTE: Eventually it is all game logic inside other things.`,
+  ascii: `   /\\      UNICRONIAN LATTICE v3.7
+  /  \\     ---------------------------
+ / /\\ \\    [01] PROJECTS   [02] DEVELOPING
+/______\\   [03] LORE       [04] OPTICS
+           [05] ARCHIVE    [06] SIGNAL`
+};
+const out = $('#lore-output');
+let typer = 0;
+function typeLore(k) {
+  clearInterval(typer); const s = LORE[k];
+  if (RM) { out.textContent = s; return; }
+  let i = 0; out.textContent = '';
+  typer = setInterval(() => { i += 3; out.textContent = s.slice(0, i); if (i >= s.length) clearInterval(typer); }, 16);
+}
+document.querySelectorAll('[data-lore]').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('[data-lore]').forEach(x => x.classList.remove('active')); b.classList.add('active'); typeLore(b.dataset.lore);
+}));
+out.textContent = LORE.riot;
+
+// ARCHIVE — every entry on tonyjmatos.com/work, newest first. bp = Beachpunk-titled frames (circled).
+const ARCHIVE = [
+  ['runway-test-2026', 'RUNWAY TEST 2026', 2026], ['huntington-beach-reimagined-in-runway-2', 'Huntington Beach Reimagined in RUNWAY 2', 2024],
+  ['choose-your-path-luma-loops-2', '"Choose Your Path" — LUMA LOOPS 2', 2025], ['luma-loops-1', 'LUMA LOOPS 1', 2024],
+  ['solve-the-past-save-the-future-runway-gen-3-test', '"Solve the past, Save the Future" — RUNWAY GEN 3 Test', 2024], ['lost-marbles-runway-series', '"Lost Marbles" — RUNWAY Series', 2024],
+  ['luma-ray-2-first-test', 'LUMA RAY 2 FIRST TEST', 2024], ['lost-coast-imagined-1', 'Huntington Beach Reimagined in RUNWAY 1', 2024],
+  ['lost-coast-episode-023', 'RUNWAY GEN 2 Moon Test', 2024], ['test-luma-15', 'TEST RUNWAY 40 SEC', 2024],
+  ['luma-16-test', 'LUMA 1.6 TEST', 2024], ['out-there', 'Out There', 2024],
+  ['recovered-transmission', 'Recovered Transmission', 2024, 1], ['exploring-latent-space-in-midjourney', 'Exploring Latent Space in Midjourney', 2024],
+  ['holodeck-to-the-lost-coast', 'Holodeck to the Lost Coast', 2024, 1], ['mixed-models-beachpunk-trailer', 'Mixed Models — Beachpunk Trailer 1', 2024, 1],
+  ['test-week-one-class', 'Test — Week One Class', 2023], ['capstone-project-beachpunk-demo-reel', 'Capstone Project — Beachpunk Demo Reel', 2023, 1],
+  ['e-3', 'Animated Tease "Swords with no Masters"', 2023], ['kaiber-ai-motion-test-text-to-video', 'Kaiber AI Motion Test (text-to-video)', 2023],
+  ['nerf-capture-tesla-supercharger', 'neRF Capture — Tesla Supercharger', 2023], ['luma-test-retail-store', 'Luma Test — Retail Store', 2023],
+  ['e', 'Interpolation Storytelling — "In the Depths Too Long"', 2023], ['g', 'Pika Labs — "Birth of nu-Babylon TV"', 2023, 1],
+  ['e-2', 'Text + Image to Video for Community ("Hope")', 2023], ['character-development-in-video-e-ko-verst', 'Image to Motion — "The Arrival"', 2023],
+  ['w3', 'Multimodal Character Dev — "The First nu-Punk"', 2023], ['e-1', 'Text to Video Demos — Pika Labs', 2023],
+  ['luma-test-chandelier', 'Luma Test — Chandelier', 2023], ['legacy-work', 'Legacy Work', 2023]
+];
+$('#contact').innerHTML = ARCHIVE.map(([slug, title, yr, bp], i) => {
+  const t = title.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  return `<a href="https://tonyjmatos.com/${slug}" target="_blank" rel="noopener"${bp ? ' class="mark"' : ''}><img src="assets/a-${slug}.jpg" alt="${t.replace(/"/g, '&quot;')}" loading="lazy" decoding="async" width="420" height="328"/><div class="fn"><span>${String(i + 1).padStart(2, '0')}${i % 2 ? 'A' : ''} ▸</span><span>${yr}</span></div><div class="tt">${t}</div></a>`;
+}).join('');
+
+/* ==========================================================================
+   5. CRT TERMINALS — tiny Python-ish highlighter + typewriter
+   ========================================================================== */
+const CRED = `# credentials.py · GIGADREAM.EXE // 06
+from terra_ii import Gigadream
+
+class TonyJoseMatos(Gigadream):
+    """Prime Waveform Modifier
+    of the Beachpunk Gigadream."""
+    handle = "@TonyJMatos"
+    role   = "Gigadream Agent"
+    media  = "Gonzo Media"
+    mode   = ("Support", "Multiplier",
+              "Bridge")
+    motto  = ("Mixing Models for "
+              "Maximum Creativity")
+
+    studio = {
+        "name":  "LABL Design",
+        "role":  "Creative Generalist"
+                 " & AI Tutor",
+        "since": 2022,
+    }
+    service = [
+        ("Maitri Learning",
+         "Creative Director", 2020, 2022),
+        ("Pro-Mart Industries",
+         "Creative Director", 2015, 2020),
+    ]
+    schooled = ("UMass Amherst",
+        "BA Arts, Entertainment"
+        " & Media Management")
+    certs = [
+        "Generative AI for Everyone"
+        " · Coursera",
+        "Generative AI Creation –"
+        " Multimodal Masterclass · Maven",
+    ]
+    tools = ["ComfyUI", "Unreal", "Spawn",
+             "Runway", "Luma", "Pika",
+             "Kaiber", "Midjourney",
+             "Firefly", "NeRF", "3DGS"]
+    ip = ["Beachpunk", "The Diamond Riot",
+          "Swords with no Masters",
+          "PORTAL 37"]
+    status = ("NEVER DOOM | GOOD AND"
+              " PROSPEROUS")
+    year = 3077
+
+    def transmit(self):
+        return "linktr.ee/beachpunks"`;
+
+// verbatim: github.com/TonyJoseMatos/gigadream-fieldkit/blob/49ac210/canon.py#L1-L21
+const TEASER = `"""GIGADREAM CANON — one bible for field kit, hangar, and Portal 37."""
+
+BOARDS = ("FRINGE", "POSH", "DARK")
+ROOMS = ("FRINGE", "POSH", "DARK", "HANGAR", "LOST")
+
+PLACES = {
+    "FRINGE": [
+        "glitch mangrove", "voxel tidepool", "broken GPS shrine",
+        "pirated cell-tower chapel", "memetic dumpster reef",
+        "off-grid Loiza backlot", "datamosh boardwalk",
+    ],
+    "POSH": [
+        "Rincon glass villa", "diamond-cut tide deck", "Condado chrome atrium",
+        "salt-white editorial beach", "luxury bunker at Isabela",
+        "gold-hour product stage",
+    ],
+    "DARK": [
+        "TERRA II blackout beach", "Guayama salt graves", "Lost Coast fogline",
+        "Culebra midnight antenna", "cathedral of rusted rebar",
+        "after-gate Rincon", "Isabela dune antenna", "Loiza breakwater",
+    ],`;
+
+const KW = /^(class|def|return|from|import|self|None|True|False)$/;
+function tokenize(src) {
+  const out = []; let inDoc = false;
+  src.split('\n').forEach((line, li) => {
+    if (li) out.push(['', '\n']);
+    out.push(['ln', String(li + 1)]);
+    let i = 0;
+    while (i < line.length) {
+      const rest = line.slice(i); let m;
+      if (inDoc || rest.startsWith('"""')) {
+        const start = inDoc ? 0 : 3, end = rest.indexOf('"""', start);
+        const seg = end < 0 ? rest : rest.slice(0, end + 3);
+        out.push(['s', seg]); inDoc = end < 0; i += seg.length; continue;
+      }
+      if (rest[0] === '#') { out.push(['c', rest]); break; }
+      if ((m = rest.match(/^"(?:[^"\\]|\\.)*"/))) { out.push(['s', m[0]]); i += m[0].length; continue; }
+      if ((m = rest.match(/^\d+/))) { out.push(['n', m[0]]); i += m[0].length; continue; }
+      if ((m = rest.match(/^[A-Za-z_]\w*/))) {
+        const w = m[0], next = rest[w.length];
+        out.push([KW.test(w) ? 'k' : /^[A-Z]/.test(w) && !/^[A-Z_]+$/.test(w) ? 't' : next === '(' ? 'f' : '', w]); i += w.length; continue;
+      }
+      if ((m = rest.match(/^[()[\]{}:,=.+|]+/))) { out.push(['p', m[0]]); i += m[0].length; continue; }
+      out.push(['', rest[0]]); i++;
+    }
+  });
+  return out;
+}
+const esc = t => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+// one grid row per source line: gutter + soft-wrapping source with a hanging indent
+function renderTokens(toks, limit = Infinity, caret = false) {
+  let html = '', n = 0, open = false;
+  for (const [c, t] of toks) {
+    if (c === 'ln') { if (open) html += '</span></span>'; html += `<span class="row"><span class="ln">${t}</span><span class="src">`; open = true; continue; }
+    if (t === '\n' && !c) { n += 1; if (n >= limit) break; continue; }
+    if (n >= limit) break;
+    const take = t.slice(0, Math.max(0, limit - n)); n += t.length;
+    html += c ? `<span class="t-${c}">${esc(take)}</span>` : esc(take);
+  }
+  if (caret) html += '<span class="caret"></span>';
+  return html + (open ? '</span></span>' : '');
+}
+const credToks = tokenize(CRED), credLen = CRED.length;
+const credEl = $('#cred-code');
+$('#teaser-code').innerHTML = renderTokens(tokenize(TEASER));
+let credTimer = 0;
+function typeCred() {
+  clearInterval(credTimer);
+  if (RM) { credEl.innerHTML = renderTokens(credToks, Infinity, true); return; }
+  let n = 0;
+  credTimer = setInterval(() => {
+    n += 7;
+    credEl.innerHTML = renderTokens(credToks, n, true);
+    if (n >= credLen) clearInterval(credTimer);
+  }, 18);
+}
+credEl.innerHTML = renderTokens(credToks, Infinity, true);
+$('#cred-replay').addEventListener('click', typeCred);
+document.querySelectorAll('[data-open]').forEach(b => b.addEventListener('click', () => openDrawer(b.dataset.open)));
+
+/* torn inner edge on each sheet, generated once so every sheet tears differently */
+function tear() {
+  document.querySelectorAll('.sheet').forEach((s, si) => {
+    const paper = s.querySelector('.sheet-paper'); let seed = si * 97 + 13; const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
+    if (mobile) { paper.style.clipPath = ''; return; }
+    const pts = [], steps = 46, left = s.classList.contains('left');
+    for (let i = 0; i <= steps; i++) { const y = (i / steps) * 100; const x = 100 - (rnd() * 1.6 + (i % 3 === 0 ? rnd() * 1.4 : 0)); pts.push(left ? `${x.toFixed(2)}% ${y.toFixed(2)}%` : `${(100 - x).toFixed(2)}% ${y.toFixed(2)}%`); }
+    paper.style.clipPath = left ? `polygon(0 0, ${pts.join(',')}, 0 100%)` : `polygon(100% 0, ${pts.join(',')}, 100% 100%)`;
+  });
+}
+
+/* ---------- boot ---------- */
+function onResize() { resize(); layout(); tear(); if (openKey) openDrawer(openKey, true); kick(); }
+addEventListener('resize', () => { clearTimeout(onResize.t); onResize.t = setTimeout(onResize, 80); });
+resize(); layout(); tear();
+raf = requestAnimationFrame(loop);
+const h = location.hash.slice(1);
+if (nodes[h]) setTimeout(() => openDrawer(h), 30);
+addEventListener('hashchange', () => { const k = location.hash.slice(1); if (nodes[k] && k !== openKey) openDrawer(k); });
+window.GIGADREAM = { open: openDrawer, close: closeAll };
+})();
+</script>
+</body>
+</html>
