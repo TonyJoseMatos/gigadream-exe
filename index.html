@@ -46,8 +46,8 @@ a{color:inherit}
 #gl-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 
 #lattice-stage{position:absolute;inset:6px;transition:transform .6s cubic-bezier(.2,.9,.2,1)}
-body.open-left #lattice-stage{transform:translateX(calc(var(--sheet-w) * .58)) scale(.78)}
-body.open-right #lattice-stage{transform:translateX(calc(var(--sheet-w) * -.47)) scale(.78)}
+body.open-left #lattice-stage{transform:translateX(calc(var(--sheet-w) * .53)) scale(.76)}
+body.open-right #lattice-stage{transform:translateX(calc(var(--sheet-w) * -.5)) scale(.76)}
 .masthead,.hint,.byline{transition:opacity .4s,transform .5s cubic-bezier(.2,.9,.2,1)}
 body.open-left .masthead,body.open-left .hint{opacity:0;pointer-events:none}
 body.open-right .masthead{transform:scale(.56);transform-origin:left top}
@@ -101,6 +101,68 @@ body.open-right #annos,body.open-left #annos{opacity:0}
 #core-anchor .spin{animation:spin 60s linear infinite}
 #core-anchor .spin-r{animation:spin 26s linear infinite reverse}
 #core-anchor .beat{animation:beat 2.2s ease-in-out infinite;transform-origin:0 0}
+/* ---------- <REDACTED PROJECT> — the black hole at the centre ---------- */
+#core-anchor{cursor:not-allowed;outline:none}
+#core-anchor:focus-visible #bh-horizon{stroke:var(--sun);stroke-width:2}
+#core-anchor .spin-slow{animation:spin 90s linear infinite}
+#core-anchor .disk-spin{animation:spin 7s linear infinite}
+#core-anchor .disk-spin.b{animation-duration:11s}
+#core-anchor .disk-spin.c{animation-duration:17s;animation-direction:reverse}
+#core-anchor .halo{animation:halo 3.1s ease-in-out infinite;transform-origin:0 0}
+@keyframes halo{0%,100%{opacity:.95;transform:scale(1)}50%{opacity:.7;transform:scale(1.035)}}
+.bh-slip-text{font-family:var(--mono);font-size:8.6px;letter-spacing:.16em;fill:#1d140d;font-weight:600}
+.bh-stamp-text{font-family:var(--display);font-weight:900;font-size:21px;letter-spacing:.1em}
+#bh-stamp .g-c,#bh-stamp .g-m{mix-blend-mode:screen;opacity:.85}
+#bh-stamp .g-c{animation:glc 3.4s steps(1) infinite} #bh-stamp .g-m{animation:glm 3.4s steps(1) infinite}
+@keyframes glc{0%,100%{transform:translate(0,0)}61%{transform:translate(-3px,1px)}63%{transform:translate(4px,-1px) skewX(-12deg)}65%{transform:translate(0,0)}88%{transform:translate(-2px,0)}89%{transform:translate(0,0)}}
+@keyframes glm{0%,100%{transform:translate(0,0)}61%{transform:translate(3px,-1px)}63%{transform:translate(-5px,1px) skewX(10deg)}65%{transform:translate(0,0)}88%{transform:translate(2px,1px)}89%{transform:translate(0,0)}}
+#bh-stamp .slice{animation:slice 3.4s steps(1) infinite}
+@keyframes slice{0%,100%{transform:translate(0,0)}62%{transform:translate(7px,0)}64%{transform:translate(-4px,0)}66%{transform:translate(0,0)}}
+#core-anchor.denied #bh{animation:deny .55s cubic-bezier(.3,.7,.4,1)}
+#core-anchor.denied #bh-stamp-wrap{animation:stampin .55s cubic-bezier(.2,1.6,.4,1)}
+#core-anchor.denied #bh-stamp .g-c{transform:translate(-6px,2px)} #core-anchor.denied #bh-stamp .g-m{transform:translate(6px,-2px)}
+@keyframes deny{0%,100%{transform:translate(0,0)}10%{transform:translate(-9px,2px) rotate(-2deg)}22%{transform:translate(8px,-3px) rotate(2deg)}36%{transform:translate(-6px,1px)}50%{transform:translate(5px,-1px)}66%{transform:translate(-3px,0)}82%{transform:translate(2px,0)}}
+@keyframes stampin{0%{transform:scale(1.7);opacity:.2}60%{transform:scale(.94);opacity:1}100%{transform:scale(1)}}
+.deny-flash{position:fixed;inset:0;z-index:26;pointer-events:none;opacity:0;mix-blend-mode:screen;
+  background:repeating-linear-gradient(180deg,rgba(229,0,125,.0) 0 7px,rgba(229,0,125,.22) 7px 9px,rgba(0,166,207,.0) 9px 17px,rgba(0,166,207,.2) 17px 18px)}
+body.denied .deny-flash{animation:dflash .5s steps(4)}
+@keyframes dflash{0%{opacity:0}20%{opacity:1;transform:translateX(-8px)}45%{opacity:.6;transform:translateX(10px)}70%{opacity:.8;transform:translateX(-3px)}100%{opacity:0}}
+
+/* ---------- SOCIALS: persistent tag cluster on home ---------- */
+.socials{top:112px;right:52px;pointer-events:auto;display:flex;align-items:center;gap:7px;transform:rotate(3deg);transition:opacity .4s}
+@media (max-width:1360px){.socials .tx{display:none}}
+.socials .tx{font-size:8.5px;letter-spacing:.22em;color:var(--coral);margin-right:2px}
+.socials a{display:inline-flex;align-items:baseline;gap:6px;text-decoration:none;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--bone);
+  background:rgba(10,18,21,.72);border:1px solid rgba(232,201,142,.65);padding:6px 8px 5px;box-shadow:2px 2px 0 var(--ektar);
+  text-shadow:-.6px 0 rgba(0,166,207,.7),.6px 0 rgba(229,0,125,.65);transition:transform .2s,background .2s}
+.socials a b{font-family:var(--display);font-weight:900;font-size:13px;letter-spacing:0;color:var(--sun);text-shadow:none}
+.socials a:nth-child(3){transform:rotate(-2deg)} .socials a:nth-child(4){transform:rotate(1.5deg)}
+.socials a:hover,.socials a:focus-visible{background:var(--ektar);color:var(--paper);outline:none;transform:rotate(0) scale(1.06)}
+.socials a:hover b,.socials a:focus-visible b{color:var(--paper)}
+body.open-right .socials{opacity:0;pointer-events:none}
+body.open-left .socials{transform:rotate(3deg) scale(.86);transform-origin:right top}
+
+/* ---------- ticket stubs (Signal socials) ---------- */
+.stubs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0 4px}
+.stub{position:relative;display:flex;flex-direction:column;gap:4px;text-decoration:none;padding:10px 10px 9px;border:1.5px dashed var(--paper-ink);background:rgba(255,255,255,.22);min-width:0}
+.stub:nth-child(1){transform:rotate(-1.2deg)} .stub:nth-child(3){transform:rotate(1deg)}
+.stub::before,.stub::after{content:"";position:absolute;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--paper);border:1.5px dashed var(--paper-ink)}
+.stub::before{left:-7px} .stub::after{right:-7px}
+.stub .sn{font-size:8px;letter-spacing:.2em;color:var(--ektar)}
+.stub .sk{font-family:var(--display);font-weight:900;font-size:22px;line-height:.9;text-transform:uppercase;letter-spacing:.02em}
+.stub .su{font-size:8.5px;letter-spacing:.06em;color:var(--paper-mute);overflow-wrap:anywhere;line-height:1.35}
+.stub:hover,.stub:focus-visible{background:var(--ektar);color:var(--paper);border-color:var(--ektar);outline:none}
+.stub:hover .su,.stub:focus-visible .su,.stub:hover .sn,.stub:focus-visible .sn{color:var(--paper)}
+
+/* ---------- 07 SPAWN: arcade cabinet bits ---------- */
+.press{display:flex;align-items:center;justify-content:center;gap:12px;margin:16px 0 6px;padding:14px 16px;text-decoration:none;background:#10181a;color:var(--sun);
+  font-family:var(--display);font-weight:900;font-size:26px;letter-spacing:.08em;box-shadow:4px 4px 0 var(--ektar),0 0 0 1px var(--paper-ink);transform:rotate(-.8deg);
+  text-shadow:-1.5px 0 rgba(0,166,207,.8),1.5px 0 rgba(229,0,125,.8)}
+.press i{font-style:normal;animation:blink 1s steps(1) infinite;color:var(--coral)}
+.press:hover,.press:focus-visible{background:var(--ektar);color:var(--paper);outline:none;transform:rotate(0) scale(1.02)}
+.spec{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:10px 0;font-size:10px;letter-spacing:.08em}
+.spec dt{color:var(--paper-mute);text-transform:uppercase;letter-spacing:.18em;font-size:8.5px;padding-top:2px}
+.spec dd{margin:0}
 @keyframes beat{0%,100%{transform:scale(1)}8%{transform:scale(1.18)}16%{transform:scale(1)}24%{transform:scale(1.08)}}
 
 /* ---------- PRINT CHROME (masthead, crop marks, slug) ---------- */
@@ -285,6 +347,13 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
   .byline{font-size:9px;max-width:230px;margin-top:10px}
   .stamp{display:none}
   .core-label{display:none}
+  .core-text{display:none}
+  .socials{top:16px;right:14px;flex-direction:column;align-items:flex-end;gap:5px;transform:rotate(2deg)}
+  .socials .tx{display:none}
+  .socials a{font-size:8.5px;padding:5px 7px 4px}
+  .stubs{gap:8px} .stub{padding:9px 7px 8px} .stub .sk{font-size:18px}
+  .stub::before,.stub::after,.stub .adm{display:none} .stub .su{font-size:8px}
+  .press{font-size:21px}
   .colorbar,.reg{display:none}
   .slug{left:22px;right:22px;bottom:16px;font-size:7px}
   .slug span:nth-child(2){display:none}
@@ -326,7 +395,7 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
   </defs>
 </svg>
 
-<noscript><p style="position:fixed;z-index:99;bottom:60px;left:20px;right:20px;color:#e8c98e;font:12px monospace">GIGADREAM.EXE needs JavaScript for the lattice. Links: x.com/TonyJMatos · tonyjmatos.com · github.com/TonyJoseMatos · linktr.ee/beachpunks</p></noscript>
+<noscript><p style="position:fixed;z-index:99;bottom:60px;left:20px;right:20px;color:#e8c98e;font:12px monospace">GIGADREAM.EXE needs JavaScript for the lattice. Links: x.com/TonyJMatos · LinkedIn · Credly (gigadream) · spawn.co/@beachpunk · tonyjmatos.com · github.com/TonyJoseMatos · linktr.ee/beachpunks</p></noscript>
 <div id="reel">
   <canvas id="gl-canvas" aria-hidden="true"></canvas>
 
@@ -361,30 +430,69 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
       <g id="edges" filter="url(#boil)"></g>
       <g id="pulses" filter="url(#pulse-glow)"></g>
 
-      <!-- UNICRONIAN VECTOR CORE -->
-      <g id="core-anchor" transform="translate(600,400)">
-        <g class="spin">
-          <path id="core-orbit" d="M0,-92 a92,92 0 1,1 0,184 a92,92 0 1,1 0,-184" fill="none"/>
-          <text class="core-text"><textPath href="#core-orbit">NEVER DOOM · GOOD AND PROSPEROUS · 3077 · LOVE IS THE FIFTH ELEMENT ·</textPath></text>
+      <!-- <REDACTED PROJECT> — black hole. Disk is split into a back half (behind the horizon)
+           and a front half; the background shader lenses the sky around the same point. -->
+      <defs>
+        <clipPath id="bh-back"><rect x="-140" y="-140" width="280" height="140"/></clipPath>
+        <clipPath id="bh-front"><rect x="-140" y="0" width="280" height="140"/></clipPath>
+        <radialGradient id="bh-glow" r=".5"><stop offset=".42" stop-color="#ff5d3b" stop-opacity="0"/><stop offset=".58" stop-color="#ff5d3b" stop-opacity=".55"/><stop offset=".75" stop-color="#e2266f" stop-opacity=".25"/><stop offset="1" stop-color="#e2266f" stop-opacity="0"/></radialGradient>
+        <linearGradient id="bh-halo-g" x1="0" y1="-1" x2="0" y2="1" gradientUnits="objectBoundingBox"><stop offset="0" stop-color="#ffe7a8"/><stop offset=".45" stop-color="#ffb21c"/><stop offset="1" stop-color="#d8291c" stop-opacity=".3"/></linearGradient>
+        <g id="bh-disk">
+          <circle r="112" fill="url(#bh-glow)"/>
+          <g class="disk-spin c"><circle r="104" fill="none" stroke="#e8c98e" stroke-width="1" stroke-dasharray=".01 7" stroke-linecap="round" opacity=".8"/></g>
+          <g class="disk-spin b"><circle r="88" fill="none" stroke="#e2266f" stroke-width="2.2" stroke-dasharray="40 9 6 14" opacity=".8"/>
+            <circle r="76" fill="none" stroke="#ff5d3b" stroke-width="3.4" stroke-dasharray="64 6 18 10" opacity=".95"/></g>
+          <g class="disk-spin"><circle r="64" fill="none" stroke="#ffb21c" stroke-width="5" stroke-dasharray="90 8 30 6"/>
+            <circle r="54" fill="none" stroke="#ffe7a8" stroke-width="3" stroke-dasharray="120 10 40 4"/>
+            <circle r="96" fill="none" stroke="#00a6cf" stroke-width="1" stroke-dasharray="10 50" opacity=".7"/></g>
         </g>
-        <circle r="74" fill="none" stroke="#e8c98e" stroke-width="1" stroke-dasharray="2 4 12 4" class="spin-r" opacity=".7"/>
-        <g filter="url(#stone-rough)">
-          <polygon points="0,-56 49,-28 49,28 0,56 -49,28 -49,-28" class="core-ring"/>
-          <polygon points="0,-34 29.5,17 -29.5,17" fill="none" stroke="#ff5d3b" stroke-width="2"/>
-          <polygon points="0,34 29.5,-17 -29.5,-17" fill="none" stroke="#17a497" stroke-width="1.4" opacity=".9"/>
+      </defs>
+      <g id="core-anchor" transform="translate(600,405)" tabindex="0" role="button" aria-label="Redacted project. Access denied." aria-describedby="deny-live">
+        <g class="spin-slow">
+          <path id="core-orbit" d="M0,-132 a132,132 0 1,1 0,264 a132,132 0 1,1 0,-264" fill="none"/>
+          <text class="core-text"><textPath href="#core-orbit">ACCESS DENIED · CLEARANCE: NONE · ▮▮▮▮▮▮▮ · FILE GD-037/00 · ▮▮▮▮ ·</textPath></text>
         </g>
-        <g class="beat"><circle r="7" fill="#ffb21c"/><circle r="12" fill="none" stroke="#ffb21c" stroke-width="1" opacity=".6"/></g>
-        <text class="core-label" y="118" text-anchor="middle">UNICRONIAN VECTOR CORE</text>
+        <g id="bh">
+          <!-- back half of the accretion disk, tilted -->
+          <g transform="rotate(-13) scale(1,.28)" clip-path="url(#bh-back)"><use href="#bh-disk"/></g>
+          <!-- lensed far side of the disk, bent up over the top of the horizon (with C/M misregistration) -->
+          <g class="halo">
+            <circle r="41" fill="none" stroke="#00a6cf" stroke-width="2" transform="translate(-1.8,1.1)" opacity=".8" style="mix-blend-mode:screen"/>
+            <circle r="41" fill="none" stroke="#e5007d" stroke-width="2" transform="translate(1.7,-1)" opacity=".8" style="mix-blend-mode:screen"/>
+            <circle r="40" fill="none" stroke="url(#bh-halo-g)" stroke-width="7"/>
+            <circle r="46" fill="none" stroke="#e8c98e" stroke-width=".8" stroke-dasharray=".01 4" stroke-linecap="round"/>
+          </g>
+          <!-- event horizon: a hand-cut hole in the film -->
+          <circle id="bh-horizon" r="33" fill="#020304" stroke="#1a0d0a" stroke-width="1" filter="url(#stone-rough)"/>
+          <circle r="22" fill="none" stroke="#d8291c" stroke-width=".6" stroke-dasharray="1 6" opacity=".45" class="spin-r"/>
+          <!-- front half of the disk crosses in front of the hole -->
+          <g transform="rotate(-13) scale(1,.28)" clip-path="url(#bh-front)"><use href="#bh-disk"/></g>
+        </g>
+        <!-- declassified slip: redaction bars + the project name you are not cleared for -->
+        <g id="bh-slip" transform="translate(-6,86) rotate(-3)">
+          <path d="M-92,-18 L-30,-20 L40,-17 L93,-19 L90,-6 L94,6 L91,19 L20,17 L-50,20 L-93,18 L-90,4 Z" fill="#eee0c2" filter="url(#stone-rough)"/>
+          <rect x="-80" y="-13" width="118" height="6" fill="#0b0b0b"/><rect x="44" y="-13" width="34" height="6" fill="#0b0b0b"/>
+          <text class="bh-slip-text" x="0" y="4" text-anchor="middle">&lt;REDACTED PROJECT&gt;</text>
+          <rect x="-80" y="9" width="40" height="6" fill="#0b0b0b"/><rect x="-34" y="9" width="96" height="6" fill="#0b0b0b"/>
+        </g>
+        <g id="bh-stamp-wrap" transform="translate(20,118)"><g id="bh-stamp" transform="rotate(-7)">
+          <g class="slice">
+            <rect x="-86" y="-17" width="172" height="31" fill="rgba(10,18,21,.78)" stroke="#ff3b22" stroke-width="3" filter="url(#ink-rough)"/>
+            <text class="bh-stamp-text g-c" x="0" y="7" text-anchor="middle" fill="#00a6cf">ACCESS DENIED</text>
+            <text class="bh-stamp-text g-m" x="0" y="7" text-anchor="middle" fill="#e5007d">ACCESS DENIED</text>
+            <text class="bh-stamp-text" x="0" y="7" text-anchor="middle" fill="#ff6a45">ACCESS DENIED</text>
+          </g>
+        </g></g>
       </g>
 
       <g id="nodes"></g>
 
       <!-- hand annotations (desktop only; repositioned/hidden by JS) -->
       <g id="annos">
-        <path class="anno-line" d="M494,170 C520,140 540,130 572,128"/><path class="anno-line" d="M494,170 l2,-11 M494,170 l10,-5"/>
-        <text class="anno" x="580" y="134" transform="rotate(-5 620 134)">start here</text>
-        <path class="anno-line" d="M790,650 C812,680 830,690 862,694"/><path class="anno-line" d="M790,650 l1,11 M790,650 l10,4"/>
-        <text class="anno" x="868" y="702" transform="rotate(4 900 702)">drag it — the sky bends</text>
+        <path class="anno-line" d="M486,198 C494,188 502,184 512,182"/><path class="anno-line" d="M486,198 l1,-10 M486,198 l9,-4"/>
+        <text class="anno" x="516" y="184" transform="rotate(-5 550 184)">start here</text>
+        <path class="anno-line" d="M890,566 C904,550 918,546 934,546"/><path class="anno-line" d="M890,566 l2,-10 M890,566 l10,-3"/>
+        <text class="anno" x="938" y="552" transform="rotate(-4 980 552)">drag it — the sky bends</text>
       </g>
     </svg>
   </div>
@@ -408,8 +516,16 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
   <div class="chrome slug"><span>FILE GD-037 · @TONYJMATOS</span><span>C 0 · M 72 · Y 88 · K 0 — EKTAR PUSH +1</span><span>PRINTED ON TERRA II</span></div>
   <button class="chrome cmd" type="button" data-open="signal" aria-label="Open credentials in 06 Signal"><b>$</b> cat credentials.py<span class="caret"></span></button>
   <div class="chrome mstat">NEVER DOOM | GOOD AND PROSPEROUS | 3077</div>
+  <nav class="chrome socials" aria-label="Socials">
+    <span class="tx" aria-hidden="true">TRANSMIT ▸</span>
+    <a href="https://www.linkedin.com/in/tony-matos-791085159/" target="_blank" rel="noopener"><b>in</b>LinkedIn</a>
+    <a href="https://www.x.com/tonyjmatos/highlights" target="_blank" rel="noopener"><b>X</b>@TonyJMatos</a>
+    <a href="https://www.credly.com/users/gigadream/badges/credly" target="_blank" rel="noopener"><b>✦</b>Credly</a>
+  </nav>
 </div>
 
+<div class="deny-flash" aria-hidden="true"></div>
+<p class="sr" id="deny-live" aria-live="assertive"></p>
 <div class="film leak" aria-hidden="true"></div>
 <div class="film grain" aria-hidden="true"></div>
 <div class="film scratch" aria-hidden="true"></div>
@@ -618,30 +734,42 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
       <p>I am a creative generalist mixing AI with a user-centric vision: the bridge between innovative brand storytelling, immersive UI/UX design, AI-driven content creation, and impactful product strategies.</p>
       <p class="hand">AI art technologist &amp; gonzo media · creator of beachpunk: The Diamond Riot!</p>
 
+      <div class="sect">socials</div>
+      <div class="stubs">
+        <a class="stub" href="https://www.linkedin.com/in/tony-matos-791085159/" target="_blank" rel="noopener"><span class="sn">№ 01<span class="adm"> · ADMIT ONE</span></span><span class="sk">LinkedIn</span><span class="su">in/tony-matos-791085159</span></a>
+        <a class="stub" href="https://www.x.com/tonyjmatos/highlights" target="_blank" rel="noopener"><span class="sn">№ 02<span class="adm"> · ADMIT ONE</span></span><span class="sk">X</span><span class="su">@tonyjmatos / highlights</span></a>
+        <a class="stub" href="https://www.credly.com/users/gigadream/badges/credly" target="_blank" rel="noopener"><span class="sn">№ 03<span class="adm"> · ADMIT ONE</span></span><span class="sk">Credly</span><span class="su">gigadream · badges</span></a>
+      </div>
+
       <div class="sect">credentials</div>
       <figure class="crt" id="cred" aria-labelledby="cred-cap">
         <figcaption class="crt-bar"><span class="lamp" aria-hidden="true"><i></i><i></i><i></i></span><span class="path" id="cred-cap">~/gigadream/signal/credentials.py</span><button type="button" id="cred-replay">↻ replay</button></figcaption>
         <div class="crt-screen"><pre tabindex="0" aria-hidden="true"><code id="cred-code"></code></pre></div>
-        <div class="crt-foot"><span>sources: tonyjmatos.com · LinkedIn · github.com/TonyJoseMatos · @TonyJMatos</span></div>
+        <div class="crt-foot"><span>sources: tonyjmatos.com · LinkedIn · Credly · Spawn · github.com/TonyJoseMatos · @TonyJMatos</span></div>
         <ul class="sr" id="cred-sr">
           <li>Creative Generalist &amp; AI Tutor, LABL Design, 2022 to now</li>
           <li>Creative Director, Maitri Learning, 2020 to 2022</li>
           <li>Creative Director, Pro-Mart Industries, 2015 to 2020</li>
           <li>BA, Arts, Entertainment and Media Management, UMass Amherst</li>
           <li>Certificates: Generative AI for Everyone (Coursera, 2023); Generative AI Creation – Multimodal Masterclass (Maven, 2023)</li>
+          <li>Credly badges: Getting Started with Generative AI, Machine Learning Methods and Tools, Data Analytics for Machine Learning (IBM SkillsBuild, 2026); Certifying Adobe Skills in Your Classroom (Adobe Education, 2026)</li>
+          <li>Game: BeachPunk Gigadream: Lost Coast, on Spawn, 2026</li>
           <li>Tools: ComfyUI, Unreal Engine, Spawn, Runway, Luma, Pika, Kaiber, Midjourney, Adobe Firefly, NeRF, Gaussian splatting</li>
           <li>IP: Beachpunk, The Diamond Riot, Swords with no Masters, PORTAL 37, TERRA II</li>
+          <li>Transmit: x.com/tonyjmatos/highlights, linkedin.com/in/tony-matos-791085159, credly.com/users/gigadream, spawn.co/@beachpunk, linktr.ee/beachpunks</li>
         </ul>
       </figure>
 
       <div class="sect">transmit</div>
       <ul class="links">
-        <li><a href="https://x.com/TonyJMatos" target="_blank" rel="noopener"><span class="k">X</span><span class="dots"></span><span class="v">@TonyJMatos</span></a></li>
+        <li><a href="https://www.x.com/tonyjmatos/highlights" target="_blank" rel="noopener"><span class="k">X</span><span class="dots"></span><span class="v">@TonyJMatos</span></a></li>
+        <li><a href="https://www.spawn.co/@beachpunk/beachpunk-gigadream-lost-coast" target="_blank" rel="noopener"><span class="k">Spawn</span><span class="dots"></span><span class="v">@beachpunk · Lost Coast</span></a></li>
         <li><a href="https://tonyjmatos.com/gigadream" target="_blank" rel="noopener"><span class="k">Portfolio</span><span class="dots"></span><span class="v">tonyjmatos.com</span></a></li>
         <li><a href="https://github.com/TonyJoseMatos" target="_blank" rel="noopener"><span class="k">GitHub</span><span class="dots"></span><span class="v">TonyJoseMatos</span></a></li>
         <li><a href="https://www.instagram.com/tonyjmatos/" target="_blank" rel="noopener"><span class="k">Instagram</span><span class="dots"></span><span class="v">@tonyjmatos</span></a></li>
         <li><a href="https://www.behance.net/Tony-J-Matos" target="_blank" rel="noopener"><span class="k">Behance</span><span class="dots"></span><span class="v">Tony-J-Matos</span></a></li>
         <li><a href="https://www.linkedin.com/in/tony-matos-791085159/" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="dots"></span><span class="v">tony-matos</span></a></li>
+        <li><a href="https://www.credly.com/users/gigadream/badges/credly" target="_blank" rel="noopener"><span class="k">Credly</span><span class="dots"></span><span class="v">gigadream</span></a></li>
         <li><a href="https://dribbble.com/tags/tonyjmatos" target="_blank" rel="noopener"><span class="k">Dribbble</span><span class="dots"></span><span class="v">#tonyjmatos</span></a></li>
         <li><a href="https://society6.com/tonyjmatos" target="_blank" rel="noopener"><span class="k">Society6</span><span class="dots"></span><span class="v">tonyjmatos</span></a></li>
         <li><a href="https://www.redbubble.com/people/thediamondriot/shop" target="_blank" rel="noopener"><span class="k">Riot shop</span><span class="dots"></span><span class="v">Redbubble</span></a></li>
@@ -651,6 +779,43 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
       <span class="ph">[ADD: booking / commissions email — only if you want one public]</span>
     </div>
     <footer class="sheet-foot"><span>GD-037 / 06</span><span>be impeccable with your word</span></footer>
+  </div>
+</aside>
+
+<!-- ======================= 07 SPAWN ======================= -->
+<!-- source: https://www.spawn.co/@beachpunk/beachpunk-gigadream-lost-coast (title, genre, blurb, release date and update names read 22 Nov 2026) -->
+<aside id="drawer-spawn" class="sheet right" role="dialog" aria-modal="false" aria-labelledby="h-spawn">
+  <div class="sheet-paper"></div>
+  <div class="sheet-inner">
+    <header class="sheet-head">
+      <span class="folio">07</span><h2 id="h-spawn">Spawn</h2><span class="kicker">playable · spawn.co/@beachpunk · 2026</span>
+      <button class="close-btn" type="button">close ✕</button>
+    </header>
+    <div class="sheet-body">
+      <a class="plate" href="https://www.spawn.co/@beachpunk/beachpunk-gigadream-lost-coast" target="_blank" rel="noopener">
+        <img src="assets/spawn-lost-coast.jpg" alt="BeachPunk Gigadream: Lost Coast key art: a starjet on the beach, a caped hero, a ringed planet over the sea" loading="lazy" decoding="async" width="1200" height="630"/>
+        <figcaption><b>PL. 07 — BeachPunk Gigadream: Lost Coast</b><span>spawn.co</span></figcaption>
+      </a>
+      <h3>BeachPunk Gigadream: Lost Coast</h3>
+      <div class="quote">Wash up on the heart-lagoon island, wake Portal 37, fly the Spektraltek starjet.
+        <cite><a href="https://www.spawn.co/@beachpunk/beachpunk-gigadream-lost-coast" target="_blank" rel="noopener">spawn.co/@beachpunk</a></cite></div>
+      <dl class="spec">
+        <dt>genre</dt><dd>Action · Adventure · Shooter · Racer</dd>
+        <dt>released</dt><dd>30 Oct 2026 · multiplayer, in the browser or the Spawn app</dd>
+        <dt>made</dt><dd>on Spawn, prototyped in conversation with Savi</dd>
+      </dl>
+      <a class="press" href="https://www.spawn.co/@beachpunk/beachpunk-gigadream-lost-coast" target="_blank" rel="noopener"><i>▶</i> PRESS START <span style="font-size:.5em;letter-spacing:.2em">· PLAY ON SPAWN</span></a>
+      <div class="sect">patch notes, pulled from the cabinet</div>
+      <div class="entry"><div class="yr">11.07</div><div><h3>Dreadnought Wrecks</h3><p>A downed airship crashes into the shallows and stays there as a burning wreck — dive it for three salvage pods.</p></div></div>
+      <div class="entry"><div class="yr">11.07</div><div><h3>Magma Pillar</h3><p>EL MORTERO on Monte Guayama hits harder; new raider airships HIVE MANTIS, ABYSS LANTERN and STING LANCE.</p></div></div>
+      <div class="entry"><div class="yr">11.04</div><div><h3>Surf Into The Inverso</h3><p>Portal 37 is now a ride: surf a 360° hyperportal tube on a board and arrive on EL INVERSO, an inverted Lost Coast.</p></div></div>
+      <div class="entry"><div class="yr">11.03</div><div><h3>No Future Tonight</h3><p>New box art: Beachpunk Gigadream, The Lost Coast, with NO FUTURE on the salvage bike.</p></div></div>
+      <div class="quote">"Mixing Models for Maximum Creativity" or currently — Using Spawn to prototype my games, then Unreal to code them with my Magi.
+        <cite><a href="https://x.com/TonyJMatos/status/2114508588609831120" target="_blank" rel="noopener">@TonyJMatos · 26 Oct 2026</a></cite></div>
+      <p class="hand">insert coin → the lost coast is open</p>
+      <a class="lnk" href="https://www.spawn.co/@beachpunk/beachpunk-gigadream-lost-coast" target="_blank" rel="noopener">spawn.co/@beachpunk/beachpunk-gigadream-lost-coast →</a>
+    </div>
+    <footer class="sheet-foot"><span>GD-037 / 07</span><span>insert coin</span></footer>
   </div>
 </aside>
 
@@ -674,7 +839,7 @@ let cmykShift = .45, vectorBash = .60, ektar = .5, pull = [0, 0], pullTarget = [
 const vert = `attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}`;
 const frag = `
 precision highp float;
-uniform vec2 R; uniform float T, C, B, E; uniform vec2 P;
+uniform vec2 R; uniform float T, C, B, E; uniform vec2 P; uniform vec3 H;
 float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float poly(vec2 uv,float n,float a){float an=atan(uv.y,uv.x)+a;float r=6.2831853/n;return cos(floor(.5+an/r)*r-an)*length(uv);}
 vec3 scene(vec2 uv,float off){
@@ -707,6 +872,12 @@ void main(){
   float fr=floor(T*12.);
   vec2 weave=vec2(h(vec2(fr,1.))-.5,h(vec2(fr,7.))-.5)*.0025;
   vec2 uv=(gl_FragCoord.xy-.5*R)/min(R.x,R.y)+weave;
+  /* <REDACTED PROJECT>: gravitational lensing around the hole (H.xy centre, H.z horizon radius).
+     The sky is pulled in (deflection ~ rs^2/r) and frame-dragged (twist ~ rs^2/r^2). */
+  vec2 hd=uv-H.xy; float hr=length(hd)+1e-4, rs=H.z;
+  float tw=min(1.7*rs*rs/(hr*hr),2.4)+sin(T*.6)*.08*rs/hr;
+  vec2 hrot=mat2(cos(tw),-sin(tw),sin(tw),cos(tw))*hd;
+  uv=H.xy+hrot-hd/hr*min(1.25*rs*rs/hr,hr*.92);
   float split=.0018+length(P)*.018+E*.002;
   vec3 col=vec3(scene(uv,split).r,scene(uv,0.).g,scene(uv,-split).b);
   /* Ektar response: lift saturation, warm the mids */
@@ -714,6 +885,11 @@ void main(){
   col=mix(vec3(l),col,1.18+E*.2); col*=vec3(1.04,1.,.94);
   col+=(h(floor(gl_FragCoord.xy/1.5)+fr)-.5)*(.04+E*.06);
   float v=1.-dot(uv*.78,uv*.78); col*=clamp(v,.12,1.);
+  if(rs>0.){
+    col+=vec3(1.,.55,.22)*exp(-pow((hr-rs*1.32)/(rs*.13),2.))*.7;     /* photon ring, Ektar-warm */
+    col+=vec3(.0,.5,.65)*exp(-pow((hr-rs*1.5)/(rs*.08),2.))*.25;      /* cyan misregistration */
+    col*=smoothstep(rs*.92,rs*1.12,hr);                                 /* event horizon */
+  }
   gl_FragColor=vec4(col,1.);
 }`;
 let U = {}, glOK = false;
@@ -725,7 +901,7 @@ if (gl) {
     gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
     const a = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(a); gl.vertexAttribPointer(a, 2, gl.FLOAT, false, 0, 0);
-    ['R','T','C','B','E','P'].forEach(k => U[k] = gl.getUniformLocation(pr, k));
+    ['R','T','C','B','E','P','H'].forEach(k => U[k] = gl.getUniformLocation(pr, k));
     glOK = true;
   } else console.error(gl.getProgramInfoLog(pr));
 }
@@ -737,7 +913,7 @@ function resize() {
 }
 
 /* ==========================================================================
-   2. LATTICE — six petroglyph sigils on a hand-ruled hexagon.
+   2. LATTICE — seven petroglyph sigils on a hand-ruled heptagon around a black hole.
    ========================================================================== */
 // Sigils: drawn as if pecked into stone. Taíno-petroglyph / cyber-orisha.
 const SIGILS = {
@@ -752,6 +928,8 @@ const SIGILS = {
   // tide record: framed stacked waves (archive)
   archive: `<rect x="-13" y="-13" width="26" height="26" rx="2"/><path d="M-10-5 q2.5-3 5 0 t5 0 t5 0 t5 0"/><path class="hot" d="M-10 1 q2.5-3 5 0 t5 0 t5 0 t5 0"/><path d="M-10 7 q2.5-3 5 0 t5 0 t5 0 t5 0"/>`,
   // signal staff: coquí-headed antenna radiating arcs
+  // starjet over a wave (07 spawn): the Lost Coast cabinet
+  spawn: `<path d="M0-16 L5-2 L16 5 L4 4 L0 11 L-4 4 L-16 5 L-5-2Z"/><circle class="hotf" cx="0" cy="-4" r="2"/><path class="hot" d="M-18 16 q4.5-4 9 0 t9 0 t9 0 t9 0"/>`,
   signal: `<path d="M0 15V-4"/><circle cx="0" cy="-7" r="3.4"/><path class="hot" d="M-7-13 Q-11-7 -7-1M7-13 Q11-7 7-1"/><path d="M-12-17 Q-18-7 -12 3M12-17 Q18-7 12 3"/><path d="M-6 15h12"/>`
 };
 const NODE_DEFS = [
@@ -760,13 +938,15 @@ const NODE_DEFS = [
   { key: 'lore',       n: '03', label: 'LORE',       sub: 'TERRA II // DIAMOND RIOT',    side: 'right' },
   { key: 'optics',     n: '04', label: 'OPTICS',     sub: 'RGB → CMYK SORTING FACILITY', side: 'right' },
   { key: 'archive',    n: '05', label: 'ARCHIVE',    sub: 'CONTACT SHEET 2023—2026',      side: 'left'  },
-  { key: 'signal',     n: '06', label: 'SIGNAL',     sub: 'ABOUT // LINKS // TRANSMIT',  side: 'left'  }
+  { key: 'signal',     n: '06', label: 'SIGNAL',     sub: 'ABOUT // LINKS // TRANSMIT',  side: 'left'  },
+  { key: 'spawn',      n: '07', label: 'SPAWN',      sub: 'LOST COAST // PRESS START',   side: 'right' }
 ];
 // hand-cut stone outlines (irregular, deliberately not a regular polygon)
 const STONES = [
   'M-22-19 L4-27 L25-13 L27 9 L10 26 L-16 24 L-27 4Z', 'M-19-24 L14-25 L28-4 L20 22 L-6 28 L-26 12 L-27-10Z',
   'M-25-12 L-4-27 L22-20 L27 6 L13 25 L-14 25 L-28 9Z', 'M-17-26 L19-22 L28 2 L17 25 L-10 27 L-27 8 L-24-15Z',
-  'M-26-6 L-11-26 L17-24 L28-3 L22 21 L-3 28 L-23 18Z', 'M-21-22 L9-28 L27-10 L24 16 L3 27 L-22 21 L-28-2Z'
+  'M-26-6 L-11-26 L17-24 L28-3 L22 21 L-3 28 L-23 18Z', 'M-21-22 L9-28 L27-10 L24 16 L3 27 L-22 21 L-28-2Z',
+  'M-24-17 L-2-28 L24-18 L28 7 L9 27 L-18 23 L-28 2Z'
 ];
 
 const svg = $('#lattice-svg'), gEdges = $('#edges'), gBleed = $('#edges-bleed'), gPulses = $('#pulses'), gNodes = $('#nodes'), gGrads = $('#grads');
@@ -789,14 +969,15 @@ NODE_DEFS.forEach((d, i) => {
   nodes[d.key] = { ...d, el: g, home: { x: 0, y: 0 }, pos: { x: 0, y: 0 }, edges: [] };
 });
 
-// edges: 6 spokes (core→node) + 6 rim segments (ring order)
-const ORDER = NODE_DEFS.map(d => d.key);
+// edges: 7 spokes (node→black hole) + 7 rim segments (ring order)
+const ORDER = ['projects', 'developing', 'lore', 'spawn', 'optics', 'archive', 'signal'];
 const EDGES = [];
 ORDER.forEach((k, i) => EDGES.push({ a: 'core', b: k, kind: 'spoke', bow: (i % 2 ? 1 : -1) * (9 + i * 1.7), id: 's' + i }));
-ORDER.forEach((k, i) => EDGES.push({ a: k, b: ORDER[(i + 1) % 6], kind: 'rim', bow: (i % 2 ? -1 : 1) * (6 + (i * 3) % 7), id: 'r' + i }));
+ORDER.forEach((k, i) => EDGES.push({ a: k, b: ORDER[(i + 1) % ORDER.length], kind: 'rim', bow: (i % 2 ? -1 : 1) * (6 + (i * 3) % 7), id: 'r' + i }));
 
 const STOPS = {
-  spoke: [[0, '#ffb21c', 1], [.18, '#ff5d3b', 1], [.55, '#e8c98e', .95], [.86, '#d8291c', .9], [1, '#3a0d08', .5]],
+  // spokes run node → hole: warm at the sigil, reddening, then swallowed at the horizon
+  spoke: [[0, '#ffb21c', .95], [.3, '#e8c98e', .95], [.66, '#ff5d3b', 1], [.88, '#d8291c', .85], [1, '#050304', .1]],
   rim:   [[0, '#e8c98e', .2], [.12, '#e8c98e', .95], [.5, '#17a497', .9], [.88, '#e8c98e', .95], [1, '#e8c98e', .2]]
 };
 EDGES.forEach(E => {
@@ -818,13 +999,32 @@ EDGES.forEach(E => {
 });
 const posOf = k => k === 'core' ? center : nodes[k].pos;
 
+let coreScale = 1;
 function edgePath(E, t) {
+  const vib = E.vib * Math.sin(t * 0.042 + E.phase);           // plucked-string kinetic cue
+  if (E.kind === 'spoke') {
+    // node → event horizon, then frame-dragged: points are rotated about the hole by an
+    // angle that grows as they fall in, so every spoke spirals into the dark.
+    const A = nodes[E.b].pos, C = center;
+    let dx = C.x - A.x, dy = C.y - A.y; const L = Math.hypot(dx, dy) || 1; dx /= L; dy /= L;
+    const rH = 34 * coreScale, LR = 175 * coreScale, SW = 1.15;
+    const x1 = A.x + dx * 34, y1 = A.y + dy * 34, x2 = C.x - dx * rH, y2 = C.y - dy * rH;
+    const bow = E.bow + vib, cx = (x1 + x2) / 2 - dy * bow, cy = (y1 + y2) / 2 + dx * bow;
+    let d = '', N = 30, ex = x1, ey = y1;
+    for (let i = 0; i <= N; i++) {
+      const u = i / N, w = 1 - u;
+      let px = w * w * x1 + 2 * w * u * cx + u * u * x2, py = w * w * y1 + 2 * w * u * cy + u * u * y2;
+      const rx = px - C.x, ry = py - C.y, r = Math.hypot(rx, ry);
+      if (r < LR) { const k = (LR - r) / (LR - rH), th = SW * k * k; const c = Math.cos(th), s = Math.sin(th); px = C.x + rx * c - ry * s; py = C.y + rx * s + ry * c; }
+      d += (i ? ' L' : 'M') + px.toFixed(1) + ',' + py.toFixed(1); ex = px; ey = py;
+    }
+    E.grad.setAttribute('x1', x1); E.grad.setAttribute('y1', y1); E.grad.setAttribute('x2', ex); E.grad.setAttribute('y2', ey);
+    return d;
+  }
   const A = posOf(E.a), B = posOf(E.b);
   let dx = B.x - A.x, dy = B.y - A.y; const L = Math.hypot(dx, dy) || 1; dx /= L; dy /= L;
-  // spokes start at the core's rim; rims overshoot the corners like a hand-ruled line
-  const s0 = E.kind === 'spoke' ? 58 : -12, s1 = E.kind === 'spoke' ? 34 : -12;
-  const x1 = A.x + dx * s0, y1 = A.y + dy * s0, x2 = B.x - dx * s1, y2 = B.y - dy * s1;
-  const vib = E.vib * Math.sin(t * 0.042 + E.phase);           // plucked-string kinetic cue
+  // rims overshoot the corners like a hand-ruled line
+  const x1 = A.x - dx * 12, y1 = A.y - dy * 12, x2 = B.x + dx * 12, y2 = B.y + dy * 12;
   const bow = E.bow + vib;
   const cx = (x1 + x2) / 2 - dy * bow, cy = (y1 + y2) / 2 + dx * bow;
   E.grad.setAttribute('x1', x1); E.grad.setAttribute('y1', y1); E.grad.setAttribute('x2', x2); E.grad.setAttribute('y2', y2);
@@ -849,25 +1049,26 @@ function layout() {
   if (!mobile) {
     VB = { w: 1200, h: 800 }; svg.setAttribute('viewBox', '0 0 1200 800'); svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
     center.x = 600; center.y = 405;
-    // flat hexagon, nudged by hand so it doesn't read as a perfect generated shape
-    const H = { projects: [452, 196], developing: [758, 188], lore: [918, 404], optics: [748, 618], archive: [446, 612], signal: [284, 398] };
+    // flat-topped heptagon around the hole, nudged by hand so it doesn't read as generated
+    const H = { projects: [450, 200], developing: [752, 194], lore: [912, 372], spawn: [852, 584], optics: [600, 652], archive: [334, 582], signal: [272, 384] };
     for (const k in nodes) { const n = nodes[k]; n.home = { x: H[k][0], y: H[k][1] }; }
     annos.style.display = '';
     EDGES.forEach(E => E.hidden = false);
   } else {
     VB = { w: 400, h: 900 }; svg.setAttribute('viewBox', '0 0 400 900'); svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-    center.x = 300; center.y = 235;
+    center.x = 300; center.y = 212;
     // the totem: sigils stacked down the left like a carved post
-    ORDER.forEach((k, i) => { nodes[k].home = { x: 74 + (i % 2 ? 22 : 0), y: 318 + i * 90 }; });
+    ORDER.forEach((k, i) => { nodes[k].home = { x: 74 + (i % 2 ? 22 : 0), y: 326 + i * 74 }; });
     annos.style.display = 'none';
-    EDGES.forEach(E => E.hidden = (E.id === 'r5'));
+    EDGES.forEach(E => E.hidden = (E.id === 'r6'));
   }
-  $('#core-anchor').setAttribute('transform', `translate(${center.x},${center.y}) scale(${mobile ? .72 : 1})`);
+  coreScale = mobile ? .6 : 1;
+  $('#core-anchor').setAttribute('transform', `translate(${center.x},${center.y}) scale(${coreScale})`);
   for (const k in nodes) {
     const n = nodes[k], [num, lab, sub] = n.el.querySelectorAll('text');
     n.pos = { ...n.home };
     if (!mobile) {
-      const below = (k === 'optics' || k === 'archive');
+      const below = (k === 'optics' || k === 'archive' || k === 'spawn');
       const lx = 0, ly = below ? 66 : -50;
       [num, lab, sub].forEach(t => t.setAttribute('text-anchor', 'middle'));
       lab.setAttribute('x', lx + 9); lab.setAttribute('y', ly);
@@ -948,10 +1149,26 @@ for (const key in nodes) {
   g.addEventListener('pointercancel', () => { dragging = null; n.pos = { ...n.home }; placeNodes(); drawEdges(); });
 }
 
+/* ---------- the centre: <REDACTED PROJECT> — never opens, only refuses ---------- */
+const coreEl = $('#core-anchor'), denyLive = $('#deny-live');
+let denyT = 0;
+function deny() {
+  coreEl.classList.remove('denied'); document.body.classList.remove('denied');
+  void coreEl.getBoundingClientRect();                    // restart the CSS animations
+  coreEl.classList.add('denied'); document.body.classList.add('denied');
+  denyLive.textContent = ''; setTimeout(() => { denyLive.textContent = 'Access denied. Redacted project.'; }, 30);
+  ORDER.forEach(k => pluck(k, RM ? 0 : 14));
+  if (!RM) { pullTarget = [(Math.random() - .5) * .12, (Math.random() - .5) * .12]; setTimeout(() => { if (!openKey) pullTarget = [0, 0]; }, 260); }
+  clearTimeout(denyT); denyT = setTimeout(() => { coreEl.classList.remove('denied'); document.body.classList.remove('denied'); }, 700);
+}
+coreEl.addEventListener('pointerdown', e => { e.stopPropagation(); });
+coreEl.addEventListener('click', e => { e.stopPropagation(); deny(); });
+coreEl.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); deny(); } });
+
 /* ==========================================================================
    3. LOOP — shader, string vibration, line boil. Pauses when hidden.
    ========================================================================== */
-const boilT = $('#boil-turb'), grainT = $('#grain-turb');
+const boilT = $('#boil-turb'), grainT = $('#grain-turb'), horizonEl = $('#bh-horizon');
 let running = true, raf = 0, lastBoil = 0, boilSeed = 1;
 function kick() { if (!raf && running) raf = requestAnimationFrame(loop); }
 function loop(now) {
@@ -961,6 +1178,10 @@ function loop(now) {
   if (glOK) {
     gl.uniform2f(U.R, canvas.width, canvas.height); gl.uniform1f(U.T, RM ? 12 : now * .001);
     gl.uniform1f(U.C, cmykShift); gl.uniform1f(U.B, vectorBash); gl.uniform1f(U.E, ektar); gl.uniform2f(U.P, pull[0], pull[1]);
+    const hb = horizonEl.getBoundingClientRect(), cb = canvas.getBoundingClientRect();
+    const sx = canvas.width / (cb.width || 1), sy = canvas.height / (cb.height || 1), m = Math.min(canvas.width, canvas.height);
+    const hx = ((hb.left + hb.width / 2 - cb.left) * sx - canvas.width / 2) / m, hy = ((cb.bottom - (hb.top + hb.height / 2)) * sy - canvas.height / 2) / m;
+    gl.uniform3f(U.H, hx, hy, (hb.width / 2) * sx / m);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
   }
   let vib = false;
@@ -989,11 +1210,12 @@ const LORE = {
 > VECTOR BASHING ENGINE: ONLINE
 > LOGISTICS LAYER: Biological RGB -> Mechanical CMYK
 > NOTE: Eventually it is all game logic inside other things.`,
-  ascii: `   /\\      UNICRONIAN LATTICE v3.7
+  ascii: `   /\\      UNICRONIAN LATTICE v3.8
   /  \\     ---------------------------
  / /\\ \\    [01] PROJECTS   [02] DEVELOPING
 /______\\   [03] LORE       [04] OPTICS
-           [05] ARCHIVE    [06] SIGNAL`
+           [05] ARCHIVE    [06] SIGNAL
+           [07] SPAWN      [▮▮] ACCESS DENIED`
 };
 const out = $('#lore-output');
 let typer = 0;
@@ -1069,6 +1291,16 @@ class TonyJoseMatos(Gigadream):
         "Generative AI Creation –"
         " Multimodal Masterclass · Maven",
     ]
+    badges = [  # credly: users/gigadream
+        "Getting Started with"
+        " Generative AI · IBM",
+        "Machine Learning Methods"
+        " and Tools · IBM",
+        "Data Analytics for"
+        " Machine Learning · IBM",
+        "Certifying Adobe Skills in"
+        " Your Classroom · Adobe",
+    ]
     tools = ["ComfyUI", "Unreal", "Spawn",
              "Runway", "Luma", "Pika",
              "Kaiber", "Midjourney",
@@ -1076,12 +1308,24 @@ class TonyJoseMatos(Gigadream):
     ip = ["Beachpunk", "The Diamond Riot",
           "Swords with no Masters",
           "PORTAL 37"]
+    game = ("BeachPunk Gigadream:"
+            " Lost Coast", "Spawn", 2026)
     status = ("NEVER DOOM | GOOD AND"
               " PROSPEROUS")
     year = 3077
 
     def transmit(self):
-        return "linktr.ee/beachpunks"`;
+        return {
+            "x": "x.com/tonyjmatos"
+                 "/highlights",
+            "linkedin": "linkedin.com/in/"
+                "tony-matos-791085159",
+            "credly": "credly.com/users/"
+                "gigadream/badges",
+            "spawn": "spawn.co/"
+                "@beachpunk",
+            "all": "linktr.ee/beachpunks",
+        }`;
 
 // verbatim: github.com/TonyJoseMatos/gigadream-fieldkit/blob/49ac210/canon.py#L1-L21
 const TEASER = `"""GIGADREAM CANON — one bible for field kit, hangar, and Portal 37."""

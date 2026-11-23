@@ -7,8 +7,9 @@ Gigadream Agent + Gonzo Media · Support • Multiplier • Bridge · Mixing Mod
 
 [![GIGADREAM.EXE — the Unicronian lattice over an Ektar sunset sea](media/hero.png)](https://tonyjosematos.github.io/gigadream-exe/)
 
-A one-page transmission from TERRA II. Six petroglyph sigils sit on a hand-ruled hexagon around the
-Unicronian vector core. Pull a sigil outward (or just tap it) and its sheet slides in:
+A one-page transmission from TERRA II. Seven petroglyph sigils sit on a hand-ruled heptagon around a black hole:
+**&lt;REDACTED PROJECT&gt; — ACCESS DENIED.** Its accretion disk swirls, the lattice lines spiral into the event horizon,
+and the sky behind it is gravitationally lensed. Click it and it refuses you. Pull a sigil outward (or just tap it) and its sheet slides in:
 
 | | |
 |---|---|
@@ -17,7 +18,9 @@ Unicronian vector core. Pull a sigil outward (or just tap it) and its sheet slid
 | **03 LORE** | The Diamond Riot // TERRA II compiler: FRINGE POSH DARK boards, field dispatches, salvage ASCII |
 | **04 OPTICS** | The Bilingual Optics Sorting Facility. Biological RGB → mechanical CMYK dials drive the sky live |
 | **05 ARCHIVE** | A contact sheet of every motion test and model shoot-out, 2023 → 2026 |
-| **06 SIGNAL** | `credentials.py`, a typed-out service record, plus every link |
+| **06 SIGNAL** | Socials (LinkedIn · X · Credly), `credentials.py` with a typed-out service record, plus every link |
+| **07 SPAWN** | [BeachPunk Gigadream: Lost Coast](https://www.spawn.co/@beachpunk/beachpunk-gigadream-lost-coast), the playable game on Spawn |
+| **centre** | &lt;REDACTED PROJECT&gt; — access denied |
 
 NEVER DOOM | GOOD AND PROSPEROUS | 3077 — love is the fifth element.
 
@@ -28,21 +31,24 @@ NEVER DOOM | GOOD AND PROSPEROUS | 3077 — love is the fifth element.
 
 ## Under the hood
 - One self-contained `index.html`. No frameworks, no build step.
-- WebGL fragment shader for the background: vector-bash shards, the horizon, and an RGB↔CMYK halftone mix.
+- WebGL fragment shader for the background: vector-bash shards, the horizon, an RGB↔CMYK halftone mix, and gravitational lensing around the black hole.
 - SVG lattice lines with feTurbulence "boil", misregistered C/M strokes, sand-grain erosion, traveling pulses, and plucked-string vibration.
 - Film layer: grain, drifting light leaks, chromatic aberration, and gate weave.
 - Responsive layout (the lattice becomes a totem on phones), keyboard support, and `prefers-reduced-motion`. Animation pauses when the tab is hidden.
-- Deep links: `#projects` `#developing` `#lore` `#optics` `#archive` `#signal`
-- `preview.mp4` is an 8-second capture of the home view.
+- Deep links: `#projects` `#developing` `#lore` `#optics` `#archive` `#signal` `#spawn`
+- `preview.mp4` is an 8-second capture of the v3 home view (before the seventh node).
 
 Run it locally by opening `index.html` in a browser.
 
 ## Links
 - Portfolio: [tonyjmatos.com](https://tonyjmatos.com/gigadream)
-- X: [@TonyJMatos](https://x.com/TonyJMatos)
+- X: [@TonyJMatos](https://www.x.com/tonyjmatos/highlights)
+- LinkedIn: [tony-matos-791085159](https://www.linkedin.com/in/tony-matos-791085159/)
+- Credly: [gigadream](https://www.credly.com/users/gigadream/badges/credly)
+- Play: [BeachPunk Gigadream: Lost Coast on Spawn](https://www.spawn.co/@beachpunk/beachpunk-gigadream-lost-coast)
 - Everything: [linktr.ee/beachpunks](https://linktr.ee/beachpunks)
 - Lore engine: [gigadream-fieldkit](https://github.com/TonyJoseMatos/gigadream-fieldkit) · [Bilingual-Optics-Sorting-Facility](https://github.com/TonyJoseMatos/Bilingual-Optics-Sorting-Facility)
 
 ## Credits
-Art, lore, and every image © Tony Jose Matos / LABL Design. Images come from tonyjmatos.com and @TonyJMatos.
+Art, lore, and every image © Tony Jose Matos / LABL Design. Images come from tonyjmatos.com, @TonyJMatos, and the game's public Spawn page.
 Fonts: Big Shoulders Stencil, Martian Mono, Newsreader, and Reenie Beanie (Google Fonts, SIL OFL).
