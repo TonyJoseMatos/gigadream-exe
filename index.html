@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>GIGADREAM.EXE — Tony Jose Matos · #beachpunk</title>
+<title>GIGADREAM OS — Tony Jose Matos · #beachpunk</title>
 <meta name="description" content="Tony Jose Matos — Prime Waveform Modifier of the Beachpunk Gigadream. Gigadream Agent + Gonzo Media. Mixing Models for Maximum Creativity." />
 <meta name="theme-color" content="#0a1215" />
-<meta property="og:title" content="GIGADREAM.EXE — Tony Jose Matos" />
+<meta property="og:title" content="GIGADREAM OS — Tony Jose Matos" />
 <meta property="og:description" content="Prime Waveform Modifier of the Beachpunk Gigadream. Mixing Models for Maximum Creativity." />
 <meta property="og:image" content="assets/x-banner.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -81,12 +81,22 @@ body.open-right #annos,body.open-left #annos{opacity:0}
 .vertex-node .stone{fill:#0c1518;stroke:var(--sand);stroke-width:1.6}
 .vertex-node .stone-shadow{fill:var(--ektar);opacity:.85}
 .vertex-node .ticks{fill:none;stroke:var(--sand);stroke-width:1;stroke-dasharray:1 5.2;opacity:.8;transform-origin:0 0;animation:spin 40s linear infinite}
-.vertex-node .sigil{fill:none;stroke:var(--bone);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.vertex-node .sigil .fill{fill:var(--bone);stroke:none}
-.vertex-node .sigil .hot{stroke:var(--coral)}
-.vertex-node .sigil .hotf{fill:var(--coral);stroke:none}
+.vertex-node .glyph{fill:none;stroke:var(--bone);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.vertex-node .glyph .fill{fill:var(--bone);stroke:none}
+.vertex-node .glyph .hot{stroke:var(--coral)}
+.vertex-node .glyph .hotf{fill:var(--coral);stroke:none}
+/* PORTALS: a hand-cut stone gateway, misregistered C/M/Y rims, a breathing tinted void with a swirl inside */
+.vertex-node .rim{fill:none;stroke-width:1.5;mix-blend-mode:screen}
+.vertex-node .rim.c{stroke:#00a6cf;transform:translate(-1.7px,1.1px)} .vertex-node .rim.m{stroke:#e5007d;transform:translate(1.6px,-1px)}
+.vertex-node .rim.y{stroke:#ffe500;stroke-dasharray:2.5 4.5;opacity:.8;transform-origin:0 0;animation:spin 23s linear infinite reverse}
+.vertex-node .rim.k{stroke:var(--bone);stroke-width:2.2;mix-blend-mode:normal}
+.vertex-node .void{transform-origin:0 0;animation:breathe 4.8s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(.93)}50%{transform:scale(1.05)}}
+.vertex-node .swirl{fill:none;stroke-linecap:round;transform-origin:0 0;animation:spin 9s linear infinite}
+.vertex-node .deep{transition:transform .5s cubic-bezier(.3,1.4,.4,1)}
 .vertex-node .body{transition:transform .35s cubic-bezier(.3,1.6,.4,1)}
-.vertex-node:hover .body,.vertex-node:focus-visible .body,.vertex-node.is-open .body{transform:scale(1.12) rotate(-4deg)}
+.vertex-node:hover .body,.vertex-node:focus-visible .body,.vertex-node.is-open .body{transform:translate(var(--px,0),var(--py,0)) scale(1.12)}
+.vertex-node:hover .deep,.vertex-node:focus-visible .deep,.vertex-node.is-open .deep{transform:translate(var(--px,0),var(--py,0))}
 .vertex-node:focus-visible .stone{stroke:var(--sun);stroke-width:2.6}
 .vertex-node.is-open .stone{stroke:var(--coral);stroke-width:2.4}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -119,24 +129,30 @@ body.open-right #annos,body.open-left #annos{opacity:0}
 #bh-stamp .slice{animation:slice 3.4s steps(1) infinite}
 @keyframes slice{0%,100%{transform:translate(0,0)}62%{transform:translate(7px,0)}64%{transform:translate(-4px,0)}66%{transform:translate(0,0)}}
 #core-anchor.denied #bh{animation:deny .55s cubic-bezier(.3,.7,.4,1)}
-#core-anchor.denied #bh-stamp-wrap{animation:stampin .55s cubic-bezier(.2,1.6,.4,1)}
+#bh-stamp-wrap{opacity:0;visibility:hidden}
+#core-anchor.denied #bh-stamp-wrap{visibility:visible;animation:stampin 1.2s cubic-bezier(.2,1.4,.4,1) forwards}
+.fil{animation:spin linear infinite;transform-origin:0 0}
+.fil.rev{animation-direction:reverse}
+#bh .precess{animation:precess 13s ease-in-out infinite alternate;transform-origin:0 0}
+@keyframes precess{from{transform:rotate(-7deg) skewX(4deg)}to{transform:rotate(6deg) skewX(-5deg)}}
+.bh-flare{fill:none;stroke-linecap:round;animation:flare 1.1s ease-out forwards}
+@keyframes flare{0%{opacity:0;stroke-dashoffset:60}15%{opacity:1}100%{opacity:0;stroke-dashoffset:0}}
 #core-anchor.denied #bh-stamp .g-c{transform:translate(-6px,2px)} #core-anchor.denied #bh-stamp .g-m{transform:translate(6px,-2px)}
 @keyframes deny{0%,100%{transform:translate(0,0)}10%{transform:translate(-9px,2px) rotate(-2deg)}22%{transform:translate(8px,-3px) rotate(2deg)}36%{transform:translate(-6px,1px)}50%{transform:translate(5px,-1px)}66%{transform:translate(-3px,0)}82%{transform:translate(2px,0)}}
-@keyframes stampin{0%{transform:scale(1.7);opacity:.2}60%{transform:scale(.94);opacity:1}100%{transform:scale(1)}}
+@keyframes stampin{0%{transform:scale(1.8);opacity:0}10%{transform:scale(.94);opacity:1}18%{transform:scale(1)}80%{opacity:1}100%{opacity:0;transform:scale(1.02)}}
 .deny-flash{position:fixed;inset:0;z-index:26;pointer-events:none;opacity:0;mix-blend-mode:screen;
   background:repeating-linear-gradient(180deg,rgba(229,0,125,.0) 0 7px,rgba(229,0,125,.22) 7px 9px,rgba(0,166,207,.0) 9px 17px,rgba(0,166,207,.2) 17px 18px)}
 body.denied .deny-flash{animation:dflash .5s steps(4)}
 @keyframes dflash{0%{opacity:0}20%{opacity:1;transform:translateX(-8px)}45%{opacity:.6;transform:translateX(10px)}70%{opacity:.8;transform:translateX(-3px)}100%{opacity:0}}
 
 /* ---------- SOCIALS: persistent tag cluster on home ---------- */
-.socials{top:112px;right:52px;pointer-events:auto;display:flex;align-items:center;gap:7px;transform:rotate(3deg);transition:opacity .4s}
-@media (max-width:1360px){.socials .tx{display:none}}
-.socials .tx{font-size:8.5px;letter-spacing:.22em;color:var(--coral);margin-right:2px}
+.chrome.socials{top:104px;right:52px;pointer-events:auto;z-index:6;display:grid;grid-template-columns:auto auto;justify-items:end;gap:7px 8px;transform:rotate(3deg);transition:opacity .4s}
+.socials .tx{grid-column:1/-1;justify-self:end;font-size:8.5px;letter-spacing:.22em;color:var(--coral);margin-right:2px}
 .socials a{display:inline-flex;align-items:baseline;gap:6px;text-decoration:none;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--bone);
   background:rgba(10,18,21,.72);border:1px solid rgba(232,201,142,.65);padding:6px 8px 5px;box-shadow:2px 2px 0 var(--ektar);
   text-shadow:-.6px 0 rgba(0,166,207,.7),.6px 0 rgba(229,0,125,.65);transition:transform .2s,background .2s}
 .socials a b{font-family:var(--display);font-weight:900;font-size:13px;letter-spacing:0;color:var(--sun);text-shadow:none}
-.socials a:nth-child(3){transform:rotate(-2deg)} .socials a:nth-child(4){transform:rotate(1.5deg)}
+.socials a:nth-child(3){transform:rotate(-2deg)} .socials a:nth-child(4){transform:rotate(1.5deg)} .socials a:nth-child(5){transform:rotate(-1deg)}
 .socials a:hover,.socials a:focus-visible{background:var(--ektar);color:var(--paper);outline:none;transform:rotate(0) scale(1.06)}
 .socials a:hover b,.socials a:focus-visible b{color:var(--paper)}
 body.open-right .socials{opacity:0;pointer-events:none}
@@ -154,7 +170,7 @@ body.open-left .socials{transform:rotate(3deg) scale(.86);transform-origin:right
 .stub:hover,.stub:focus-visible{background:var(--ektar);color:var(--paper);border-color:var(--ektar);outline:none}
 .stub:hover .su,.stub:focus-visible .su,.stub:hover .sn,.stub:focus-visible .sn{color:var(--paper)}
 
-/* ---------- 07 SPAWN: arcade cabinet bits ---------- */
+/* ---------- 07 PLAY: arcade cabinet bits (built on Spawn) ---------- */
 .press{display:flex;align-items:center;justify-content:center;gap:12px;margin:16px 0 6px;padding:14px 16px;text-decoration:none;background:#10181a;color:var(--sun);
   font-family:var(--display);font-weight:900;font-size:26px;letter-spacing:.08em;box-shadow:4px 4px 0 var(--ektar),0 0 0 1px var(--paper-ink);transform:rotate(-.8deg);
   text-shadow:-1.5px 0 rgba(0,166,207,.8),1.5px 0 rgba(229,0,125,.8)}
@@ -171,6 +187,99 @@ body.open-left .socials{transform:rotate(3deg) scale(.86);transform-origin:right
 .wordmark{font-family:var(--display);font-weight:900;font-size:clamp(46px,6.2vw,96px);line-height:.82;letter-spacing:.01em;color:var(--bone);
   text-shadow:-2px 1px 0 rgba(0,166,207,.8),2px -1px 0 rgba(229,0,125,.75);transform:rotate(-2.2deg);transform-origin:left top}
 .wordmark .exe{font-size:.36em;color:var(--coral);text-shadow:none;letter-spacing:.08em;vertical-align:top;margin-left:4px}
+/* ---------- GIGADREAM OS: the wordmark is the power switch ---------- */
+.os-btn{all:unset;cursor:pointer;display:inline-block;position:relative;font:inherit;color:inherit;line-height:inherit;letter-spacing:inherit;text-shadow:inherit}
+.os-btn .boot{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--sun);text-shadow:none;margin:8px 0 0 3px;font-weight:400}
+.os-btn .boot i{display:inline-block;width:.6em;height:1em;vertical-align:-.15em;background:var(--coral);margin-left:4px;animation:blink 1s steps(1) infinite}
+.os-btn:hover,.os-btn:focus-visible{text-shadow:-5px 2px 0 rgba(0,166,207,.9),5px -2px 0 rgba(229,0,125,.85),0 0 0 #000;outline:none}
+.os-btn:focus-visible .boot{background:var(--sun);color:var(--night)}
+.os-btn:active{transform:translate(2px,2px)}
+/* riso boot overlay: paper + four ink passes */
+.os{position:fixed;inset:0;z-index:38;overflow:hidden;background:#eee0c2;
+  background-image:radial-gradient(rgba(29,20,13,.08) .7px,transparent 1.1px);background-size:4px 4px}
+.os[hidden],.tx-modal[hidden]{display:none}
+.os.in{animation:osin .18s steps(3)}
+@keyframes osin{from{opacity:0}to{opacity:1}}
+.os.kick{animation:oskick .16s steps(2)}
+@keyframes oskick{0%{transform:translate(0,0)}50%{transform:translate(-6px,3px)}100%{transform:translate(0,0)}}
+.os.out{animation:osout .6s cubic-bezier(.6,0,.4,1) forwards}
+@keyframes osout{from{clip-path:inset(0 0 0 0)}to{clip-path:inset(0 0 100% 0)}}
+.os-pass{position:absolute;inset:-2%;width:104%;height:104%;mix-blend-mode:multiply;opacity:0}
+.os-pass.on{animation:slam .34s cubic-bezier(.2,1.5,.3,1) forwards}
+@keyframes slam{from{opacity:0;transform:translate(calc(var(--dx) * 5),calc(var(--dy) * 5)) scale(1.07)}to{opacity:.92;transform:translate(var(--dx),var(--dy)) scale(1)}}
+.os-log{position:absolute;left:5vw;bottom:9vh;z-index:2;margin:0;font-family:var(--mono);font-size:12px;line-height:1.75;color:#1d140d;background:rgba(238,224,194,.86);
+  padding:14px 18px;border:1.5px solid #1d140d;box-shadow:4px 4px 0 #d8291c;max-width:min(560px,88vw);white-space:pre-wrap;transform:rotate(-1deg)}
+.os-log b{color:#d8291c;font-weight:600}
+.os-pass-lbl{position:absolute;right:5vw;bottom:9vh;z-index:2;font-family:var(--display);font-weight:900;font-size:clamp(40px,7vw,110px);line-height:.8;color:#1d140d;opacity:.85}
+/* TRANSMISSION card */
+.tx-modal{position:fixed;inset:0;z-index:39;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(6,10,12,.72);padding:20px}
+.tx-slot{position:relative;width:min(600px,92vw);padding:0 0 6px;border-top:10px solid #0b0d0e;box-shadow:0 -2px 0 #2a2f31}
+.tx-slot::before{content:"PRINTER // GIGADREAM OS";position:absolute;top:-24px;left:0;font-family:var(--mono);font-size:8.5px;letter-spacing:.24em;color:var(--sand)}
+.tx-slot canvas{display:block;width:100%;height:auto;box-shadow:0 18px 34px rgba(0,0,0,.6);transform:rotate(-1.2deg);transform-origin:top center}
+.tx-modal.print .tx-slot canvas{animation:printout 1.1s steps(16) both}
+@keyframes printout{from{clip-path:inset(0 0 100% 0);transform:translateY(-30px) rotate(0)}to{clip-path:inset(0 0 0 0);transform:translateY(0) rotate(-1.2deg)}}
+.tx-actions{display:flex;gap:10px}
+.tx-actions button{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:10px 14px;cursor:pointer;border:1.5px solid var(--sand);background:#0c1311;color:var(--sand);box-shadow:3px 3px 0 var(--ektar)}
+.tx-actions button:hover,.tx-actions button:focus-visible{background:var(--sun);color:#0c1311;outline:none}
+.tx-note{font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:rgba(232,201,142,.8);text-transform:uppercase;text-align:center}
+/* solid-state reveals (Optics spectrum at either end) */
+.reveal{position:fixed;left:0;right:0;top:58%;z-index:27;pointer-events:none;text-align:center;font-family:var(--display);font-weight:900;
+  font-size:clamp(34px,6.4vw,104px);line-height:.86;letter-spacing:.5em;opacity:0;clip-path:inset(-60% 50% -60% 50%);
+  transition:opacity .6s,letter-spacing 1.1s cubic-bezier(.2,.9,.2,1),clip-path .9s cubic-bezier(.2,.9,.2,1);padding:0 4vw}
+.reveal span{display:inline-block;filter:url(#ink-bleed)}
+.reveal.on{opacity:1;letter-spacing:.04em;clip-path:inset(-60% -2% -60% -2%)}
+#reveal-white{color:#1d140d;text-shadow:-3px 1px 0 rgba(0,166,207,.55),3px -1px 0 rgba(229,0,125,.5)}
+#reveal-black{color:#fff1cf;text-shadow:0 0 14px rgba(255,178,28,.85),0 0 42px rgba(255,93,59,.5),-2px 0 rgba(0,166,207,.7),2px 0 rgba(229,0,125,.7)}
+body.open-right .reveal{right:calc(var(--sheet-w) + 16px)}
+body.open-left .reveal{left:calc(var(--sheet-w) + 16px)}
+body.solid-white .vertex-node .stone{fill:#f4ead6}
+body.solid-white .vertex-node .glyph{stroke:#1d140d}
+/* optics readout */
+.readout{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:10px 0 2px;padding:10px 12px;background:#10181a;color:var(--sand);font-size:10px;letter-spacing:.16em;text-transform:uppercase;box-shadow:3px 3px 0 var(--ektar)}
+.readout .sw{width:46px;height:18px;border:1px solid rgba(232,201,142,.6);flex:none}
+.readout b{font-family:var(--display);font-weight:900;font-size:20px;letter-spacing:.06em;color:var(--sun)}
+.readout.white{background:#f6f0e2;color:#1d140d} .readout.white b{color:#d8291c}
+.readout.black{background:#000} .readout.black b{color:#fff1cf;text-shadow:0 0 10px rgba(255,178,28,.8)}
+input[type=range].spectrum::-webkit-slider-runnable-track{background:linear-gradient(90deg,#fff 0,#fff3cf 6%,#ffb21c 20%,#ff5d3b 36%,#e2266f 52%,#7b3fe4 64%,#2a5bd7 76%,#17a497 88%,#000 100%)}
+input[type=range].spectrum::-moz-range-track{background:linear-gradient(90deg,#fff 0,#fff3cf 6%,#ffb21c 20%,#ff5d3b 36%,#e2266f 52%,#7b3fe4 64%,#2a5bd7 76%,#17a497 88%,#000 100%)}
+.chip.small{padding:5px 8px 4px;font-size:8.5px}
+/* ---------- sky fx: mini starjets + rare anomalies ---------- */
+#sky-fx{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+#sky-fx.paused *{animation-play-state:paused!important}
+.jet{position:absolute;left:0;top:0;width:70px;height:12px;margin:-6px 0 0 -62px;will-change:transform}
+.jet .trail{position:absolute;left:4px;top:5.4px;width:50px;height:1.3px;background:linear-gradient(90deg,transparent,var(--jc));opacity:.85}
+.jet svg{position:absolute;right:0;top:0;width:17px;height:12px;overflow:visible}
+.jet .burn{animation:flick .09s steps(2) infinite}
+@keyframes flick{50%{opacity:.35}}
+.anom{position:absolute;left:0;top:0;mix-blend-mode:screen;will-change:transform,opacity}
+.comet{width:260px;height:3px;margin:-1.5px 0 0 -250px;background:linear-gradient(90deg,transparent,rgba(0,166,207,.35) 40%,rgba(244,234,214,.9) 96%,#fff);border-radius:3px;box-shadow:0 0 10px rgba(255,178,28,.5)}
+.comet::after{content:"";position:absolute;right:-5px;top:-4px;width:11px;height:11px;border-radius:50%;background:radial-gradient(#fff,rgba(255,178,28,.6) 50%,transparent 70%)}
+.pulsar{width:60px;height:60px;margin:-30px 0 0 -30px;background:radial-gradient(circle,#fff 0 2px,rgba(160,200,255,.8) 3px,transparent 9px),linear-gradient(90deg,transparent 0 46%,rgba(200,220,255,.9) 50%,transparent 54%),linear-gradient(0deg,transparent 0 47%,rgba(200,220,255,.7) 50%,transparent 53%)}
+.ripple{width:240px;height:240px;margin:-120px 0 0 -120px;border-radius:50%;border:1.5px solid rgba(244,234,214,.7);box-shadow:-3px 2px 0 rgba(0,166,207,.6),3px -2px 0 rgba(229,0,125,.55),inset 0 0 30px rgba(123,63,228,.35)}
+.bloom{width:46vw;height:46vw;margin:-23vw 0 0 -23vw;border-radius:50%}
+/* ---------- tickets (Signal) ---------- */
+.tickets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 14px;margin:14px 0 6px}
+.ticket{--tc:#f1dcae;position:relative;display:grid;grid-template-columns:30px 1fr;min-height:104px;text-decoration:none;color:#1d140d;
+  background-color:var(--tc);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .15  0 0 0 .55 -.12'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+    repeating-linear-gradient(103deg,transparent 0 9px,rgba(120,80,30,.05) 9px 10px),linear-gradient(170deg,rgba(255,255,255,.35),transparent 40%,rgba(120,80,30,.12));
+  -webkit-mask:radial-gradient(circle 7px at 30px 0,transparent 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 7px at 30px 100%,transparent 98%,#000) bottom/100% 51% no-repeat;
+          mask:radial-gradient(circle 7px at 30px 0,transparent 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 7px at 30px 100%,transparent 98%,#000) bottom/100% 51% no-repeat;
+  filter:drop-shadow(0 3px 3px rgba(29,20,13,.25));transition:transform .2s}
+.tickets .ticket:nth-child(1){transform:rotate(-1.6deg)} .tickets .ticket:nth-child(2){--tc:#f3c9bf;transform:rotate(1.2deg)}
+.tickets .ticket:nth-child(3){--tc:#cfe3d3;transform:rotate(.8deg)} .tickets .ticket:nth-child(4){--tc:#f5e49c;transform:rotate(-1deg)}
+.ticket:hover,.ticket:focus-visible{transform:rotate(0) translateY(-3px) scale(1.02);outline:none}
+.ticket:focus-visible{filter:drop-shadow(0 0 0 #d8291c) drop-shadow(0 0 3px #d8291c)}
+.tk-stub{display:flex;align-items:center;justify-content:center;border-right:2px dotted rgba(29,20,13,.55);writing-mode:vertical-rl;transform:rotate(180deg);
+  font-size:7.5px;letter-spacing:.28em;text-transform:uppercase;color:#d8291c;font-weight:600}
+.tk-body{display:flex;flex-direction:column;gap:3px;padding:12px 12px 10px 12px;min-width:0}
+.tk-sn{font-size:7.5px;letter-spacing:.2em;color:rgba(29,20,13,.65)}
+.tk-k{font-family:var(--display);font-weight:900;font-size:25px;line-height:.85;text-transform:uppercase;letter-spacing:.02em}
+.tk-u{font-size:8.5px;letter-spacing:.04em;color:rgba(29,20,13,.72);overflow-wrap:anywhere;line-height:1.35}
+.tk-punch{position:absolute;top:9px;right:10px;width:9px;height:9px;border-radius:50%;background:var(--paper);box-shadow:inset 1px 1px 2px rgba(0,0,0,.45)}
+.tk-stamp{position:absolute;right:8px;bottom:8px;padding:3px 6px 2px;border:2px solid #d8291c;border-radius:3px;color:#d8291c;font-family:var(--display);font-weight:900;font-size:10.5px;letter-spacing:.14em;
+  transform:rotate(-13deg);opacity:.78;mix-blend-mode:multiply;filter:url(#ink-rough)}
+.ticket:nth-child(2) .tk-stamp{border-radius:50%;padding:7px 5px;transform:rotate(9deg)} .ticket:nth-child(3) .tk-stamp{color:#0d5a60;border-color:#0d5a60}
 .byline{margin-top:14px;font-size:10.5px;letter-spacing:.16em;color:var(--sand);max-width:360px;line-height:1.7;transform:rotate(-1deg)}
 .byline b{color:var(--bone);font-weight:600}
 .stamp{top:30px;right:52px;transform:rotate(3.5deg);border:3px solid var(--coral);color:var(--coral);padding:8px 12px 7px;font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:.12em;
@@ -197,8 +306,8 @@ body.open-left .socials{transform:rotate(3deg) scale(.86);transform-origin:right
 @keyframes grainjump{0%{transform:translate(0,0)}20%{transform:translate(-31px,17px)}40%{transform:translate(23px,-41px)}60%{transform:translate(-13px,29px)}80%{transform:translate(37px,9px)}}
 .film.leak{z-index:25;mix-blend-mode:screen;opacity:.42;filter:blur(30px)}
 .film.leak::before,.film.leak::after{content:"";position:absolute;border-radius:50%}
-.film.leak::before{width:48vw;height:70vh;left:-16vw;top:-12vh;background:radial-gradient(closest-side,rgba(255,93,59,.95),rgba(216,41,28,.5) 55%,transparent);animation:leak1 19s ease-in-out infinite alternate}
-.film.leak::after{width:34vw;height:58vh;right:-12vw;bottom:-14vh;background:radial-gradient(closest-side,rgba(255,178,28,.9),rgba(226,38,111,.45) 60%,transparent);animation:leak2 23s ease-in-out infinite alternate}
+.film.leak::before{width:48vw;height:70vh;left:var(--l1x,-16vw);top:var(--l1y,-12vh);background:radial-gradient(closest-side,rgba(255,93,59,.95),rgba(216,41,28,.5) 55%,transparent);animation:leak1 19s ease-in-out infinite alternate}
+.film.leak::after{width:34vw;height:58vh;right:var(--l2x,-12vw);bottom:var(--l2y,-14vh);background:radial-gradient(closest-side,rgba(255,178,28,.9),rgba(226,38,111,.45) 60%,transparent);animation:leak2 23s ease-in-out infinite alternate}
 @keyframes leak1{0%{transform:translate(0,0) scale(1);opacity:.75}50%{transform:translate(8vw,10vh) scale(1.2);opacity:1}100%{transform:translate(2vw,28vh) scale(.9);opacity:.55}}
 @keyframes leak2{0%{transform:translate(0,0);opacity:.6}60%{transform:translate(-10vw,-14vh) scale(1.25);opacity:1}100%{transform:translate(-4vw,-30vh);opacity:.7}}
 .film.burn{box-shadow:inset 0 0 140px 30px rgba(0,0,0,.75),inset 0 0 40px rgba(216,41,28,.35)}
@@ -348,7 +457,11 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
   .stamp{display:none}
   .core-label{display:none}
   .core-text{display:none}
-  .socials{top:16px;right:14px;flex-direction:column;align-items:flex-end;gap:5px;transform:rotate(2deg)}
+  .chrome.socials{top:14px;right:12px;grid-template-columns:auto;gap:5px;transform:rotate(2deg)}
+  .os-btn .boot{font-size:8.5px;margin-top:5px}
+  .reveal{top:auto;bottom:22%}
+  .tickets{gap:12px 10px} .tk-k{font-size:20px} .ticket{grid-template-columns:24px 1fr;min-height:96px} .tk-body{padding:10px 8px 26px 9px}
+  .os-log{font-size:10.5px;left:4vw;bottom:6vh} .os-pass-lbl{display:none}
   .socials .tx{display:none}
   .socials a{font-size:8.5px;padding:5px 7px 4px}
   .stubs{gap:8px} .stub{padding:9px 7px 8px} .stub .sk{font-size:18px}
@@ -378,6 +491,9 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
   .film.scratch{display:none}
+  #core-anchor.denied #bh-stamp-wrap{opacity:1;visibility:visible}
+  .os-pass.on{opacity:.92}
+  .reveal{transition:opacity .01ms}
 }
 </style>
 </head>
@@ -392,12 +508,20 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
       <feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="1" seed="2" result="w"/>
       <feDisplacementMap in="eaten" in2="w" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
+    <!-- INK BLEED for the solid-state reveals -->
+    <filter id="ink-bleed" x="-12%" y="-70%" width="124%" height="240%">
+      <feTurbulence type="fractalNoise" baseFrequency=".035 .09" numOctaves="2" seed="11" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation=".6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="d"/></feMerge>
+    </filter>
   </defs>
 </svg>
 
 <noscript><p style="position:fixed;z-index:99;bottom:60px;left:20px;right:20px;color:#e8c98e;font:12px monospace">GIGADREAM.EXE needs JavaScript for the lattice. Links: x.com/TonyJMatos · LinkedIn · Credly (gigadream) · spawn.co/@beachpunk · tonyjmatos.com · github.com/TonyJoseMatos · linktr.ee/beachpunks</p></noscript>
 <div id="reel">
   <canvas id="gl-canvas" aria-hidden="true"></canvas>
+  <div id="sky-fx" aria-hidden="true"></div>
 
   <div id="lattice-stage">
     <svg id="lattice-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="group" aria-label="GIGADREAM lattice navigation">
@@ -437,15 +561,7 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
         <clipPath id="bh-front"><rect x="-140" y="0" width="280" height="140"/></clipPath>
         <radialGradient id="bh-glow" r=".5"><stop offset=".42" stop-color="#ff5d3b" stop-opacity="0"/><stop offset=".58" stop-color="#ff5d3b" stop-opacity=".55"/><stop offset=".75" stop-color="#e2266f" stop-opacity=".25"/><stop offset="1" stop-color="#e2266f" stop-opacity="0"/></radialGradient>
         <linearGradient id="bh-halo-g" x1="0" y1="-1" x2="0" y2="1" gradientUnits="objectBoundingBox"><stop offset="0" stop-color="#ffe7a8"/><stop offset=".45" stop-color="#ffb21c"/><stop offset="1" stop-color="#d8291c" stop-opacity=".3"/></linearGradient>
-        <g id="bh-disk">
-          <circle r="112" fill="url(#bh-glow)"/>
-          <g class="disk-spin c"><circle r="104" fill="none" stroke="#e8c98e" stroke-width="1" stroke-dasharray=".01 7" stroke-linecap="round" opacity=".8"/></g>
-          <g class="disk-spin b"><circle r="88" fill="none" stroke="#e2266f" stroke-width="2.2" stroke-dasharray="40 9 6 14" opacity=".8"/>
-            <circle r="76" fill="none" stroke="#ff5d3b" stroke-width="3.4" stroke-dasharray="64 6 18 10" opacity=".95"/></g>
-          <g class="disk-spin"><circle r="64" fill="none" stroke="#ffb21c" stroke-width="5" stroke-dasharray="90 8 30 6"/>
-            <circle r="54" fill="none" stroke="#ffe7a8" stroke-width="3" stroke-dasharray="120 10 40 4"/>
-            <circle r="96" fill="none" stroke="#00a6cf" stroke-width="1" stroke-dasharray="10 50" opacity=".7"/></g>
-        </g>
+        <g id="bh-disk"></g>
       </defs>
       <g id="core-anchor" transform="translate(600,405)" tabindex="0" role="button" aria-label="Redacted project. Access denied." aria-describedby="deny-live">
         <g class="spin-slow">
@@ -453,36 +569,34 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
           <text class="core-text"><textPath href="#core-orbit">ACCESS DENIED · CLEARANCE: NONE · ▮▮▮▮▮▮▮ · FILE GD-037/00 · ▮▮▮▮ ·</textPath></text>
         </g>
         <g id="bh">
-          <!-- back half of the accretion disk, tilted -->
-          <g transform="rotate(-13) scale(1,.28)" clip-path="url(#bh-back)"><use href="#bh-disk"/></g>
+          <g class="precess">
+          <!-- back half of the accretion disk, tilted (tilt + squash are seeded) -->
+          <g class="bh-tilt" transform="rotate(-13) scale(1,.28)" clip-path="url(#bh-back)"><use href="#bh-disk"/></g>
           <!-- lensed far side of the disk, bent up over the top of the horizon (with C/M misregistration) -->
-          <g class="halo">
-            <circle r="41" fill="none" stroke="#00a6cf" stroke-width="2" transform="translate(-1.8,1.1)" opacity=".8" style="mix-blend-mode:screen"/>
-            <circle r="41" fill="none" stroke="#e5007d" stroke-width="2" transform="translate(1.7,-1)" opacity=".8" style="mix-blend-mode:screen"/>
-            <circle r="40" fill="none" stroke="url(#bh-halo-g)" stroke-width="7"/>
-            <circle r="46" fill="none" stroke="#e8c98e" stroke-width=".8" stroke-dasharray=".01 4" stroke-linecap="round"/>
-          </g>
+          <g class="halo" id="bh-halo"></g>
           <!-- event horizon: a hand-cut hole in the film -->
           <circle id="bh-horizon" r="33" fill="#020304" stroke="#1a0d0a" stroke-width="1" filter="url(#stone-rough)"/>
           <circle r="22" fill="none" stroke="#d8291c" stroke-width=".6" stroke-dasharray="1 6" opacity=".45" class="spin-r"/>
           <!-- front half of the disk crosses in front of the hole -->
-          <g transform="rotate(-13) scale(1,.28)" clip-path="url(#bh-front)"><use href="#bh-disk"/></g>
+          <g class="bh-tilt" transform="rotate(-13) scale(1,.28)" clip-path="url(#bh-front)"><use href="#bh-disk"/></g>
+          </g>
+          <g id="bh-flares"></g>
         </g>
         <!-- declassified slip: redaction bars + the project name you are not cleared for -->
-        <g id="bh-slip" transform="translate(-6,86) rotate(-3)">
+        <g id="bh-slip" transform="translate(-6,86) rotate(-3)" opacity=".82">
           <path d="M-92,-18 L-30,-20 L40,-17 L93,-19 L90,-6 L94,6 L91,19 L20,17 L-50,20 L-93,18 L-90,4 Z" fill="#eee0c2" filter="url(#stone-rough)"/>
           <rect x="-80" y="-13" width="118" height="6" fill="#0b0b0b"/><rect x="44" y="-13" width="34" height="6" fill="#0b0b0b"/>
           <text class="bh-slip-text" x="0" y="4" text-anchor="middle">&lt;REDACTED PROJECT&gt;</text>
           <rect x="-80" y="9" width="40" height="6" fill="#0b0b0b"/><rect x="-34" y="9" width="96" height="6" fill="#0b0b0b"/>
         </g>
-        <g id="bh-stamp-wrap" transform="translate(20,118)"><g id="bh-stamp" transform="rotate(-7)">
+        <g transform="translate(4,4)"><g id="bh-stamp-wrap"><g id="bh-stamp" transform="rotate(-7)">
           <g class="slice">
             <rect x="-86" y="-17" width="172" height="31" fill="rgba(10,18,21,.78)" stroke="#ff3b22" stroke-width="3" filter="url(#ink-rough)"/>
             <text class="bh-stamp-text g-c" x="0" y="7" text-anchor="middle" fill="#00a6cf">ACCESS DENIED</text>
             <text class="bh-stamp-text g-m" x="0" y="7" text-anchor="middle" fill="#e5007d">ACCESS DENIED</text>
             <text class="bh-stamp-text" x="0" y="7" text-anchor="middle" fill="#ff6a45">ACCESS DENIED</text>
           </g>
-        </g></g>
+        </g></g></g>
       </g>
 
       <g id="nodes"></g>
@@ -499,7 +613,7 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
 
   <!-- PRINT CHROME -->
   <div class="chrome masthead">
-    <h1 class="wordmark">GIGA<br/>DREAM<span class="exe">.EXE</span></h1>
+    <h1 class="wordmark"><button class="os-btn" id="os-btn" type="button" aria-label="Boot GIGADREAM OS: reprint the screen and print your one-of-one transmission card">GIGA<br/>DREAM<span class="exe">OS</span><span class="boot" aria-hidden="true">▸ BOOT<i></i></span></button></h1>
     <p class="byline"><b>TONY JOSE MATOS</b> — PRIME WAVEFORM MODIFIER OF THE BEACHPUNK GIGADREAM · GIGADREAM AGENT + GONZO MEDIA · #BEACHPUNK IMG/ACC</p>
   </div>
   <div class="chrome stamp">NEVER DOOM | GOOD AND PROSPEROUS | 3077<small>LOC. TERRA II · MIXING MODELS FOR MAXIMUM CREATIVITY</small></div>
@@ -510,21 +624,32 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
     <i style="background:#00a6cf"></i><i style="background:#e5007d"></i><i style="background:#ffe500"></i><i style="background:#111"></i>
     <i style="background:#d8291c"></i><i style="background:#ff5d3b"></i><i style="background:#ffb21c"></i><i style="background:#e8c98e"></i><i style="background:#17a497"></i><i style="background:#0d5a60"></i>
   </div>
-  <div class="chrome hint">pull a sigil outward<br/>— or just tap it
+  <div class="chrome hint">pull a portal outward<br/>— or just tap it
     <svg width="46" height="22" viewBox="0 0 46 22"><path d="M2 14 C14 2 26 22 42 8 M42 8 l-9 0 M42 8 l-2 9" fill="none" stroke="#ffb21c" stroke-width="1.6" stroke-linecap="round"/></svg>
   </div>
   <div class="chrome slug"><span>FILE GD-037 · @TONYJMATOS</span><span>C 0 · M 72 · Y 88 · K 0 — EKTAR PUSH +1</span><span>PRINTED ON TERRA II</span></div>
   <button class="chrome cmd" type="button" data-open="signal" aria-label="Open credentials in 06 Signal"><b>$</b> cat credentials.py<span class="caret"></span></button>
   <div class="chrome mstat">NEVER DOOM | GOOD AND PROSPEROUS | 3077</div>
   <nav class="chrome socials" aria-label="Socials">
-    <span class="tx" aria-hidden="true">TRANSMIT ▸</span>
+    <span class="tx" aria-hidden="true">TRANSMIT ▾</span>
     <a href="https://www.linkedin.com/in/tony-matos-791085159/" target="_blank" rel="noopener"><b>in</b>LinkedIn</a>
     <a href="https://www.x.com/tonyjmatos/highlights" target="_blank" rel="noopener"><b>X</b>@TonyJMatos</a>
     <a href="https://www.credly.com/users/gigadream/badges/credly" target="_blank" rel="noopener"><b>✦</b>Credly</a>
+    <a href="https://tonyjmatos.com" target="_blank" rel="noopener"><b>◎</b>tonyjmatos.com</a>
   </nav>
 </div>
 
 <div class="deny-flash" aria-hidden="true"></div>
+<div class="reveal" id="reveal-white" aria-hidden="true"><span>LOVE IS THE FIFTH ELEMENT</span></div>
+<div class="reveal" id="reveal-black" aria-hidden="true"><span>A LIGHT IN THE DARK</span></div>
+<p class="sr" id="reveal-live" aria-live="polite"></p>
+<div class="os" id="os" hidden aria-hidden="true"><pre class="os-log" id="os-log"></pre><div class="os-pass-lbl" id="os-pass-lbl"></div></div>
+<div class="tx-modal" id="tx" role="dialog" aria-modal="true" aria-labelledby="tx-title" hidden>
+  <h2 class="sr" id="tx-title">Your TRANSMISSION card</h2>
+  <div class="tx-slot"><canvas id="tx-canvas" width="1200" height="760" role="img" aria-label="TRANSMISSION card"></canvas></div>
+  <div class="tx-actions"><button type="button" id="tx-save">⤓ save png</button><button type="button" id="tx-close">close ✕</button></div>
+  <p class="tx-note" id="tx-note"></p>
+</div>
 <p class="sr" id="deny-live" aria-live="assertive"></p>
 <div class="film leak" aria-hidden="true"></div>
 <div class="film grain" aria-hidden="true"></div>
@@ -681,9 +806,13 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
       <h3>Biological RGB → Mechanical CMYK</h3>
       <p>Translates biological human layout logic (RGB) into mechanical structural logic (CMYK), using cross-layer latent blending matrices as the physical translation mechanics in the gigadream OS.</p>
       <p class="hand">these dials drive the sky behind this sheet ↓</p>
+      <div class="dial"><label for="spectrum-slider">spectrum · white ↔ ektar ↔ violet ↔ black <output id="spectrum-val">EKTAR</output></label><input id="spectrum-slider" class="spectrum" type="range" min="0" max="100" value="40"/></div>
+      <div class="readout" id="readout"><span id="readout-txt">background · ektar sunset</span><span class="sw" id="readout-sw"></span></div>
+      <div class="dial"><label for="chaos-slider">nebula chaos · domain warp <output id="chaos-val">50%</output></label><input id="chaos-slider" type="range" min="0" max="100" value="50"/></div>
       <div class="dial"><label for="cmyk-slider">latent RGB ↔ CMYK matrix shift <output id="cmyk-val">45%</output></label><input id="cmyk-slider" type="range" min="0" max="100" value="45"/></div>
       <div class="dial"><label for="vector-slider">unicronian vector-bash fracture <output id="vector-val">60%</output></label><input id="vector-slider" type="range" min="0" max="100" value="60"/></div>
       <div class="dial"><label for="ektar-slider">ektar push · leaks + grain <output id="ektar-val">50%</output></label><input id="ektar-slider" type="range" min="0" max="100" value="50"/></div>
+      <div class="chips" role="group" aria-label="Universe seed"><button class="chip small" type="button" id="reseed-btn">↻ reseed universe</button><span class="lbl" id="seed-lbl" style="align-self:center"></span></div>
       <div class="term" style="min-height:0">M_blend = (1.0 - alpha) * RGB_bio + alpha * inv(CMYK_mech)
 # live GLSL uniforms bound to the background shader</div>
       <a class="lnk" href="https://github.com/TonyJoseMatos/Bilingual-Optics-Sorting-Facility" target="_blank" rel="noopener">Bilingual-Optics-Sorting-Facility →</a>
@@ -731,14 +860,15 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
         <div><h3>Tony Jose Matos</h3><div class="lbl">Gigadream Agent + Gonzo Media · <b>Terra II</b></div>
           <div class="lbl" style="margin-top:4px">Support • Multiplier • Bridge · Imaginative Development</div></div>
       </div>
-      <p>I am a creative generalist mixing AI with a user-centric vision: the bridge between innovative brand storytelling, immersive UI/UX design, AI-driven content creation, and impactful product strategies.</p>
-      <p class="hand">AI art technologist &amp; gonzo media · creator of beachpunk: The Diamond Riot!</p>
+      <p>I am a developer working in creative operations, mixing AI with a user-centric vision: the bridge between innovative brand storytelling, immersive UI/UX design, AI-driven content creation, and impactful product strategies.</p>
+      <p class="hand">developer · creative operations · gonzo media · creator of beachpunk: The Diamond Riot!</p>
 
       <div class="sect">socials</div>
-      <div class="stubs">
-        <a class="stub" href="https://www.linkedin.com/in/tony-matos-791085159/" target="_blank" rel="noopener"><span class="sn">№ 01<span class="adm"> · ADMIT ONE</span></span><span class="sk">LinkedIn</span><span class="su">in/tony-matos-791085159</span></a>
-        <a class="stub" href="https://www.x.com/tonyjmatos/highlights" target="_blank" rel="noopener"><span class="sn">№ 02<span class="adm"> · ADMIT ONE</span></span><span class="sk">X</span><span class="su">@tonyjmatos / highlights</span></a>
-        <a class="stub" href="https://www.credly.com/users/gigadream/badges/credly" target="_blank" rel="noopener"><span class="sn">№ 03<span class="adm"> · ADMIT ONE</span></span><span class="sk">Credly</span><span class="su">gigadream · badges</span></a>
+      <div class="tickets">
+        <a class="ticket" href="https://www.linkedin.com/in/tony-matos-791085159/" target="_blank" rel="noopener"><span class="tk-stub">admit one</span><span class="tk-body"><span class="tk-sn">№ 3077-0001 · LI</span><span class="tk-k">LinkedIn</span><span class="tk-u">in/tony-matos-791085159</span></span><i class="tk-punch"></i><span class="tk-stamp">ADMITTED</span></a>
+        <a class="ticket" href="https://www.x.com/tonyjmatos/highlights" target="_blank" rel="noopener"><span class="tk-stub">transmit</span><span class="tk-body"><span class="tk-sn">№ 3077-0002 · X</span><span class="tk-k">X</span><span class="tk-u">@tonyjmatos / highlights</span></span><i class="tk-punch"></i><span class="tk-stamp">LIVE</span></a>
+        <a class="ticket" href="https://www.credly.com/users/gigadream/badges/credly" target="_blank" rel="noopener"><span class="tk-stub">admit one</span><span class="tk-body"><span class="tk-sn">№ 3077-0003 · CR</span><span class="tk-k">Credly</span><span class="tk-u">gigadream · badges</span></span><i class="tk-punch"></i><span class="tk-stamp">VERIFIED</span></a>
+        <a class="ticket" href="https://tonyjmatos.com" target="_blank" rel="noopener"><span class="tk-stub">transmit</span><span class="tk-body"><span class="tk-sn">№ 3077-0004 · WEB</span><span class="tk-k">Tonyjmatos.com</span><span class="tk-u">portfolio · work · gigadream</span></span><i class="tk-punch"></i><span class="tk-stamp">OPEN</span></a>
       </div>
 
       <div class="sect">credentials</div>
@@ -747,7 +877,7 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
         <div class="crt-screen"><pre tabindex="0" aria-hidden="true"><code id="cred-code"></code></pre></div>
         <div class="crt-foot"><span>sources: tonyjmatos.com · LinkedIn · Credly · Spawn · github.com/TonyJoseMatos · @TonyJMatos</span></div>
         <ul class="sr" id="cred-sr">
-          <li>Creative Generalist &amp; AI Tutor, LABL Design, 2022 to now</li>
+          <li>Developer, Creative Operations &amp; AI Tutor, LABL Design, 2022 to now</li>
           <li>Creative Director, Maitri Learning, 2020 to 2022</li>
           <li>Creative Director, Pro-Mart Industries, 2015 to 2020</li>
           <li>BA, Arts, Entertainment and Media Management, UMass Amherst</li>
@@ -756,14 +886,14 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
           <li>Game: BeachPunk Gigadream: Lost Coast, on Spawn, 2026</li>
           <li>Tools: ComfyUI, Unreal Engine, Spawn, Runway, Luma, Pika, Kaiber, Midjourney, Adobe Firefly, NeRF, Gaussian splatting</li>
           <li>IP: Beachpunk, The Diamond Riot, Swords with no Masters, PORTAL 37, TERRA II</li>
-          <li>Transmit: x.com/tonyjmatos/highlights, linkedin.com/in/tony-matos-791085159, credly.com/users/gigadream, spawn.co/@beachpunk, linktr.ee/beachpunks</li>
+          <li>Transmit: x.com/tonyjmatos/highlights, linkedin.com/in/tony-matos-791085159, credly.com/users/gigadream, tonyjmatos.com, spawn.co/@beachpunk (play), linktr.ee/beachpunks</li>
         </ul>
       </figure>
 
       <div class="sect">transmit</div>
       <ul class="links">
         <li><a href="https://www.x.com/tonyjmatos/highlights" target="_blank" rel="noopener"><span class="k">X</span><span class="dots"></span><span class="v">@TonyJMatos</span></a></li>
-        <li><a href="https://www.spawn.co/@beachpunk/beachpunk-gigadream-lost-coast" target="_blank" rel="noopener"><span class="k">Spawn</span><span class="dots"></span><span class="v">@beachpunk · Lost Coast</span></a></li>
+        <li><a href="https://www.spawn.co/@beachpunk/beachpunk-gigadream-lost-coast" target="_blank" rel="noopener"><span class="k">Play</span><span class="dots"></span><span class="v">Lost Coast · on Spawn</span></a></li>
         <li><a href="https://tonyjmatos.com/gigadream" target="_blank" rel="noopener"><span class="k">Portfolio</span><span class="dots"></span><span class="v">tonyjmatos.com</span></a></li>
         <li><a href="https://github.com/TonyJoseMatos" target="_blank" rel="noopener"><span class="k">GitHub</span><span class="dots"></span><span class="v">TonyJoseMatos</span></a></li>
         <li><a href="https://www.instagram.com/tonyjmatos/" target="_blank" rel="noopener"><span class="k">Instagram</span><span class="dots"></span><span class="v">@tonyjmatos</span></a></li>
@@ -782,13 +912,13 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
   </div>
 </aside>
 
-<!-- ======================= 07 SPAWN ======================= -->
+<!-- ======================= 07 PLAY (built on Spawn) ======================= -->
 <!-- source: https://www.spawn.co/@beachpunk/beachpunk-gigadream-lost-coast (title, genre, blurb, release date and update names read 22 Nov 2026) -->
-<aside id="drawer-spawn" class="sheet right" role="dialog" aria-modal="false" aria-labelledby="h-spawn">
+<aside id="drawer-play" class="sheet right" role="dialog" aria-modal="false" aria-labelledby="h-play">
   <div class="sheet-paper"></div>
   <div class="sheet-inner">
     <header class="sheet-head">
-      <span class="folio">07</span><h2 id="h-spawn">Spawn</h2><span class="kicker">playable · spawn.co/@beachpunk · 2026</span>
+      <span class="folio">07</span><h2 id="h-play">Play</h2><span class="kicker">playable now · built on Spawn · 2026</span>
       <button class="close-btn" type="button">close ✕</button>
     </header>
     <div class="sheet-body">
@@ -797,6 +927,7 @@ body.open-left .cmd,body.open-right .cmd{opacity:0;pointer-events:none}
         <figcaption><b>PL. 07 — BeachPunk Gigadream: Lost Coast</b><span>spawn.co</span></figcaption>
       </a>
       <h3>BeachPunk Gigadream: Lost Coast</h3>
+      <p class="lbl" style="margin:6px 0 2px">built on <a href="https://www.spawn.co/@beachpunk/beachpunk-gigadream-lost-coast" target="_blank" rel="noopener" style="color:var(--ektar)"><b>Spawn ↗</b></a> · the multiplayer game platform it runs on</p>
       <div class="quote">Wash up on the heart-lagoon island, wake Portal 37, fly the Spektraltek starjet.
         <cite><a href="https://www.spawn.co/@beachpunk/beachpunk-gigadream-lost-coast" target="_blank" rel="noopener">spawn.co/@beachpunk</a></cite></div>
       <dl class="spec">
@@ -834,14 +965,20 @@ const el = (tag, attrs = {}, parent) => { const e = document.createElementNS(SVG
    ========================================================================== */
 const canvas = $('#gl-canvas');
 const gl = canvas.getContext('webgl', { antialias: false, premultipliedAlpha: false, powerPreference: 'low-power' });
-let cmykShift = .45, vectorBash = .60, ektar = .5, pull = [0, 0], pullTarget = [0, 0];
+let cmykShift = .45, vectorBash = .60, ektar = .5, spectrum = .4, chaos = .5, pull = [0, 0], pullTarget = [0, 0];
+let SEEDV = [0, 0, 0, 0], specK = [1, .36, .23]; const ORBS = new Float32Array(16), ORBC = new Float32Array(12);
 
 const vert = `attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}`;
 const frag = `
 precision highp float;
-uniform vec2 R; uniform float T, C, B, E; uniform vec2 P; uniform vec3 H;
+uniform vec2 R; uniform float T, C, B, E, X, N; uniform vec2 P; uniform vec3 H;
+uniform vec4 S; uniform vec4 O[4]; uniform vec3 OC[4]; uniform vec3 K;
 float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+  return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+vec2(1.,1.)),f.x),f.y);}
+float fbm(vec2 p){float s=0.,a=.5;for(int i=0;i<3;i++){s+=a*vn(p);p=mat2(1.6,1.2,-1.2,1.6)*p+vec2(3.1,1.7);a*=.5;}return s;}
 float poly(vec2 uv,float n,float a){float an=atan(uv.y,uv.x)+a;float r=6.2831853/n;return cos(floor(.5+an/r)*r-an)*length(uv);}
+vec3 hrot(vec3 c,float a){vec3 k=vec3(.57735);float ca=cos(a);return c*ca+cross(k,c)*sin(a)+k*dot(k,c)*(1.-ca);}
 vec3 scene(vec2 uv,float off){
   vec2 p=uv+P*.25+vec2(off,-off*.7);
   float t=T*.2;
@@ -868,29 +1005,54 @@ vec3 scene(vec2 uv,float off){
   vec3 mech=vec3(.035,.06,.075)+dotm*vec3(.85,.78,.64)*.32 + lines*ink*.42 + horizon*vec3(.95,.92,.85);
   return mix(bio,mech,C);
 }
+/* GALAXY NEBULA: seeded colour spheres, smeared by domain-warped fbm, cut by dust lanes */
+vec3 nebula(vec2 uv){
+  vec2 q=uv*1.7+S.xy;
+  float t=T*.012;
+  vec2 w=vec2(fbm(q+vec2(0.,t)),fbm(q+vec2(5.2,1.3)-t));
+  float ch=.6+N*3.;
+  float n=fbm(q+ch*(w-.5)*1.6);
+  float lanes=fbm(q*2.1-w*2.2+vec2(7.3,2.9));
+  vec3 c=vec3(0.);
+  for(int i=0;i<4;i++){vec2 d=(uv-O[i].xy+(w-.5)*N*.55)/O[i].z; c+=OC[i]*exp(-dot(d,d));}
+  c*=.25+n*1.45;
+  c+=hrot(vec3(1.,.42,.2),S.z+w.x*3.*N)*pow(n,3.)*(.35+.5*N);
+  c*=mix(1.,smoothstep(.28,.62,lanes),.45+.4*N);
+  return c;
+}
 void main(){
   float fr=floor(T*12.);
   vec2 weave=vec2(h(vec2(fr,1.))-.5,h(vec2(fr,7.))-.5)*.0025;
   vec2 uv=(gl_FragCoord.xy-.5*R)/min(R.x,R.y)+weave;
-  /* <REDACTED PROJECT>: gravitational lensing around the hole (H.xy centre, H.z horizon radius).
-     The sky is pulled in (deflection ~ rs^2/r) and frame-dragged (twist ~ rs^2/r^2). */
+  /* <REDACTED PROJECT>: gravitational lensing around the hole (H.xy centre, H.z horizon radius). */
   vec2 hd=uv-H.xy; float hr=length(hd)+1e-4, rs=H.z;
   float tw=min(1.7*rs*rs/(hr*hr),2.4)+sin(T*.6)*.08*rs/hr;
-  vec2 hrot=mat2(cos(tw),-sin(tw),sin(tw),cos(tw))*hd;
-  uv=H.xy+hrot-hd/hr*min(1.25*rs*rs/hr,hr*.92);
+  vec2 hrt=mat2(cos(tw),-sin(tw),sin(tw),cos(tw))*hd;
+  uv=H.xy+hrt-hd/hr*min(1.25*rs*rs/hr,hr*.92);
   float split=.0018+length(P)*.018+E*.002;
   vec3 col=vec3(scene(uv,split).r,scene(uv,0.).g,scene(uv,-split).b);
+  vec3 neb=nebula(uv);
+  col=col+neb*(.6+.5*N)-col*neb*.3;
+  float sv=h(floor(gl_FragCoord.xy/1.6)+S.xy*37.);
+  col+=vec3(.95,.92,1.)*step(.9968,sv)*(.55+.45*sin(T*2.3+sv*400.));
   /* Ektar response: lift saturation, warm the mids */
   float l=dot(col,vec3(.299,.587,.114));
   col=mix(vec3(l),col,1.18+E*.2); col*=vec3(1.04,1.,.94);
   col+=(h(floor(gl_FragCoord.xy/1.5)+fr)-.5)*(.04+E*.06);
   float v=1.-dot(uv*.78,uv*.78); col*=clamp(v,.12,1.);
   if(rs>0.){
-    col+=vec3(1.,.55,.22)*exp(-pow((hr-rs*1.32)/(rs*.13),2.))*.7;     /* photon ring, Ektar-warm */
-    col+=vec3(.0,.5,.65)*exp(-pow((hr-rs*1.5)/(rs*.08),2.))*.25;      /* cyan misregistration */
-    col*=smoothstep(rs*.92,rs*1.12,hr);                                 /* event horizon */
+    col+=vec3(1.,.55,.22)*exp(-pow((hr-rs*1.32)/(rs*.13),2.))*.7;
+    col+=vec3(.0,.5,.65)*exp(-pow((hr-rs*1.5)/(rs*.08),2.))*.25;
+    col*=smoothstep(rs*.92,rs*1.12,hr);
   }
-  gl_FragColor=vec4(col,1.);
+  /* SPECTRUM (Optics): X=.4 is the Ektar default. Toward 0 it bleaches to solid paper-white;
+     toward 1 the hue swings magenta -> violet -> cobalt -> teal and sinks to solid black. */
+  float lt=clamp((.4-X)/.4,0.,1.), dk=clamp((X-.4)/.6,0.,1.);
+  float lu=dot(col,vec3(.299,.587,.114));
+  vec3 duo=K*(.12+2.1*lu)+vec3(1.,.97,.9)*pow(lu,2.5)*.7;
+  col=mix(col,duo,smoothstep(.0,.16,dk)*.82+lt*.35);
+  col=mix(col,vec3(1.),pow(lt,1.3)); col*=1.-pow(dk,2.6);
+  gl_FragColor=vec4(clamp(col,0.,1.),1.);
 }`;
 let U = {}, glOK = false;
 if (gl) {
@@ -901,22 +1063,22 @@ if (gl) {
     gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
     const a = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(a); gl.vertexAttribPointer(a, 2, gl.FLOAT, false, 0, 0);
-    ['R','T','C','B','E','P','H'].forEach(k => U[k] = gl.getUniformLocation(pr, k));
+    ['R','T','C','B','E','P','H','X','N','S','O','OC','K'].forEach(k => U[k] = gl.getUniformLocation(pr, k));
     glOK = true;
   } else console.error(gl.getProgramInfoLog(pr));
 }
 if (!glOK) canvas.style.background = 'radial-gradient(ellipse at 45% 62%,#ff6a2a 0,#a3183f 30%,#140b14 60%,#04191b 100%)';
 function resize() {
-  const dpr = Math.min(window.devicePixelRatio || 1, 1.5) * (innerWidth > 1600 ? .75 : .9); // capped: it's a film layer, not a hero render
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.25) * (innerWidth > 1600 ? .66 : .8); // capped: it's a film layer, not a hero render
   canvas.width = Math.round(canvas.clientWidth * dpr); canvas.height = Math.round(canvas.clientHeight * dpr);
   if (glOK) gl.viewport(0, 0, canvas.width, canvas.height);
 }
 
 /* ==========================================================================
-   2. LATTICE — seven petroglyph sigils on a hand-ruled heptagon around a black hole.
+   2. LATTICE — seven petroglyph portals on a hand-ruled heptagon around a black hole.
    ========================================================================== */
-// Sigils: drawn as if pecked into stone. Taíno-petroglyph / cyber-orisha.
-const SIGILS = {
+// Portal glyphs: pecked into the stone at the heart of each gateway. Taíno-petroglyph / cyber-orisha.
+const GLYPHS = {
   // sun-face (cemí sun): ring, two eyes, mouth, rays
   projects: `<circle r="11"/><circle class="fill" cx="-4" cy="-2.5" r="1.9"/><circle class="fill" cx="4" cy="-2.5" r="1.9"/><path d="M-5 4 Q0 8 5 4"/><path class="hot" d="M0-15v-5M0 15v5M-15 0h-5M15 0h5M-10.6-10.6l-3.5-3.5M10.6 10.6l3.5 3.5M10.6-10.6l3.5-3.5M-10.6 10.6l-3.5 3.5"/>`,
   // double spiral (development / recursion)
@@ -928,8 +1090,8 @@ const SIGILS = {
   // tide record: framed stacked waves (archive)
   archive: `<rect x="-13" y="-13" width="26" height="26" rx="2"/><path d="M-10-5 q2.5-3 5 0 t5 0 t5 0 t5 0"/><path class="hot" d="M-10 1 q2.5-3 5 0 t5 0 t5 0 t5 0"/><path d="M-10 7 q2.5-3 5 0 t5 0 t5 0 t5 0"/>`,
   // signal staff: coquí-headed antenna radiating arcs
-  // starjet over a wave (07 spawn): the Lost Coast cabinet
-  spawn: `<path d="M0-16 L5-2 L16 5 L4 4 L0 11 L-4 4 L-16 5 L-5-2Z"/><circle class="hotf" cx="0" cy="-4" r="2"/><path class="hot" d="M-18 16 q4.5-4 9 0 t9 0 t9 0 t9 0"/>`,
+  // starjet over a wave (07 play): the Lost Coast cabinet
+  play: `<path d="M0-16 L5-2 L16 5 L4 4 L0 11 L-4 4 L-16 5 L-5-2Z"/><circle class="hotf" cx="0" cy="-4" r="2"/><path class="hot" d="M-18 16 q4.5-4 9 0 t9 0 t9 0 t9 0"/>`,
   signal: `<path d="M0 15V-4"/><circle cx="0" cy="-7" r="3.4"/><path class="hot" d="M-7-13 Q-11-7 -7-1M7-13 Q11-7 7-1"/><path d="M-12-17 Q-18-7 -12 3M12-17 Q18-7 12 3"/><path d="M-6 15h12"/>`
 };
 const NODE_DEFS = [
@@ -939,7 +1101,7 @@ const NODE_DEFS = [
   { key: 'optics',     n: '04', label: 'OPTICS',     sub: 'RGB → CMYK SORTING FACILITY', side: 'right' },
   { key: 'archive',    n: '05', label: 'ARCHIVE',    sub: 'CONTACT SHEET 2023—2026',      side: 'left'  },
   { key: 'signal',     n: '06', label: 'SIGNAL',     sub: 'ABOUT // LINKS // TRANSMIT',  side: 'left'  },
-  { key: 'spawn',      n: '07', label: 'SPAWN',      sub: 'LOST COAST // PRESS START',   side: 'right' }
+  { key: 'play',       n: '07', label: 'PLAY',       sub: 'LOST COAST // PRESS START',   side: 'right' }
 ];
 // hand-cut stone outlines (irregular, deliberately not a regular polygon)
 const STONES = [
@@ -954,14 +1116,28 @@ const center = { x: 600, y: 400 };
 const nodes = {};
 let mobile = false, VB = { w: 1200, h: 800 };
 
+const TINT = { projects: '#ff5d3b', developing: '#17a497', lore: '#ffb21c', play: '#e2266f', optics: '#00a6cf', archive: '#e8c98e', signal: '#7b3fe4' };
+const spiral = (turns, r1, ph) => { let d = ''; for (let i = 0; i <= 40; i++) { const u = i / 40, a = ph + u * turns * 6.283, r = 1.5 + u * r1; d += (i ? 'L' : 'M') + (Math.cos(a) * r).toFixed(1) + ',' + (Math.sin(a) * r).toFixed(1); } return d; };
 NODE_DEFS.forEach((d, i) => {
-  const g = el('g', { class: 'vertex-node', id: 'node-' + d.key, 'data-section': d.key, tabindex: '0', role: 'button', 'aria-label': `Open ${d.n} ${d.label}` }, gNodes);
+  const g = el('g', { class: 'vertex-node', id: 'node-' + d.key, 'data-section': d.key, tabindex: '0', role: 'button', 'aria-label': `Open portal ${d.n} ${d.label}` }, gNodes);
+  const tint = TINT[d.key], gr = el('radialGradient', { id: 'pv-' + d.key }, gGrads);
+  [[0, '#020304', 1], [.5, tint, .22], [.82, tint, .85], [1, '#0c1518', 1]].forEach(([o, c, a]) => el('stop', { offset: o, 'stop-color': c, 'stop-opacity': a }, gr));
   g.innerHTML = `
     <g class="body">
-      <path class="stone-shadow" d="${STONES[i]}" transform="translate(3.5,4)" filter="url(#stone-rough)"/>
-      <path class="stone" d="${STONES[i]}" filter="url(#stone-rough)"/>
+      <path class="stone-shadow" d="${STONES[i]}" transform="translate(3.5,4) scale(1.1)" filter="url(#stone-rough)"/>
+      <path class="stone" d="${STONES[i]}" transform="scale(1.1)" filter="url(#stone-rough)"/>
       <circle class="ticks" r="37"/>
-      <g class="sigil" filter="url(#stone-rough)">${SIGILS[d.key]}</g>
+      <g class="deep">
+        <circle class="void" r="21" fill="url(#pv-${d.key})"/>
+        <circle r="12.5" fill="none" stroke="#020304" stroke-width="4" opacity=".55"/>
+        <g class="swirl" style="animation-duration:${(7 + i * 1.9).toFixed(1)}s${i % 2 ? ';animation-direction:reverse' : ''}">
+          <path d="${spiral(2.2, 17, i)}" stroke="${tint}" stroke-width="1.3" opacity=".8"/>
+          <path d="${spiral(1.6, 15, i + 3.1)}" stroke="#f4ead6" stroke-width=".7" stroke-dasharray="1.5 3" opacity=".45"/>
+        </g>
+      </g>
+      <circle class="rim c" r="23.5"/><circle class="rim m" r="23.5"/><circle class="rim y" r="26.5"/>
+      <circle class="rim k" r="23.5" filter="url(#stone-rough)"/>
+      <g class="glyph" transform="scale(.46)">${GLYPHS[d.key]}</g>
     </g>
     <text class="node-num">${d.n}</text>
     <text class="node-label">${d.label}</text>
@@ -970,13 +1146,13 @@ NODE_DEFS.forEach((d, i) => {
 });
 
 // edges: 7 spokes (node→black hole) + 7 rim segments (ring order)
-const ORDER = ['projects', 'developing', 'lore', 'spawn', 'optics', 'archive', 'signal'];
+const ORDER = ['projects', 'developing', 'lore', 'play', 'optics', 'archive', 'signal'];
 const EDGES = [];
 ORDER.forEach((k, i) => EDGES.push({ a: 'core', b: k, kind: 'spoke', bow: (i % 2 ? 1 : -1) * (9 + i * 1.7), id: 's' + i }));
 ORDER.forEach((k, i) => EDGES.push({ a: k, b: ORDER[(i + 1) % ORDER.length], kind: 'rim', bow: (i % 2 ? -1 : 1) * (6 + (i * 3) % 7), id: 'r' + i }));
 
 const STOPS = {
-  // spokes run node → hole: warm at the sigil, reddening, then swallowed at the horizon
+  // spokes run node → hole: warm at the portal, reddening, then swallowed at the horizon
   spoke: [[0, '#ffb21c', .95], [.3, '#e8c98e', .95], [.66, '#ff5d3b', 1], [.88, '#d8291c', .85], [1, '#050304', .1]],
   rim:   [[0, '#e8c98e', .2], [.12, '#e8c98e', .95], [.5, '#17a497', .9], [.88, '#e8c98e', .95], [1, '#e8c98e', .2]]
 };
@@ -1050,14 +1226,14 @@ function layout() {
     VB = { w: 1200, h: 800 }; svg.setAttribute('viewBox', '0 0 1200 800'); svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
     center.x = 600; center.y = 405;
     // flat-topped heptagon around the hole, nudged by hand so it doesn't read as generated
-    const H = { projects: [450, 200], developing: [752, 194], lore: [912, 372], spawn: [852, 584], optics: [600, 652], archive: [334, 582], signal: [272, 384] };
+    const H = { projects: [450, 200], developing: [752, 194], lore: [912, 372], play: [852, 584], optics: [600, 652], archive: [334, 582], signal: [272, 384] };
     for (const k in nodes) { const n = nodes[k]; n.home = { x: H[k][0], y: H[k][1] }; }
     annos.style.display = '';
     EDGES.forEach(E => E.hidden = false);
   } else {
     VB = { w: 400, h: 900 }; svg.setAttribute('viewBox', '0 0 400 900'); svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
     center.x = 300; center.y = 212;
-    // the totem: sigils stacked down the left like a carved post
+    // the totem: portals stacked down the left like a carved post
     ORDER.forEach((k, i) => { nodes[k].home = { x: 74 + (i % 2 ? 22 : 0), y: 326 + i * 74 }; });
     annos.style.display = 'none';
     EDGES.forEach(E => E.hidden = (E.id === 'r6'));
@@ -1068,7 +1244,7 @@ function layout() {
     const n = nodes[k], [num, lab, sub] = n.el.querySelectorAll('text');
     n.pos = { ...n.home };
     if (!mobile) {
-      const below = (k === 'optics' || k === 'archive' || k === 'spawn');
+      const below = (k === 'optics' || k === 'archive' || k === 'play');
       const lx = 0, ly = below ? 66 : -50;
       [num, lab, sub].forEach(t => t.setAttribute('text-anchor', 'middle'));
       lab.setAttribute('x', lx + 9); lab.setAttribute('y', ly);
@@ -1081,10 +1257,11 @@ function layout() {
       sub.setAttribute('x', 47); sub.setAttribute('y', 28);
     }
   }
+  for (const k in nodes) { const n = nodes[k], dx = center.x - n.home.x, dy = center.y - n.home.y, L = Math.hypot(dx, dy) || 1; n.el.style.setProperty('--px', (dx / L * 7).toFixed(1) + 'px'); n.el.style.setProperty('--py', (dy / L * 7).toFixed(1) + 'px'); }
   placeNodes(); drawEdges();
 }
 
-/* ---------- interaction: click / drag a sigil outward to open ---------- */
+/* ---------- interaction: click / drag a portal outward to open ---------- */
 let dragging = null, dragStart = null, openKey = null;
 function clientToSvg(x, y) { const p = svg.createSVGPoint(); p.x = x; p.y = y; return p.matrixTransform(gNodes.getScreenCTM().inverse()); }
 function pluck(key, amt) { nodes[key].edges.forEach(E => E.vib = Math.max(E.vib, amt * (E.kind === 'spoke' ? 1 : .55))); kick(); }
@@ -1159,7 +1336,7 @@ function deny() {
   denyLive.textContent = ''; setTimeout(() => { denyLive.textContent = 'Access denied. Redacted project.'; }, 30);
   ORDER.forEach(k => pluck(k, RM ? 0 : 14));
   if (!RM) { pullTarget = [(Math.random() - .5) * .12, (Math.random() - .5) * .12]; setTimeout(() => { if (!openKey) pullTarget = [0, 0]; }, 260); }
-  clearTimeout(denyT); denyT = setTimeout(() => { coreEl.classList.remove('denied'); document.body.classList.remove('denied'); }, 700);
+  clearTimeout(denyT); denyT = setTimeout(() => { coreEl.classList.remove('denied'); document.body.classList.remove('denied'); }, 1250);
 }
 coreEl.addEventListener('pointerdown', e => { e.stopPropagation(); });
 coreEl.addEventListener('click', e => { e.stopPropagation(); deny(); });
@@ -1178,6 +1355,7 @@ function loop(now) {
   if (glOK) {
     gl.uniform2f(U.R, canvas.width, canvas.height); gl.uniform1f(U.T, RM ? 12 : now * .001);
     gl.uniform1f(U.C, cmykShift); gl.uniform1f(U.B, vectorBash); gl.uniform1f(U.E, ektar); gl.uniform2f(U.P, pull[0], pull[1]);
+    gl.uniform1f(U.X, spectrum); gl.uniform1f(U.N, chaos); gl.uniform4f(U.S, SEEDV[0], SEEDV[1], SEEDV[2], SEEDV[3]); gl.uniform4fv(U.O, ORBS); gl.uniform3fv(U.OC, ORBC); gl.uniform3f(U.K, specK[0], specK[1], specK[2]);
     const hb = horizonEl.getBoundingClientRect(), cb = canvas.getBoundingClientRect();
     const sx = canvas.width / (cb.width || 1), sy = canvas.height / (cb.height || 1), m = Math.min(canvas.width, canvas.height);
     const hx = ((hb.left + hb.width / 2 - cb.left) * sx - canvas.width / 2) / m, hy = ((cb.bottom - (hb.top + hb.height / 2)) * sy - canvas.height / 2) / m;
@@ -1191,7 +1369,7 @@ function loop(now) {
   if (!RM && now - lastBoil > 125) { lastBoil = now; boilSeed = boilSeed % 4 + 1; boilT.setAttribute('seed', boilSeed); grainT.setAttribute('seed', boilSeed + 10); }
   if (!RM || vib || dragging) raf = requestAnimationFrame(loop);
 }
-document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) kick(); else { cancelAnimationFrame(raf); raf = 0; } });
+document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) kick(); else { cancelAnimationFrame(raf); raf = 0; } skyPause(document.hidden); });
 
 /* ==========================================================================
    4. SHEET CONTENT + CONTROLS
@@ -1199,7 +1377,37 @@ document.addEventListener('visibilitychange', () => { running = !document.hidden
 const bind = (id, out, fn) => { const s = $('#' + id), o = $('#' + out); s.addEventListener('input', () => { o.textContent = s.value + '%'; fn(s.value / 100); kick(); }); };
 bind('cmyk-slider', 'cmyk-val', v => cmykShift = v);
 bind('vector-slider', 'vector-val', v => vectorBash = v);
-bind('ektar-slider', 'ektar-val', v => { ektar = v; document.querySelector('.film.leak').style.opacity = (.12 + v * .6).toFixed(2); document.querySelector('.film.grain').style.opacity = (.06 + v * .28).toFixed(2); });
+bind('ektar-slider', 'ektar-val', v => { ektar = v; applyFilm(); });
+
+/* ---------- SPECTRUM + CHAOS (Optics) and the two solid-state reveals ---------- */
+const SPEC = [[0, '#ffffff'], [.06, '#fff3cf'], [.2, '#ffb21c'], [.36, '#ff5d3b'], [.52, '#e2266f'], [.64, '#7b3fe4'], [.76, '#2a5bd7'], [.88, '#17a497'], [1, '#000000']];
+const NAMES = [[.03, 'SOLID WHITE'], [.17, 'BLEACHED'], [.3, 'SUN-BLEACHED'], [.47, 'EKTAR'], [.58, 'MAGENTA DUSK'], [.71, 'VIOLET'], [.83, 'COBALT'], [.969, 'TEAL ABYSS'], [2, 'SOLID BLACK']];
+function specColor(v) { v = Math.min(1, Math.max(0, v)); for (let i = 1; i < SPEC.length; i++) if (v <= SPEC[i][0]) { const [a, ca] = SPEC[i - 1], [b, cb] = SPEC[i], t = (v - a) / (b - a); const p = c => [1, 3, 5].map(j => parseInt(c.substr(j, 2), 16)); const A = p(ca), Bc = p(cb); return `rgb(${A.map((x, j) => Math.round(x + (Bc[j] - x) * t)).join(',')})`; } return 'rgb(0,0,0)'; }
+const revW = $('#reveal-white'), revB = $('#reveal-black'), revLive = $('#reveal-live'), readout = $('#readout');
+let solidState = '';
+function applyFilm() {
+  const lt = Math.max(0, (.4 - spectrum) / .4), dk = Math.max(0, (spectrum - .4) / .6);
+  document.querySelector('.film.leak').style.opacity = ((.12 + ektar * .6) * (1 - dk) * (1 - lt * .7)).toFixed(2);
+  document.querySelector('.film.grain').style.opacity = ((.06 + ektar * .28) * (1 - Math.max(lt, dk) * .6)).toFixed(2);
+  document.querySelector('.film.burn').style.opacity = (1 - Math.pow(lt, .6)).toFixed(2);
+}
+function applySpectrum(v) {
+  spectrum = v;
+  const name = NAMES.find(n => v <= n[0])[1];
+  $('#spectrum-val').textContent = name;
+  $('#readout-txt').textContent = v <= .03 ? 'solid state · love is the fifth element' : v >= .97 ? 'solid state · a light in the dark' : 'background · ' + name.toLowerCase();
+  const sc = specColor(v); $('#readout-sw').style.background = sc; specK = sc.match(/\d+/g).map(x => x / 255);
+  const st = v <= .03 ? 'white' : v >= .97 ? 'black' : '';
+  readout.classList.toggle('white', st === 'white'); readout.classList.toggle('black', st === 'black');
+  document.body.classList.toggle('solid-white', st === 'white'); document.body.classList.toggle('solid-black', st === 'black');
+  revW.classList.toggle('on', st === 'white'); revB.classList.toggle('on', st === 'black');
+  if (st !== solidState) { solidState = st; revLive.textContent = st === 'white' ? 'Love is the fifth element.' : st === 'black' ? 'A light in the dark.' : ''; }
+  applyFilm(); kick();
+}
+$('#spectrum-slider').addEventListener('input', e => applySpectrum(e.target.value / 100));
+$('#chaos-slider').addEventListener('input', e => { chaos = e.target.value / 100; $('#chaos-val').textContent = e.target.value + '%'; kick(); });
+applySpectrum(.4);
+$('#reseed-btn').addEventListener('click', () => { applySeed((Math.random() * 4294967296) >>> 0); });
 
 const LORE = {
   riot: `[BOARD: FRINGE_POSH_DARK // SECTOR 3077]
@@ -1215,7 +1423,7 @@ const LORE = {
  / /\\ \\    [01] PROJECTS   [02] DEVELOPING
 /______\\   [03] LORE       [04] OPTICS
            [05] ARCHIVE    [06] SIGNAL
-           [07] SPAWN      [▮▮] ACCESS DENIED`
+           [07] PLAY       [▮▮] ACCESS DENIED`
 };
 const out = $('#lore-output');
 let typer = 0;
@@ -1272,8 +1480,8 @@ class TonyJoseMatos(Gigadream):
 
     studio = {
         "name":  "LABL Design",
-        "role":  "Creative Generalist"
-                 " & AI Tutor",
+        "role":  "Developer & Creative"
+                 " Operations · AI Tutor",
         "since": 2022,
     }
     service = [
@@ -1322,8 +1530,9 @@ class TonyJoseMatos(Gigadream):
                 "tony-matos-791085159",
             "credly": "credly.com/users/"
                 "gigadream/badges",
-            "spawn": "spawn.co/"
+            "play": "spawn.co/"
                 "@beachpunk",
+            "site": "tonyjmatos.com",
             "all": "linktr.ee/beachpunks",
         }`;
 
@@ -1420,15 +1629,274 @@ function tear() {
   });
 }
 
+/* ==========================================================================
+   6. SEED — one 32-bit seed drives the nebula spheres, the light leaks and the
+      accretion disk. GIGADREAM OS boots a new one; it is kept per visitor.
+   ========================================================================== */
+function mulberry32(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const hex8 = n => (n >>> 0).toString(16).padStart(8, '0').toUpperCase();
+const serialOf = sd => `GD-${hex8(sd).slice(0, 4)}-${hex8(sd).slice(4)}-${String(sd % 97).padStart(2, '0')}`;
+function initialSeed() {
+  const q = new URLSearchParams(location.search).get('seed');
+  if (q && /^[0-9a-f]{1,8}$/i.test(q)) return parseInt(q, 16) >>> 0;
+  try { const st = localStorage.getItem('gd-seed'); if (st && /^[0-9A-F]{8}$/.test(st)) return parseInt(st, 16) >>> 0; } catch (e) {}
+  return (Math.random() * 4294967296) >>> 0;
+}
+// cool inks first so teal / cobalt / violet always show up somewhere in the sky
+const COOL = [[.09, .64, .59], [.16, .36, .84], [.48, .25, .89], [0, .65, .81]];
+const WARM = [[.89, .15, .44], [1, .7, .11], [1, .36, .23], [.48, .25, .89], [.09, .64, .59]];
+let seed = 0;
+function applySeed(sd) {
+  seed = sd >>> 0; const r = mulberry32(seed);
+  SEEDV = [r() * 10, r() * 10, r() * 6.283, r()];
+  for (let i = 0; i < 4; i++) {
+    ORBS.set([(r() * 2 - 1) * .95, r() * 1.05 - .5, .16 + r() * .3, 0], i * 4);
+    const pool = i < 2 ? COOL : WARM; ORBC.set(pool[Math.floor(r() * pool.length)].map(x => x * (.55 + r() * .35)), i * 3);
+  }
+  const root = document.documentElement.style;
+  root.setProperty('--l1x', (-24 + r() * 50).toFixed(1) + 'vw'); root.setProperty('--l1y', (-20 + r() * 55).toFixed(1) + 'vh');
+  root.setProperty('--l2x', (-20 + r() * 50).toFixed(1) + 'vw'); root.setProperty('--l2y', (-20 + r() * 50).toFixed(1) + 'vh');
+  buildHole(r);
+  const lbl = $('#seed-lbl'); if (lbl) lbl.textContent = 'seed 0x' + hex8(seed);
+  try { localStorage.setItem('gd-seed', hex8(seed)); } catch (e) {}
+  kick();
+}
+
+/* ---------- the accretion disk: seeded, asymmetric, turbulent filaments ---------- */
+function buildHole(r) {
+  const HOT = ['#fff6e0', '#ffe7a8', '#ffb21c'], MID = ['#ff5d3b', '#e2266f', '#ff8a3d', '#ffb21c'], COLD = ['#9b4dff', '#2a7bd7', '#17a497', '#e8c98e', '#00a6cf', '#e2266f'];
+  let h = `<ellipse rx="${(108 + r() * 26).toFixed(0)}" ry="${(92 + r() * 34).toFixed(0)}" transform="rotate(${(r() * 180).toFixed(0)})" fill="url(#bh-glow)"/>`;
+  for (let i = 0; i < 19; i++) {
+    const r0 = 40 + Math.pow(r(), 1.35) * 82, span = (25 + r() * 260) * Math.PI / 180, a0 = r() * 6.283;
+    const amp = 3 + r() * (r0 > 80 ? 18 : 10), k = 1 + Math.floor(r() * 4), ph = r() * 6.283, drift = (r() - .5) * 30, amp2 = 1 + r() * 5, k2 = 5 + Math.floor(r() * 7), ph2 = r() * 6.283;
+    let d = '';
+    for (let st = 0; st <= 30; st++) { const u = st / 30, a = a0 + span * u, rr = r0 + amp * Math.sin(k * a + ph) + amp2 * Math.sin(k2 * a + ph2) + drift * u + (r() - .5) * 4; d += (st ? 'L' : 'M') + (Math.cos(a) * rr).toFixed(1) + ',' + (Math.sin(a) * rr).toFixed(1); }
+    const pool = r0 < 58 ? HOT : r0 < 86 ? MID : COLD, col = pool[Math.floor(r() * pool.length)];
+    const w = (r0 < 58 ? 2 + r() * 5 : .5 + r() * 3) * (.6 + r() * .8);
+    const dash = r() < .45 ? ` stroke-dasharray="${(4 + r() * 38).toFixed(1)} ${(2 + r() * 16).toFixed(1)}"` : '';
+    const dur = (Math.pow(r0 / 50, 1.5) * (4 + r() * 6)).toFixed(1), rev = r() < .12 ? ' rev' : '';
+    h += `<g class="fil${rev}" style="animation-duration:${dur}s"><path d="${d}" fill="none" stroke="${col}" stroke-width="${w.toFixed(2)}" stroke-linecap="round" opacity="${(.45 + r() * .55).toFixed(2)}"${dash}/></g>`;
+  }
+  for (let i = 0; i < 6; i++) { const rr = 46 + r() * 60, a = r() * 6.283, dur = (Math.pow(rr / 50, 1.5) * 5).toFixed(1); h += `<g class="fil" style="animation-duration:${dur}s"><circle cx="${(Math.cos(a) * rr).toFixed(1)}" cy="${(Math.sin(a) * rr).toFixed(1)}" r="${(1.5 + r() * 3).toFixed(1)}" fill="${r() < .5 ? '#fff6e0' : '#ffb21c'}"/></g>`; }
+  $('#bh-disk').innerHTML = h;
+  const tilt = (-34 + r() * 40).toFixed(1), sq = (.18 + r() * .22).toFixed(2);
+  document.querySelectorAll('.bh-tilt').forEach(g => g.setAttribute('transform', `rotate(${tilt}) scale(1,${sq})`));
+  // lensed far-side halo: noisy, never a clean ring; one Doppler-bright side
+  const p1 = r() * 6.28, p2 = r() * 6.28, A1 = 1 + r() * 2.5, A2 = .6 + r() * 1.6;
+  const ring = (R0, off = 0) => { let d = ''; for (let i = 0; i <= 48; i++) { const a = i / 48 * 6.283, rr = R0 + A1 * Math.sin(3 * a + p1 + off) + A2 * Math.sin(7 * a + p2); d += (i ? 'L' : 'M') + (Math.cos(a) * rr).toFixed(1) + ',' + (Math.sin(a) * rr).toFixed(1); } return d + 'Z'; };
+  const b0 = r() * 6.283, b1 = b0 + 1.2 + r() * 1.4;
+  let arc = ''; for (let i = 0; i <= 20; i++) { const a = b0 + (b1 - b0) * i / 20, rr = 40 + A1 * Math.sin(3 * a + p1); arc += (i ? 'L' : 'M') + (Math.cos(a) * rr).toFixed(1) + ',' + (Math.sin(a) * rr).toFixed(1); }
+  $('#bh-halo').innerHTML = `<path d="${ring(41, .3)}" fill="none" stroke="#00a6cf" stroke-width="1.8" transform="translate(-1.8,1.1)" opacity=".8" style="mix-blend-mode:screen"/>
+    <path d="${ring(41, -.3)}" fill="none" stroke="#e5007d" stroke-width="1.8" transform="translate(1.7,-1)" opacity=".8" style="mix-blend-mode:screen"/>
+    <path d="${ring(40)}" fill="none" stroke="url(#bh-halo-g)" stroke-width="${(3 + r() * 3).toFixed(1)}"/>
+    <path d="${arc}" fill="none" stroke="#fff6e0" stroke-width="${(4 + r() * 4).toFixed(1)}" stroke-linecap="round" opacity=".9"/>
+    <path d="${ring(47 + r() * 4)}" fill="none" stroke="#e8c98e" stroke-width=".8" stroke-dasharray=".01 4" stroke-linecap="round"/>`;
+}
+/* occasional flares: a frame-dragged jet of light leaves the horizon */
+function flare() {
+  const g = $('#bh-flares'), a = Math.random() * 6.283, L = 30 + Math.random() * 55, tw = (Math.random() < .5 ? 1 : -1) * (.4 + Math.random() * .5);
+  const x0 = Math.cos(a) * 34, y0 = Math.sin(a) * 34, x1 = Math.cos(a + tw) * (34 + L), y1 = Math.sin(a + tw) * (34 + L), cx = Math.cos(a + tw * .3) * (34 + L * .6), cy = Math.sin(a + tw * .3) * (34 + L * .6);
+  const d = `M${x0.toFixed(1)},${y0.toFixed(1)} Q${cx.toFixed(1)},${cy.toFixed(1)} ${x1.toFixed(1)},${y1.toFixed(1)}`;
+  g.insertAdjacentHTML('beforeend', `<g class="fl"><path class="bh-flare" d="${d}" stroke="#e5007d" stroke-width="3" stroke-dasharray="60" transform="translate(1.5,-1)" opacity=".7"/><path class="bh-flare" d="${d}" stroke="#fff1cf" stroke-width="1.8" stroke-dasharray="60"/></g>`);
+  const f = g.lastElementChild; setTimeout(() => f.remove(), 1200);
+}
+function schedFlare() { setTimeout(() => { if (!document.hidden) flare(); schedFlare(); }, 2400 + Math.random() * 4200); }
+
+/* ==========================================================================
+   7. GIGADREAM OS — riso boot. The screen is reprinted one ink pass at a time
+      (C, M, Y, K), then a one-of-one TRANSMISSION card is printed and the
+      universe re-seeds to that card's seed.
+   ========================================================================== */
+const osEl = $('#os'), osLog = $('#os-log'), osLbl = $('#os-pass-lbl'), txEl = $('#tx'), txCv = $('#tx-canvas'), osBtn = $('#os-btn');
+const LORE_LINES = ['NEVER DOOM | GOOD AND PROSPEROUS', 'LOVE IS THE FIFTH ELEMENT (STOP FORGETTING)', 'PORTAL 37 // DIMENSIONAL TRANSIT', 'A LIGHT IN THE DARK'];
+const INKS = [['c', '#00a6cf', 'cyan'], ['m', '#e5007d', 'magenta'], ['y', '#ffe500', 'yellow'], ['k', '#1d140d', 'key (not black)']];
+const wait = ms => new Promise(res => setTimeout(res, ms));
+let booting = false, txSeed = 0;
+function passSVG(k, col, r, hex) {
+  const W = 1600, H = 1000, cx = 800, cy = 500;
+  const pat = (id, rot, rad) => `<pattern id="${id}" width="13" height="13" patternUnits="userSpaceOnUse" patternTransform="rotate(${rot})"><circle cx="6.5" cy="6.5" r="${rad}" fill="${col}"/></pattern>`;
+  let body = '';
+  if (k === 'c') {
+    for (let i = 0; i < 3; i++) body += `<ellipse cx="${(200 + r() * 1200).toFixed(0)}" cy="${(150 + r() * 700).toFixed(0)}" rx="${(180 + r() * 260).toFixed(0)}" ry="${(120 + r() * 200).toFixed(0)}" transform="rotate(${(r() * 90).toFixed(0)})" fill="url(#ht-c)"/>`;
+    body += `<rect x="0" y="${(620 + r() * 80).toFixed(0)}" width="${W}" height="400" fill="url(#ht-c)"/><circle cx="${(300 + r() * 1000).toFixed(0)}" cy="${(200 + r() * 300).toFixed(0)}" r="70" fill="${col}"/>`;
+    body = `<defs>${pat('ht-c', 15, 4.2)}</defs>` + body;
+  } else if (k === 'm') {
+    const pts = []; for (let i = 0; i < 7; i++) { const a = -Math.PI / 2 + i / 7 * 6.283 + Math.PI / 7; pts.push([cx + Math.cos(a) * (360 + r() * 30), cy + Math.sin(a) * (270 + r() * 20)]); }
+    body = `<defs>${pat('ht-m', 75, 3.6)}</defs><circle cx="${cx}" cy="${cy}" r="250" fill="url(#ht-m)"/><polygon points="${pts.map(p => p.map(v => v.toFixed(0)).join(',')).join(' ')}" fill="none" stroke="${col}" stroke-width="18" stroke-linejoin="round"/>`
+      + pts.map(p => `<path d="M${p[0].toFixed(0)},${p[1].toFixed(0)} Q${((p[0] + cx) / 2 + 60).toFixed(0)},${((p[1] + cy) / 2 - 40).toFixed(0)} ${cx},${cy}" fill="none" stroke="${col}" stroke-width="7"/><circle cx="${p[0].toFixed(0)}" cy="${p[1].toFixed(0)}" r="44" fill="none" stroke="${col}" stroke-width="12"/>`).join('');
+  } else if (k === 'y') {
+    body = `<defs>${pat('ht-y', 0, 5)}</defs><circle cx="${(350 + r() * 900).toFixed(0)}" cy="${(260 + r() * 300).toFixed(0)}" r="${(200 + r() * 90).toFixed(0)}" fill="${col}"/><rect x="0" y="560" width="${W}" height="70" fill="${col}"/><rect x="0" y="0" width="${W}" height="${H}" fill="url(#ht-y)" opacity=".7"/>`;
+  } else {
+    const crop = (x, y, sx, sy) => `<path d="M${x},${y + sy * 60} V${y} H${x + sx * 60}" fill="none" stroke="${col}" stroke-width="3"/>`;
+    body = `<text x="${cx}" y="${cy + 70}" text-anchor="middle" font-family="Big Shoulders Stencil Display, Impact, sans-serif" font-weight="900" font-size="250" fill="${col}" letter-spacing="6">GIGADREAM OS</text>
+      <circle cx="${cx}" cy="${cy - 150}" r="46" fill="${col}"/>
+      <text x="${cx}" y="${cy + 140}" text-anchor="middle" font-family="Martian Mono, monospace" font-size="22" fill="${col}" letter-spacing="8">BOOT 3077 · SEED 0x${hex} · K IS FOR KEY</text>
+      ${crop(40, 40, 1, 1)}${crop(W - 40, 40, -1, 1)}${crop(40, H - 40, 1, -1)}${crop(W - 40, H - 40, -1, -1)}
+      <g fill="none" stroke="${col}" stroke-width="2.5"><circle cx="90" cy="${cy}" r="18"/><path d="M60 ${cy}h60M90 ${cy - 30}v60"/><circle cx="${W - 90}" cy="${cy}" r="18"/><path d="M${W - 120} ${cy}h60M${W - 90} ${cy - 30}v60"/></g>`;
+  }
+  return `<svg class="os-pass" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${body}</svg>`;
+}
+async function boot() {
+  if (booting) return; booting = true;
+  closeAll(); txEl.hidden = true;
+  const sd = (Math.random() * 4294967296) >>> 0, hex = hex8(sd), r = mulberry32(sd ^ 0x3077);
+  osEl.querySelectorAll('.os-pass').forEach(e => e.remove());
+  osLog.innerHTML = ''; osLbl.textContent = '';
+  osEl.classList.remove('out', 'kick'); osEl.hidden = false; void osEl.offsetWidth; osEl.classList.add('in');
+  const q = RM ? 0 : 1, log = t => { osLog.innerHTML += t + '\n'; };
+  log('<b>GIGADREAM OS</b> // boot 3077'); await wait(260 * q);
+  log('rgb → cmyk sorting facility ...... ok'); await wait(200 * q);
+  for (const [k, col, name] of INKS) {
+    osLog.insertAdjacentHTML('beforebegin', passSVG(k, col, r, hex));
+    const sv = osLog.previousElementSibling, m = k === 'k' ? 2 : 4 + r() * 6;
+    sv.style.setProperty('--dx', ((r() - .5) * 2 * m).toFixed(1) + 'px'); sv.style.setProperty('--dy', ((r() - .5) * 2 * m).toFixed(1) + 'px');
+    sv.classList.add('on');
+    if (!RM) { osEl.classList.remove('kick'); void osEl.offsetWidth; osEl.classList.add('kick'); }
+    osLbl.textContent = 'PASS ' + k.toUpperCase();
+    log(`pass ${k.toUpperCase()} ▮ ${name}`); await wait(430 * q);
+  }
+  log('mount portal_37 ................. ok'); await wait(220 * q);
+  log(`seed: 0x${hex}`); await wait(220 * q);
+  log('reseed: nebula · spheres · accretion'); applySeed(sd); await wait(260 * q);
+  log(`print TRANSMISSION № ${serialOf(sd)}`); await wait(260 * q);
+  log('<b>NEVER DOOM | GOOD AND PROSPEROUS</b>');
+  await drawCard(sd); await wait(RM ? 500 : 420);
+  if (!RM) { osEl.classList.add('out'); await wait(620); }
+  osEl.hidden = true; osEl.classList.remove('in', 'out', 'kick');
+  txSeed = sd;
+  $('#tx-note').textContent = `one of one · seed 0x${hex} · your universe has been re-seeded`;
+  txEl.hidden = false; txEl.classList.remove('print'); void txEl.offsetWidth; if (!RM) txEl.classList.add('print');
+  $('#tx-save').focus({ preventScroll: true });
+  booting = false;
+}
+function closeCard() { if (txEl.hidden) return; txEl.hidden = true; osBtn.focus({ preventScroll: true }); }
+osBtn.addEventListener('click', boot);
+$('#tx-close').addEventListener('click', closeCard);
+txEl.addEventListener('click', e => { if (e.target === txEl) closeCard(); });
+txEl.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { e.stopPropagation(); closeCard(); }
+  if (e.key === 'Tab') { const f = [$('#tx-save'), $('#tx-close')], i = f.indexOf(document.activeElement); e.preventDefault(); f[(i + (e.shiftKey ? f.length - 1 : 1)) % f.length].focus(); }
+});
+$('#tx-save').addEventListener('click', () => {
+  txCv.toBlob(b => { if (!b) return; const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = `gigadream-transmission-${serialOf(txSeed)}.png`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }, 'image/png');
+});
+
+/* the TRANSMISSION card, drawn on canvas so it can be saved as a PNG */
+async function drawCard(sd) {
+  try { await Promise.all([document.fonts.load('900 90px "Big Shoulders Stencil Display"'), document.fonts.load('400 20px "Martian Mono"'), document.fonts.load('italic 40px "Newsreader"')]); } catch (e) {}
+  const c = txCv.getContext('2d'), W = txCv.width, H = txCv.height, r = mulberry32(sd ^ 0xBEAC4);
+  const DISP = '"Big Shoulders Stencil Display", Impact, sans-serif', MONO = '"Martian Mono", "Courier New", monospace', SERIF = '"Newsreader", Georgia, serif';
+  c.globalCompositeOperation = 'source-over'; c.filter = 'none';
+  c.fillStyle = '#efe2c4'; c.fillRect(0, 0, W, H);
+  for (let i = 0; i < 9000; i++) { c.fillStyle = `rgba(70,45,20,${(r() * .13).toFixed(3)})`; c.fillRect(r() * W, r() * H, 1.3, 1.3); }
+  c.strokeStyle = 'rgba(120,80,30,.08)'; c.lineWidth = 1; for (let i = 0; i < 70; i++) { const x = r() * W, y = r() * H; c.beginPath(); c.moveTo(x, y); c.lineTo(x + (r() - .5) * 60, y + (r() - .5) * 14); c.stroke(); }
+  c.strokeStyle = '#1d140d'; c.lineWidth = 2; c.strokeRect(22, 22, W - 44, H - 44); c.setLineDash([3, 7]); c.strokeRect(34, 34, W - 68, H - 68); c.setLineDash([]);
+  // thumbnail: a mini nebula + lattice of this seed's universe
+  const tx = 60, ty = 110, ts = 520, ccx = tx + ts / 2, ccy = ty + ts / 2;
+  c.save(); c.beginPath(); c.rect(tx, ty, ts, ts); c.clip();
+  c.fillStyle = '#05070a'; c.fillRect(tx, ty, ts, ts);
+  c.globalCompositeOperation = 'lighter';
+  for (let i = 0; i < 4; i++) {
+    const ox = ccx + ORBS[i * 4] * ts * .45, oy = ccy - ORBS[i * 4 + 1] * ts * .6, R0 = ORBS[i * 4 + 2] * ts * 1.1, col = [0, 1, 2].map(j => Math.round(Math.min(1, ORBC[i * 3 + j] * 1.5) * 255));
+    for (let j = 0; j < 9; j++) { const x = ox + (r() - .5) * R0, y = oy + (r() - .5) * R0, rr = R0 * (.35 + r() * .8); const g = c.createRadialGradient(x, y, 0, x, y, rr); g.addColorStop(0, `rgba(${col},.32)`); g.addColorStop(1, `rgba(${col},0)`); c.fillStyle = g; c.fillRect(tx, ty, ts, ts); }
+  }
+  c.globalCompositeOperation = 'source-over'; c.filter = 'blur(7px)'; c.lineCap = 'round';
+  for (let i = 0; i < 7; i++) { c.strokeStyle = 'rgba(4,5,8,.55)'; c.lineWidth = 8 + r() * 22; c.beginPath(); const x = tx + r() * ts, y = ty + r() * ts; c.moveTo(x, y); c.bezierCurveTo(x + (r() - .5) * 300, y + (r() - .5) * 300, x + (r() - .5) * 300, y + (r() - .5) * 300, x + (r() - .5) * 400, y + (r() - .5) * 400); c.stroke(); }
+  c.filter = 'none';
+  for (let i = 0; i < 420; i++) { const s = r(); c.fillStyle = s > .97 ? '#ffe7a8' : s > .93 ? '#a9d8ff' : 'rgba(244,234,214,.85)'; const z = s > .985 ? 2.4 : 1.1; c.fillRect(tx + r() * ts, ty + r() * ts, z, z); }
+  const pts = []; for (let i = 0; i < 7; i++) { const a = -Math.PI / 2 + i / 7 * 6.283 + Math.PI / 7; pts.push([ccx + Math.cos(a) * (180 + r() * 20), ccy + Math.sin(a) * (165 + r() * 18)]); }
+  c.strokeStyle = 'rgba(232,201,142,.85)'; c.lineWidth = 1.6; c.beginPath(); pts.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath(); c.stroke();
+  pts.forEach(p => { c.strokeStyle = 'rgba(255,93,59,.85)'; c.lineWidth = 1.3; c.beginPath(); for (let i = 0; i <= 24; i++) { const u = i / 24; let x = p[0] + (ccx - p[0]) * u, y = p[1] + (ccy - p[1]) * u; const dx = x - ccx, dy = y - ccy, rr = Math.hypot(dx, dy); if (rr < 110) { const th = 1.2 * Math.pow((110 - rr) / 90, 2); x = ccx + dx * Math.cos(th) - dy * Math.sin(th); y = ccy + dx * Math.sin(th) + dy * Math.cos(th); } i ? c.lineTo(x, y) : c.moveTo(x, y); } c.stroke(); });
+  const TC = ['#ff5d3b', '#17a497', '#ffb21c', '#e2266f', '#00a6cf', '#e8c98e', '#7b3fe4'];
+  pts.forEach((p, i) => { c.fillStyle = '#05070a'; c.beginPath(); c.arc(p[0], p[1], 13, 0, 6.283); c.fill(); c.lineWidth = 2; [['#00a6cf', -1.5, 1], ['#e5007d', 1.5, -1], [TC[i], 0, 0]].forEach(([s, ox, oy]) => { c.strokeStyle = s; c.beginPath(); c.arc(p[0] + ox, p[1] + oy, 13, 0, 6.283); c.stroke(); }); });
+  c.save(); c.translate(ccx, ccy); c.rotate(-.3 + r() * .6); c.scale(1, .3); c.lineWidth = 5; ['#fff6e0', '#ffb21c', '#ff5d3b', '#e2266f', '#7b3fe4'].forEach((s, i) => { c.strokeStyle = s; c.globalAlpha = .9 - i * .12; c.beginPath(); c.arc(0, 0, 36 + i * 11 + r() * 6, r() * 6, r() * 6 + 3 + r() * 2.5); c.stroke(); }); c.restore(); c.globalAlpha = 1;
+  c.fillStyle = '#000'; c.beginPath(); c.arc(ccx, ccy, 24, 0, 6.283); c.fill(); c.strokeStyle = '#ffb21c'; c.lineWidth = 3; c.beginPath(); c.arc(ccx, ccy, 29, -2.4, .6); c.stroke();
+  c.restore();
+  [['#00a6cf', -3, 2], ['#e5007d', 3, -2], ['#1d140d', 0, 0]].forEach(([s, ox, oy]) => { c.strokeStyle = s; c.lineWidth = 2.5; c.strokeRect(tx + ox, ty + oy, ts, ts); });
+  c.fillStyle = '#1d140d'; c.font = `500 13px ${MONO}`; c.fillText('FIG. 00 — YOUR UNIVERSE, SEEDED', tx, ty + ts + 30);
+  // text column
+  const X0 = 630, X1 = W - 70;
+  c.fillStyle = '#6b5a46'; c.font = `400 15px ${MONO}`; c.fillText('GIGADREAM OS // TRANSMISSION RECEIVED', X0, 120);
+  let fs = 118; c.font = `900 ${fs}px ${DISP}`; while (c.measureText('TRANSMISSION').width > X1 - X0 && fs > 40) { fs -= 4; c.font = `900 ${fs}px ${DISP}`; }
+  [['rgba(0,166,207,.85)', -4, 2], ['rgba(229,0,125,.8)', 4, -2], ['#d8291c', 0, 0]].forEach(([s, ox, oy]) => { c.fillStyle = s; c.fillText('TRANSMISSION', X0 + ox, 120 + fs * .92 + oy); });
+  const y0 = 140 + fs;
+  c.fillStyle = '#1d140d'; c.font = `600 26px ${MONO}`; c.fillText('№ ' + serialOf(sd), X0, y0 + 36);
+  const d = new Date(), MON = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  c.font = `400 16px ${MONO}`;
+  [['ISSUED', `${String(d.getDate()).padStart(2, '0')} ${MON[d.getMonth()]} ${d.getFullYear()}`], ['SEED', '0x' + hex8(sd)], ['EDITION', 'ONE OF ONE']].forEach(([k, v], i) => { c.fillStyle = '#6b5a46'; c.fillText(k, X0, y0 + 82 + i * 30); c.fillStyle = '#1d140d'; c.fillText(v, X0 + 140, y0 + 82 + i * 30); });
+  c.setLineDash([4, 6]); c.strokeStyle = '#1d140d'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(X0, y0 + 182); c.lineTo(X1, y0 + 182); c.stroke(); c.setLineDash([]);
+  const line = LORE_LINES[sd % LORE_LINES.length];
+  let lf = 50; c.font = `900 ${lf}px ${DISP}`;
+  const wrap = (t, w) => { const out = []; let cur = ''; t.split(' ').forEach(wd => { const n = cur ? cur + ' ' + wd : wd; if (c.measureText(n).width > w && cur) { out.push(cur); cur = wd; } else cur = n; }); out.push(cur); return out; };
+  let lines = wrap(line, X1 - X0); while (lines.length > 3 && lf > 30) { lf -= 4; c.font = `900 ${lf}px ${DISP}`; lines = wrap(line, X1 - X0); }
+  c.fillStyle = '#1d140d'; lines.forEach((l, i) => c.fillText(l, X0, y0 + 236 + i * lf * .98));
+  c.fillStyle = '#6b5a46'; c.font = `400 14px ${MONO}`; c.fillText('@TONYJMATOS · TONYJMATOS.COM', X0, H - 70);
+  c.textAlign = 'right'; c.fillText('PRINTED ON TERRA II', X1, H - 70); c.textAlign = 'left';
+  // ink stamp
+  c.save(); c.translate(X1 - 70, H - 170); c.rotate(-.22); c.globalAlpha = .8; c.strokeStyle = '#d8291c'; c.fillStyle = '#d8291c'; c.lineWidth = 4;
+  c.beginPath(); c.arc(0, 0, 60, 0, 6.283); c.stroke(); c.lineWidth = 1.5; c.beginPath(); c.arc(0, 0, 50, 0, 6.283); c.stroke();
+  c.textAlign = 'center'; c.font = `900 34px ${DISP}`; c.fillText('1 / 1', 0, 12); c.font = `400 9px ${MONO}`; c.fillText('GIGADREAM OS', 0, -24); c.fillText('NEVER DOOM', 0, 34);
+  c.restore(); c.textAlign = 'left';
+  // crop marks
+  c.strokeStyle = '#1d140d'; c.lineWidth = 1.5; [[10, 10, 1, 1], [W - 10, 10, -1, 1], [10, H - 10, 1, -1], [W - 10, H - 10, -1, -1]].forEach(([x, y, sx, sy]) => { c.beginPath(); c.moveTo(x, y + sy * 18); c.lineTo(x, y); c.lineTo(x + sx * 18, y); c.stroke(); });
+  txCv.setAttribute('aria-label', `TRANSMISSION card ${serialOf(sd)}, issued ${d.toDateString()}, seed 0x${hex8(sd)}. ${line}.`);
+}
+
+/* ==========================================================================
+   8. SKY FX — mini starjets (to scale with the portals) and, rarely, one
+      larger celestial anomaly. Lightweight DOM + Web Animations; paused when
+      the tab is hidden; never started with reduced motion.
+   ========================================================================== */
+const sky = $('#sky-fx'), JC = ['#ffb21c', '#00a6cf', '#e5007d', '#f4ead6', '#ff5d3b', '#ffe500'];
+function skyPause(p) { sky.classList.toggle('paused', p); sky.getAnimations({ subtree: true }).forEach(a => p ? a.pause() : a.play()); }
+function jetEl(col) { const e = document.createElement('div'); e.className = 'jet'; e.style.setProperty('--jc', col); e.innerHTML = `<i class="trail"></i><svg viewBox="0 0 17 12"><path d="M17 6 L7 2 L8.6 4.9 L1.6 4.1 L3.1 6 L1.6 7.9 L8.6 7.1 L7 10Z" fill="${col}" stroke="#0a1215" stroke-width=".6"/><circle class="burn" cx="1.3" cy="6" r="1.5" fill="#fff6d0"/></svg>`; return e; }
+function jet() {
+  if (RM || document.hidden || sky.querySelectorAll('.jet').length >= 4) return;
+  const W = sky.clientWidth, H = sky.clientHeight, ltr = Math.random() < .5;
+  const x0 = ltr ? -90 : W + 90, x1 = ltr ? W + 90 : -90, y0 = H * (.08 + Math.random() * .84), y1 = H * (.08 + Math.random() * .84);
+  const cx = W * (.25 + Math.random() * .5), cy = (y0 + y1) / 2 + (Math.random() - .5) * H * .6, sc = (.7 + Math.random() * .55).toFixed(2);
+  const kf = []; for (let i = 0; i <= 24; i++) { const t = i / 24, u = 1 - t, x = u * u * x0 + 2 * u * t * cx + t * t * x1, y = u * u * y0 + 2 * u * t * cy + t * t * y1, dx = 2 * u * (cx - x0) + 2 * t * (x1 - cx), dy = 2 * u * (cy - y0) + 2 * t * (y1 - cy); kf.push({ transform: `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) rotate(${Math.atan2(dy, dx).toFixed(3)}rad) scale(${sc})` }); }
+  const dur = 4200 + Math.random() * 4800, col = JC[Math.floor(Math.random() * JC.length)];
+  const fly = (e, delay, off) => { sky.appendChild(e); const k2 = off ? kf.map(f => ({ transform: f.transform.replace(/scale\(([\d.]+)\)/, `translate(${off}) scale(${(sc * .85).toFixed(2)})`) })) : kf; const a = e.animate(k2, { duration: dur, delay, easing: 'linear', fill: 'both' }); a.onfinish = () => e.remove(); if (document.hidden) a.pause(); };
+  fly(jetEl(col), 0);
+  if (Math.random() < .3) fly(jetEl(JC[Math.floor(Math.random() * JC.length)]), 160, '-22px,13px');      // wingman
+}
+function schedJet(first) { setTimeout(() => { jet(); schedJet(); }, first || 3200 + Math.random() * 6500); }
+function anomaly(type) {
+  if (RM || (document.hidden && !type) || sky.querySelector('.anom')) return;
+  const W = sky.clientWidth, H = sky.clientHeight, t = type || ['comet', 'pulsar', 'ripple', 'bloom'][Math.floor(Math.random() * 4)];
+  const e = document.createElement('div'); e.className = 'anom ' + t; sky.appendChild(e);
+  const rx = () => W * (.1 + Math.random() * .8), ry = () => H * (.1 + Math.random() * .7);
+  let a;
+  if (t === 'comet') {
+    const x0 = Math.random() < .5 ? -100 : W + 100, x1 = x0 < 0 ? W * (.6 + Math.random() * .5) : W * (-.1 + Math.random() * .4), y0 = H * (.05 + Math.random() * .3), y1 = y0 + H * (.25 + Math.random() * .35), ang = Math.atan2(y1 - y0, x1 - x0);
+    a = e.animate([{ transform: `translate(${x0}px,${y0}px) rotate(${ang}rad)`, opacity: 0 }, { opacity: 1, offset: .15 }, { opacity: 1, offset: .8 }, { transform: `translate(${x1}px,${y1}px) rotate(${ang}rad)`, opacity: 0 }], { duration: 6500, easing: 'cubic-bezier(.3,0,.7,1)' });
+  } else if (t === 'pulsar') {
+    const x = rx(), y = ry(); a = e.animate([0, 1, .1, 1, .15, .9, .1, .7, 0].map((o, i, arr) => ({ transform: `translate(${x}px,${y}px) rotate(${i * 9}deg) scale(${.7 + o * .5})`, opacity: o })), { duration: 3400, easing: 'steps(1,end)' });
+  } else if (t === 'ripple') {
+    const x = rx(), y = ry(); a = e.animate([{ transform: `translate(${x}px,${y}px) scale(.15)`, opacity: .95 }, { transform: `translate(${x}px,${y}px) scale(2.6)`, opacity: 0 }], { duration: 3800, easing: 'cubic-bezier(.2,.7,.3,1)' });
+  } else {
+    const x = rx(), y = ry(), C1 = ['23,164,151', '42,91,215', '123,63,228', '226,38,111', '255,178,28'][Math.floor(Math.random() * 5)], C2 = ['0,166,207', '229,0,125', '123,63,228'][Math.floor(Math.random() * 3)];
+    e.style.background = `radial-gradient(closest-side,rgba(${C1},.55),rgba(${C2},.22) 55%,transparent)`;
+    a = e.animate([{ transform: `translate(${x}px,${y}px) scale(.8)`, opacity: 0 }, { opacity: .55, offset: .45 }, { transform: `translate(${x}px,${y}px) scale(1.25)`, opacity: 0 }], { duration: 9000, easing: 'ease-in-out' });
+  }
+  a.onfinish = () => e.remove(); if (document.hidden) a.pause();
+}
+function schedAnomaly(first) { setTimeout(() => { anomaly(); schedAnomaly(); }, first || 20000 + Math.random() * 20000); }
+
 /* ---------- boot ---------- */
 function onResize() { resize(); layout(); tear(); if (openKey) openDrawer(openKey, true); kick(); }
 addEventListener('resize', () => { clearTimeout(onResize.t); onResize.t = setTimeout(onResize, 80); });
 resize(); layout(); tear();
+applySeed(initialSeed());
+if (!RM) { schedJet(2500); schedAnomaly(20000 + Math.random() * 20000); schedFlare(); }
 raf = requestAnimationFrame(loop);
-const h = location.hash.slice(1);
+const ALIAS = { spawn: 'play' };
+const hk = () => { const k = location.hash.slice(1); return ALIAS[k] || k; };
+const h = hk();
 if (nodes[h]) setTimeout(() => openDrawer(h), 30);
-addEventListener('hashchange', () => { const k = location.hash.slice(1); if (nodes[k] && k !== openKey) openDrawer(k); });
-window.GIGADREAM = { open: openDrawer, close: closeAll };
+addEventListener('hashchange', () => { const k = hk(); if (nodes[k] && k !== openKey) openDrawer(k); });
+window.GIGADREAM = { open: k => openDrawer(ALIAS[k] || k), close: closeAll, boot, seed: applySeed, spectrum: v => { $('#spectrum-slider').value = Math.round(v * 100); applySpectrum(v); }, jet, anomaly, flare };
 })();
 </script>
 </body>
